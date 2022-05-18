@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import '../../../../app_theme.dart';
 import '../../../../components/button_border.dart';
+import '../../../../routes/app_routes.dart';
 
 class TransferExByCardNumberPage extends StatelessWidget {
   const TransferExByCardNumberPage({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class TransferExByCardNumberPage extends StatelessWidget {
         backgroundColor: const Color(0xFFF67D10),
         centerTitle: true,
         title: Text(
-          'CK LIÊN NH QUA SỐ TK',
+          'CK LIÊN NH QUA SỐ THẺ',
           style: Styles.baseNotoSansTS.copyWith(
               fontSize: 16, color: white, fontWeight: FontWeight.w600),
         ),
@@ -179,7 +180,9 @@ class TransferExByCardNumberPage extends StatelessWidget {
                     width: width * 0.4,
                     height: height48,
                     child: ButtonPrimaryText(
-                      onTab: () {},
+                      onTab: () {
+                        Get.back();
+                      },
                       margin: EdgeInsets.zero,
                       padding: EdgeInsets.all(width8),
                       radius: width30,
@@ -195,7 +198,9 @@ class TransferExByCardNumberPage extends StatelessWidget {
                     width: width*0.4,
                     height: height48,
                     child: ButtonPrimaryText(
-                      onTab: () {},
+                      onTab: () {
+                        Get.toNamed(AppRoutes.transferExAccNumberDetail);
+                      },
                       margin: EdgeInsets.zero,
                       padding: EdgeInsets.all(width8),
                       radius: width30,

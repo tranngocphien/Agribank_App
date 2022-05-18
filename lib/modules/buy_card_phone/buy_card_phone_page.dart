@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import '../../app_theme.dart';
 import '../../components/button_border.dart';
+import '../../routes/app_routes.dart';
 
 class BuyCardPhonePage extends StatelessWidget {
   const BuyCardPhonePage({Key? key}) : super(key: key);
@@ -164,7 +165,9 @@ class BuyCardPhonePage extends StatelessWidget {
                     width: width*0.4,
                     height: height48,
                     child: ButtonPrimaryText(
-                      onTab: () {},
+                      onTab: () {
+                        Get.toNamed(AppRoutes.confirmTransaction);
+                      },
                       margin: EdgeInsets.zero,
                       padding: EdgeInsets.all(width8),
                       radius: width30,

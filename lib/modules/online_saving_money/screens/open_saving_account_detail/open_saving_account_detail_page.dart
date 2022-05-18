@@ -1,12 +1,14 @@
+import 'package:agribank_banking/modules/online_saving_money/screens/open_saving_account_detail/open_saving_account_detail_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../../app_theme.dart';
 import '../../../../components/button_border.dart';
 import '../../../../components/information_tile.dart';
 import '../../../../routes/app_routes.dart';
 
-class TransferInternalDetailPage extends StatelessWidget {
-  const TransferInternalDetailPage({Key? key}) : super(key: key);
+class OpenSavingAccountDetailPage extends GetWidget<OpenSavingAccountDetailController> {
+  const OpenSavingAccountDetailPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ class TransferInternalDetailPage extends StatelessWidget {
         backgroundColor: const Color(0xFFF67D10),
         centerTitle: true,
         title: Text(
-          'CHUYỂN KHOẢN NỘI BỘ QUA TK/SĐT',
+          'MỞ TÀI KHOẢN TIỀN GỬI TRỰC TUYẾN',
           style: Styles.baseNotoSansTS.copyWith(
               fontSize: 16, color: white, fontWeight: FontWeight.w600),
         ),
@@ -38,13 +40,13 @@ class TransferInternalDetailPage extends StatelessWidget {
                       content: '1504281024240',
                     ),
                     InformationTile(
-                      label: 'Số tài khoản thụ hưởng',
-                      content: '1504281024240',
+                      label: 'Tên Khách hàng',
+                      content: 'TRẦN NGỌC PHIÊN',
+                      isHighLight: false,
                     ),
                     InformationTile(
-                      label: 'Tên người thụ hưởng',
-                      content: 'Trần Thị Thu Cúc',
-                      isHighLight: true,
+                      label: 'Loại tiền gửi',
+                      content: 'Tiền gửi trực tuyến',
                     ),
 
                     InformationTile(
@@ -53,18 +55,22 @@ class TransferInternalDetailPage extends StatelessWidget {
                     ),
 
                     InformationTile(
-                      label: 'Phí giao dịch',
-                      content: '0 VND',
+                      label: 'Kỳ hạn gửi',
+                      content: '1 tháng',
                     ),
 
                     InformationTile(
-                      label: 'Tổng tiền',
-                      content: '10,000 VNĐ',
+                      label: 'Ngày mở tài khoản',
+                      content: '18/05/2022',
                     ),
 
                     InformationTile(
-                      label: 'Nội dung CK',
-                      content: 'TRAN NGOC PHIEN CK',
+                      label: 'Lãi suất',
+                      content: '3.10%/năm',
+                    ),
+                    InformationTile(
+                      label: 'Hình thức gia hạn',
+                      content: '3.10%/năm',
                     )
                   ],
                 ),
@@ -120,4 +126,3 @@ class TransferInternalDetailPage extends StatelessWidget {
     );
   }
 }
-

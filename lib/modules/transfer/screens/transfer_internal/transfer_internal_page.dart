@@ -55,22 +55,119 @@ class TransferInternalPage extends GetWidget<TransferInternalController> {
                     SizedBox(
                       height: height32,
                     ),
-                    Text(
-                      '1504281024240',
-                      style: Styles.baseNotoSansTS.copyWith(
-                          color: Colors.deepOrangeAccent, fontSize: 18),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '1504281024240',
+                          style: Styles.baseNotoSansTS.copyWith(
+                              color: Colors.deepOrangeAccent, fontSize: 18),
+                        ),
+                        GestureDetector(
+                          child: const Icon(Icons.keyboard_arrow_down),
+                          onTap: () {
+                            Get.dialog(
+                                Dialog(
+                                  insetPadding: EdgeInsets.zero,
+                                  backgroundColor: Colors.transparent,
+                                  child: Container(
+                                    width: width * 0.9,
+                                    height: height * 0.3,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(width16)),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          width: width * 0.9,
+                                          height: height60,
+                                          decoration: BoxDecoration(
+                                              color: const Color(0xFFF67D10),
+                                              borderRadius: BorderRadius.only(
+                                                  topRight:
+                                                      Radius.circular(width16),
+                                                  topLeft: Radius.circular(
+                                                      width16))),
+                                          child: Center(
+                                              child: Text(
+                                            "Tài khoản nguồn",
+                                            style: Styles.baseNotoSansTS
+                                                .copyWith(
+                                                    fontSize: 18,
+                                                    color: white,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                          )),
+                                        ),
+                                        SizedBox(
+                                          height: height8,
+                                        ),
+                                        Row(
+                                          children: [
+                                            const SizedBox(
+                                              width: 8,
+                                            ),
+                                            const Icon(
+                                              Icons.radio_button_checked,
+                                              color: Color(0xFFF67D10),
+                                            ),
+                                            const SizedBox(
+                                              width: 32,
+                                            ),
+                                            Text(
+                                              "1504281024240",
+                                              style: Styles.baseNotoSansTS
+                                                  .copyWith(
+                                                      color: black,
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                useSafeArea: true);
+                          },
+                        )
+                      ],
                     ),
                     SizedBox(
                       height: height32,
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           'Số dư:',
                           style: Styles.baseNotoSansTS.copyWith(fontSize: 16),
                         ),
-                        const Text('*******')
+                        const Spacer(),
+                        Obx(
+                          () => Text(
+                            controller.isShowBalance.value
+                                ? "0 VND"
+                                : '*******',
+                            style: Styles.baseNotoSansTS.copyWith(
+                                fontSize: 16,
+                                color: const Color(0xFFF67D10),
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        GestureDetector(
+                            onTap: () {
+                              controller.isShowBalance.value =
+                                  !controller.isShowBalance.value;
+                            },
+                            child: Obx(() => Icon(controller.isShowBalance.value
+                                ? Icons.visibility_off
+                                : Icons.visibility)))
                       ],
                     )
                   ],
@@ -103,9 +200,44 @@ class TransferInternalPage extends GetWidget<TransferInternalController> {
                       ],
                     ),
                     TextField(
-                      decoration: const InputDecoration(
-                        suffixIcon: Icon(Icons.keyboard_arrow_down),
-                        label: Text('Số điện thoại/số tài khoản'),
+                      controller: controller.controllerPhone,
+                      decoration: InputDecoration(
+                        suffixIcon: GestureDetector(
+                            onTap: () {
+                              Get.dialog(
+                                  Dialog(
+                                    backgroundColor: Colors.transparent,
+                                    child: Container(
+                                      width: width * 0.8,
+                                      height: height * 0.5,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(width16)),
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            width: width * 0.8,
+                                            height: height60,
+                                            decoration: BoxDecoration(
+                                                color: const Color(0xFFF67D10),
+                                                borderRadius: BorderRadius.only(
+                                                    topRight: Radius.circular(
+                                                        width16),
+                                                    topLeft: Radius.circular(
+                                                        width16))),
+                                            child: Row(
+                                              children: [],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  useSafeArea: true);
+                            },
+                            child: const Icon(Icons.keyboard_arrow_down)),
+                        label: const Text('Số điện thoại/số tài khoản'),
                         focusColor: black700,
                         hoverColor: black700,
                         fillColor: black700,
@@ -114,6 +246,7 @@ class TransferInternalPage extends GetWidget<TransferInternalController> {
                       style: Styles.baseNotoSansTS.copyWith(fontSize: 18),
                     ),
                     TextField(
+                      controller: controller.controllerAmount,
                       decoration: InputDecoration(
                         suffixIcon: Text(
                           'VND',
@@ -140,6 +273,7 @@ class TransferInternalPage extends GetWidget<TransferInternalController> {
                       ),
                     ),
                     TextField(
+                      controller: controller.controllerContent,
                       decoration: const InputDecoration(
                         border: InputBorder.none,
                       ),
@@ -171,7 +305,9 @@ class TransferInternalPage extends GetWidget<TransferInternalController> {
                     width: width * 0.4,
                     height: height48,
                     child: ButtonPrimaryText(
-                      onTab: () {},
+                      onTab: () {
+                        Get.back();
+                      },
                       margin: EdgeInsets.zero,
                       padding: EdgeInsets.all(width8),
                       radius: width30,
@@ -184,11 +320,16 @@ class TransferInternalPage extends GetWidget<TransferInternalController> {
                     ),
                   ),
                   SizedBox(
-                    width: width*0.4,
+                    width: width * 0.4,
                     height: height48,
                     child: ButtonPrimaryText(
                       onTab: () {
-                        Get.toNamed(AppRoutes.transferDetailInternal);
+                        Get.toNamed(AppRoutes.transferDetailInternal,
+                            arguments: [
+                              controller.controllerPhone.text,
+                              controller.controllerAmount.text,
+                              controller.controllerContent.text
+                            ]);
                       },
                       margin: EdgeInsets.zero,
                       padding: EdgeInsets.all(width8),

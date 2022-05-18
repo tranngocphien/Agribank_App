@@ -1,6 +1,7 @@
+import 'package:agribank_banking/routes/app_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import '../../../../app_theme.dart';
 import '../../../../components/button_border.dart';
 
@@ -100,6 +101,40 @@ class TransferExByAccNumberPage extends StatelessWidget {
                       ],
                     ),
                     TextField(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) => Dialog(
+                                  insetPadding: EdgeInsets.zero,
+                                  alignment: Alignment.center,
+                                  child: SizedBox(
+                                    height: height * 0.5,
+                                    width: width * 0.9,
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          width: width * 0.9,
+                                          height: height48,
+                                          decoration: const BoxDecoration(
+                                              color: Color(0xFFF67D10)),
+                                          child: Center(
+                                            child: Text(
+                                              "Ngân hàng thụ hưởng",
+                                              style: Styles.baseNotoSansTS
+                                                  .copyWith(
+                                                      fontSize: 16,
+                                                      color: white,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                            ),
+                                          ),
+                                        ),
+
+                                      ],
+                                    ),
+                                  ),
+                                ));
+                      },
                       decoration: const InputDecoration(
                         suffixIcon: Icon(Icons.keyboard_arrow_down),
                         label: Text('Ngân hàng thụ hưởng'),
@@ -149,7 +184,6 @@ class TransferExByAccNumberPage extends StatelessWidget {
                     ),
                     TextField(
                       decoration: const InputDecoration(
-                        border: InputBorder.none,
                       ),
                       style: Styles.baseNotoSansTS.copyWith(fontSize: 18),
                     ),
@@ -179,7 +213,9 @@ class TransferExByAccNumberPage extends StatelessWidget {
                     width: width * 0.4,
                     height: height48,
                     child: ButtonPrimaryText(
-                      onTab: () {},
+                      onTab: () {
+                        Get.back();
+                      },
                       margin: EdgeInsets.zero,
                       padding: EdgeInsets.all(width8),
                       radius: width30,
@@ -192,10 +228,12 @@ class TransferExByAccNumberPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: width*0.4,
+                    width: width * 0.4,
                     height: height48,
                     child: ButtonPrimaryText(
-                      onTab: () {},
+                      onTab: () {
+                        Get.toNamed(AppRoutes.transferExAccNumberDetail);
+                      },
                       margin: EdgeInsets.zero,
                       padding: EdgeInsets.all(width8),
                       radius: width30,

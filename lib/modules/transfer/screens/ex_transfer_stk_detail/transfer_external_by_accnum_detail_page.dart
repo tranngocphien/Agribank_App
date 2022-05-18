@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../app_theme.dart';
 import '../../../../components/button_border.dart';
-import '../../../../components/information_tile.dart';
 import '../../../../routes/app_routes.dart';
 
-class TransferInternalDetailPage extends StatelessWidget {
-  const TransferInternalDetailPage({Key? key}) : super(key: key);
+class TransferExternalByAccNumDetailPage extends StatelessWidget {
+  const TransferExternalByAccNumDetailPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +14,7 @@ class TransferInternalDetailPage extends StatelessWidget {
         backgroundColor: const Color(0xFFF67D10),
         centerTitle: true,
         title: Text(
-          'CHUYỂN KHOẢN NỘI BỘ QUA TK/SĐT',
+          'CK LIÊN NH QUA SỐ TK',
           style: Styles.baseNotoSansTS.copyWith(
               fontSize: 16, color: white, fontWeight: FontWeight.w600),
         ),
@@ -121,3 +120,38 @@ class TransferInternalDetailPage extends StatelessWidget {
   }
 }
 
+class InformationTile extends StatelessWidget {
+  const InformationTile({
+    Key? key, required this.label, required this.content, this.isFinal = false, this.isHighLight = false,
+  }) : super(key: key);
+
+  final String label;
+  final String content;
+  final bool? isFinal;
+  final bool? isHighLight;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: width,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label, style: Styles.baseNotoSansTS.copyWith(
+            fontSize: 14,
+            color: Colors.grey,
+          ),),
+          SizedBox(height: height4,),
+          Text(content, style: Styles.baseNotoSansTS.copyWith(
+            fontSize: 17,
+            color: isHighLight! ? const Color(0xFFF67D10) : black,
+            fontWeight: isHighLight! ? FontWeight.w600:  FontWeight.w400
+          ),),
+          SizedBox(height: height4,),
+          isFinal! ? Container() : const Divider(thickness: 1,)
+
+        ],
+      ),
+    );
+  }
+}

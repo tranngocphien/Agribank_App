@@ -20,8 +20,10 @@ class AppRoutes {
   static const transferInternal = '/transferInternal';
   static const transferDetailInternal = '/transferDetailInternal';
   static const transferExAccNumber = '/transferExAccNumber';
+  static const transferExAccNumberDetail = '/transferExAccNumberDetail';
   static const transferExCardNumber = '/transferExCardNumber';
   static const transferExQr = '/transferQR';
+  static const confirmTransaction = '/confirmTransaction';
 
   /// recharge phone money
   static const rechargePhone = '/rechargePhone';
@@ -38,6 +40,7 @@ class AppRoutes {
   /// online saving money
   static const onlineSavingMoney = '/onlineSavingMoney';
   static const openSavingAccount = '/openSavingAccount';
+  static const openSavingAccountDetail = '/openSavingAccountDetail';
   static const onlineDepositSettlement = '/onlineDepositSettlement';
 
   /// question and answer

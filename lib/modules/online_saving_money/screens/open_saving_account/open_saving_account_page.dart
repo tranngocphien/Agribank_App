@@ -204,7 +204,7 @@ class OpenSavingAccountPage extends StatelessWidget {
                     height: height48,
                     child: ButtonPrimaryText(
                       onTab: () {
-                        Get.toNamed(AppRoutes.transferDetailInternal);
+                        Get.toNamed(AppRoutes.openSavingAccountDetail);
                       },
                       margin: EdgeInsets.zero,
                       padding: EdgeInsets.all(width8),

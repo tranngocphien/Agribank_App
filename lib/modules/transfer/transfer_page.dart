@@ -37,7 +37,7 @@ class TransferPage extends GetWidget<TransferController> {
                 children: [
                   FunctionItem(
                     icon: Image.asset(
-                      'assets/icons/ic_transfer_money.jpg',
+                      'assets/icons/ic_phone.png',
                       height: height40,
                       width: width40,
                     ),
@@ -49,7 +49,7 @@ class TransferPage extends GetWidget<TransferController> {
                   ),
                   FunctionItem(
                     icon: Image.asset(
-                      'assets/icons/ic_recharge_phone.png',
+                      'assets/icons/ic_credit_card.png',
                       height: height40,
                       width: width40,
                     ),
@@ -61,7 +61,7 @@ class TransferPage extends GetWidget<TransferController> {
                   ),
                   FunctionItem(
                     icon: Image.asset(
-                      'assets/icons/ic_bill.png',
+                      'assets/icons/ic_credit_card.png',
                       height: height40,
                       width: width40,
                     ),
@@ -73,7 +73,7 @@ class TransferPage extends GetWidget<TransferController> {
                   ),
                   FunctionItem(
                     icon: Image.asset(
-                      'assets/icons/ic_transfer_money.jpg',
+                      'assets/icons/ic_qr_scan.png',
                       height: height40,
                       width: width40,
                     ),
