@@ -1,6 +1,6 @@
 import 'dart:async';
 import '../models/base_entity.dart';
-import '../utils//enums.dart';
+import '../utils/enums.dart';
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 
@@ -22,6 +22,9 @@ abstract class BaseRepositoryInterface {
       int offset, int limit, T Function(dynamic e) convert);
 
   Future<List<T>> getListByPath<T extends BaseEntity>(
+      T Function(dynamic e) convert);
+
+  Future<List<T>> queryList<T extends BaseEntity>(
       T Function(dynamic e) convert);
 }
 
@@ -234,6 +237,13 @@ class BaseRepository extends BaseRepositoryInterface {
   Future<List<T>> getListByPath<T extends BaseEntity>(
       T Function(dynamic e) convert) {
     final response = dio.get(url);
+    return _getDocuments(response, convert);
+  }
+
+  @override
+  Future<List<T>> queryList<T extends BaseEntity>(T Function(dynamic e) convert) {
+    // TODO: implement queryList
+    final response = dio.post(url);
     return _getDocuments(response, convert);
   }
 }

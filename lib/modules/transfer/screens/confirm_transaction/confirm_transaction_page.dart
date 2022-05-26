@@ -1,3 +1,4 @@
+import 'package:agribank_banking/modules/transfer/screens/confirm_transaction/confirm_transaction_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../../../app_theme.dart';
@@ -6,7 +7,7 @@ import 'package:get/get.dart';
 import '../../../../components/button_border.dart';
 import '../../../../routes/app_routes.dart';
 
-class ConfirmTransactionPage extends StatelessWidget {
+class ConfirmTransactionPage extends GetWidget<ConfirmTransactionController> {
   const ConfirmTransactionPage({Key? key}) : super(key: key);
 
   @override
@@ -47,29 +48,32 @@ class ConfirmTransactionPage extends StatelessWidget {
                     height: height8,
                   ),
                   Text(
-                    "Mã OTP đã được gửi đến số điện thoại",
+                    "Vui lòng nhập mã PIN",
                     style: Styles.baseNotoSansTS.copyWith(
                       fontSize: 16,
                     ),
                   ),
-                  RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(children: <TextSpan>[
-                      TextSpan(
-                          text: "0377016054",
-                          style: Styles.baseNotoSansTS.copyWith(
-                              fontSize: 16, fontWeight: FontWeight.w600)),
-                      TextSpan(
-                          text:
-                              ".Quý khách vui lòng nhập OTP để xác thực giao dịch",
-                          style: Styles.baseNotoSansTS.copyWith(fontSize: 16))
-                    ]),
-                  ),
-                  SizedBox(
-                    height: height16,
-                  ),
+                  // RichText(
+                  //   textAlign: TextAlign.center,
+                  //   text: TextSpan(children: <TextSpan>[
+                  //     TextSpan(
+                  //         text: "0377016054",
+                  //         style: Styles.baseNotoSansTS.copyWith(
+                  //             fontSize: 16, fontWeight: FontWeight.w600)),
+                  //     TextSpan(
+                  //         text:
+                  //             ".Quý khách vui lòng nhập OTP để xác thực giao dịch",
+                  //         style: Styles.baseNotoSansTS.copyWith(fontSize: 16))
+                  //   ]),
+                  // ),
+                  // SizedBox(
+                  //   height: height16,
+                  // ),
                   PinCodeTextField(
-                      appContext: context, length: 6, onChanged: (value) {},
+                    controller: controller.controllerPin,
+                    appContext: context,
+                    length: 6,
+                    onChanged: (value) {},
                     keyboardType: TextInputType.number,
                     cursorColor: Colors.red,
                   ),
@@ -98,10 +102,11 @@ class ConfirmTransactionPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: width*0.4,
+                        width: width * 0.4,
                         height: height48,
                         child: ButtonPrimaryText(
-                          onTab: () {
+                          onTab: () async {
+                            await controller.onConfirmTransaction();
                           },
                           margin: EdgeInsets.zero,
                           padding: EdgeInsets.all(width8),

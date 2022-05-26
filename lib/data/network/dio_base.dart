@@ -18,6 +18,7 @@ class DioBase {
     receiveTimeout: 30000,
     headers: {
       'Authorization' : 'Bearer $token',
+      'token': token,
     },
   ));
 }

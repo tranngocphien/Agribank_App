@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../app_theme.dart';
+import '../../../models/static_money.dart';
 
 class ListAmountMoney extends StatelessWidget {
   const ListAmountMoney(
@@ -9,7 +10,7 @@ class ListAmountMoney extends StatelessWidget {
       required this.indexSelected,
       required this.onPress})
       : super(key: key);
-  final List<String> values;
+  final List<Money> values;
   final int indexSelected;
   final Function(int) onPress;
 
@@ -24,7 +25,7 @@ class ListAmountMoney extends StatelessWidget {
                 onPress(values.indexOf(e));
               },
               child: MoneyItem(
-                  amount: e, isClick: values.indexOf(e) == indexSelected)))
+                  amount: e.title, isClick: values.indexOf(e) == indexSelected)))
           .toList(),
     );
   }

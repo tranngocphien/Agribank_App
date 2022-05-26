@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../data/storage/store_global.dart';
 import 'widgets/BottomNavigation.dart';
 
 class HomePage extends GetWidget<HomeController> {
@@ -94,26 +95,32 @@ class HomePage extends GetWidget<HomeController> {
                     SizedBox(
                       height: height8,
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        Get.toNamed(AppRoutes.login);
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: width24, vertical: height8),
-                        decoration: BoxDecoration(
-                            color: const Color(0xFFff7700),
-                            gradient: const LinearGradient(colors: [
-                              Color(0xFFd47c24),
-                              Color(0xFFc96a0a),
-                            ]),
-                            borderRadius: BorderRadius.circular(width16)),
-                        child: const Text(
-                          'Đăng nhập',
-                          style: TextStyle(color: white, fontSize: 16),
-                        ),
-                      ),
-                    ),
+                    StoreGlobal.isLogin.value
+                        ? Text(StoreGlobal.user.value!.name.toUpperCase(), style: Styles.baseNotoSansTS.copyWith(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+
+                    ),)
+                        : GestureDetector(
+                            onTap: () {
+                              Get.toNamed(AppRoutes.login);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: width24, vertical: height8),
+                              decoration: BoxDecoration(
+                                  color: const Color(0xFFff7700),
+                                  gradient: const LinearGradient(colors: [
+                                    Color(0xFFd47c24),
+                                    Color(0xFFc96a0a),
+                                  ]),
+                                  borderRadius: BorderRadius.circular(width16)),
+                              child: const Text(
+                                'Đăng nhập',
+                                style: TextStyle(color: white, fontSize: 16),
+                              ),
+                            ),
+                          ),
                     SizedBox(
                       height: height8,
                     ),
@@ -131,7 +138,8 @@ class HomePage extends GetWidget<HomeController> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Get.toNamed(AppRoutes.accountInformation);
+                            StoreGlobal.isLogin.value ?
+                            Get.toNamed(AppRoutes.accountInformation) : Get.toNamed(AppRoutes.login);
                           },
                           child: Column(
                             children: [
@@ -143,7 +151,11 @@ class HomePage extends GetWidget<HomeController> {
                                     color: const Color(0xFFf2f2f2),
                                     borderRadius:
                                         BorderRadius.circular(width25)),
-                                child: Image.asset('assets/icons/ic_wallet.png', width: width40, height: height40,),
+                                child: Image.asset(
+                                  'assets/icons/ic_wallet.png',
+                                  width: width40,
+                                  height: height40,
+                                ),
                               ),
                               SizedBox(
                                 height: height4,
@@ -188,15 +200,15 @@ class HomePage extends GetWidget<HomeController> {
                           child: Column(
                             children: [
                               Container(
-                                height: height60,
-                                width: width60,
-                                padding: EdgeInsets.all(width16),
-                                decoration: BoxDecoration(
-                                    color: const Color(0xFFf2f2f2),
-                                    borderRadius:
-                                        BorderRadius.circular(width25)),
-                                child: Image.asset('assets/icons/ic_card.png')
-                              ),
+                                  height: height60,
+                                  width: width60,
+                                  padding: EdgeInsets.all(width16),
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xFFf2f2f2),
+                                      borderRadius:
+                                          BorderRadius.circular(width25)),
+                                  child:
+                                      Image.asset('assets/icons/ic_card.png')),
                               SizedBox(
                                 height: height4,
                               ),
@@ -272,7 +284,7 @@ class HomePage extends GetWidget<HomeController> {
                                     ),
                                     text: 'Chuyển khoản',
                                     onClick: () {
-                                      Get.toNamed(AppRoutes.transfer);
+                                      StoreGlobal.isLogin.value ?Get.toNamed(AppRoutes.transfer) : Get.toNamed(AppRoutes.login);
                                     },
                                   ),
                                   FunctionItem(
@@ -283,7 +295,7 @@ class HomePage extends GetWidget<HomeController> {
                                     ),
                                     text: 'Nạp tiền điện thoại',
                                     onClick: () {
-                                      Get.toNamed(AppRoutes.rechargePhone);
+                                      StoreGlobal.isLogin.value ? Get.toNamed(AppRoutes.rechargePhone): Get.toNamed(AppRoutes.login);
                                     },
                                   ),
                                   FunctionItem(
@@ -303,7 +315,7 @@ class HomePage extends GetWidget<HomeController> {
                                     ),
                                     text: 'Mua mã thẻ',
                                     onClick: () {
-                                      Get.toNamed(AppRoutes.buyPhoneCard);
+                                      StoreGlobal.isLogin.value ? Get.toNamed(AppRoutes.buyPhoneCard): Get.toNamed(AppRoutes.login);
                                     },
                                   ),
                                   FunctionItem(
@@ -314,7 +326,7 @@ class HomePage extends GetWidget<HomeController> {
                                     ),
                                     text: 'Tiền gửi trực tuyến',
                                     onClick: () {
-                                      Get.toNamed(AppRoutes.onlineSavingMoney);
+                                      StoreGlobal.isLogin.value ? Get.toNamed(AppRoutes.onlineSavingMoney): Get.toNamed(AppRoutes.login);
                                     },
                                   ),
                                   FunctionItem(
@@ -362,7 +374,6 @@ class HomePage extends GetWidget<HomeController> {
                                     text: 'Trả nợ',
                                     onClick: () {},
                                   ),
-
                                 ]),
                           ),
                         ],
@@ -683,8 +694,10 @@ class FunctionItem extends StatelessWidget {
             Text(
               text,
               textAlign: TextAlign.center,
-              style: Styles.baseNotoSansTS
-                  .copyWith(fontSize: 14, fontWeight: FontWeight.w400,),
+              style: Styles.baseNotoSansTS.copyWith(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
             )
           ],
         ),

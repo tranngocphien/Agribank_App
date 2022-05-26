@@ -15,3 +15,11 @@ enum HttpMethod {
   path,
 }
 
+enum TransactionType {
+  rechargePhone,
+  sendMoney,
+  sendMoneyInterbank,
+  buyCodePhone
+
+}
+

@@ -1,11 +1,15 @@
+import 'package:agribank_banking/modules/transfer/screens/ex_transfer_st/transfer_external_by_cardnum_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../app_theme.dart';
+import '../../../../components/account_information.dart';
 import '../../../../components/button_border.dart';
+import '../../../../components/widget_input.dart';
 import '../../../../routes/app_routes.dart';
 
-class TransferExByCardNumberPage extends StatelessWidget {
+class TransferExByCardNumberPage
+    extends GetWidget<TransferExternalByCardNumberController> {
   const TransferExByCardNumberPage({Key? key}) : super(key: key);
 
   @override
@@ -26,53 +30,12 @@ class TransferExByCardNumberPage extends StatelessWidget {
           padding: EdgeInsets.all(width16),
           child: Column(
             children: [
-              Container(
-                height: height160,
-                padding: EdgeInsets.all(width8),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(width16), color: white),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.credit_card,
-                          color: Colors.deepOrangeAccent,
-                        ),
-                        SizedBox(
-                          width: width16,
-                        ),
-                        Text(
-                          'Tài khoản thanh toán',
-                          style: Styles.baseNotoSansTS.copyWith(
-                              fontSize: 16, fontWeight: FontWeight.w500),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: height32,
-                    ),
-                    Text(
-                      '1504281024240',
-                      style: Styles.baseNotoSansTS.copyWith(
-                          color: Colors.deepOrangeAccent, fontSize: 18),
-                    ),
-                    SizedBox(
-                      height: height32,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Số dư:',
-                          style: Styles.baseNotoSansTS.copyWith(fontSize: 16),
-                        ),
-                        const Text('*******')
-                      ],
-                    )
-                  ],
-                ),
+              AccountInformationWidget(
+                accounts: [],
+                indexSelected: 0,
+                onPress: (value){
+
+                },
               ),
               SizedBox(
                 height: height16,
@@ -100,43 +63,15 @@ class TransferExByCardNumberPage extends StatelessWidget {
                         )
                       ],
                     ),
-                    TextField(
-                      decoration: const InputDecoration(
-                        suffixIcon: Icon(Icons.keyboard_arrow_down),
-                        label: Text('Ngân hàng thụ hưởng'),
-                        focusColor: black700,
-                        hoverColor: black700,
-                        fillColor: black700,
-                        border: InputBorder.none,
-                      ),
-                      style: Styles.baseNotoSansTS.copyWith(fontSize: 18),
-                    ),
-                    TextField(
-                      decoration: const InputDecoration(
-                        suffixIcon: Icon(Icons.keyboard_arrow_down),
-                        label: Text('Số thẻ thụ hưởng'),
-                        focusColor: black700,
-                        hoverColor: black700,
-                        fillColor: black700,
-                        border: InputBorder.none,
-                      ),
-                      style: Styles.baseNotoSansTS.copyWith(fontSize: 18),
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        suffixIcon: Text(
-                          'VND',
-                          style: Styles.baseNotoSansTS
-                              .copyWith(color: black700, fontSize: 16),
-                        ),
-                        label: const Text('Số tiền'),
-                        focusColor: black700,
-                        hoverColor: black700,
-                        fillColor: black700,
-                        border: InputBorder.none,
-                      ),
-                      style: Styles.baseNotoSansTS.copyWith(fontSize: 18),
-                      keyboardType: TextInputType.number,
+                    WidgetInput( text: 'Ngân hàng thụ hưởng', onPress: (){},suffixIcon: const Icon(Icons.keyboard_arrow_down),),
+                    WidgetInput( text: 'Số thẻ thụ hưởng', onPress: (){},suffixIcon: const Icon(Icons.keyboard_arrow_down),),
+                    WidgetInput(
+                      text: 'Số tiền',
+                      onPress: () {},
+                      suffixIcon: Text('VND', style: Styles.baseNotoSansTS.copyWith(
+                        fontSize: 16,
+                        color: black500
+                      ),),
                     ),
                     SizedBox(
                       height: height16,
@@ -149,9 +84,7 @@ class TransferExByCardNumberPage extends StatelessWidget {
                       ),
                     ),
                     TextField(
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                      ),
+                      decoration: const InputDecoration(),
                       style: Styles.baseNotoSansTS.copyWith(fontSize: 18),
                     ),
                     Row(
@@ -195,7 +128,7 @@ class TransferExByCardNumberPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: width*0.4,
+                    width: width * 0.4,
                     height: height48,
                     child: ButtonPrimaryText(
                       onTab: () {
@@ -218,6 +151,7 @@ class TransferExByCardNumberPage extends StatelessWidget {
           ),
         ),
       ),
-    );;
+    );
+    ;
   }
 }

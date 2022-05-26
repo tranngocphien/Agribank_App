@@ -3,8 +3,9 @@ import 'package:get/get.dart';
 
 import '../../../app_theme.dart';
 import '../../../routes/app_routes.dart';
+import 'login_controller.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends GetWidget<LoginController> {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
@@ -33,119 +34,145 @@ class LoginPage extends StatelessWidget {
           )
         ],
       ),
-      body: SizedBox(
-        width: width,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: height16,
-            ),
-            const Text(
-              "Đăng nhập",
-              style: TextStyle(
-                  color: Color(0xFFd46c11),
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20),
-            ),
-            SizedBox(
-              height: height64,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: width24),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
-                        "Số điện thoại",
-                        style: TextStyle(color: black600),
-                      ),
-                      Text(
-                        "037*****54",
-                        style: TextStyle(
-                            color: black200,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: height4,
-                  ),
-                  const Divider(
-                    thickness: 1,
-                  ),
-                  SizedBox(
-                    height: height16,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        "Mật khẩu",
-                        style: TextStyle(color: black600),
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(width: width100, child: const TextField(
-                            textDirection: TextDirection.rtl,
-                            decoration: InputDecoration(
-                              border: InputBorder.none
-                            ),
-                          )),
-                          SizedBox(
-                            width: width8,
-                          ),
-                          const Icon(
-                            Icons.remove_red_eye_outlined,
-                            color: black100,
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: height4,
-                  ),
-                  const Divider(
-                    thickness: 1,
-                  )
-                ],
+      body: SingleChildScrollView(
+        child: SizedBox(
+          width: width,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: height16,
               ),
-            ),
-            SizedBox(
-              height: height16,
-            ),
-            GestureDetector(
-              onTap: () {
-                Get.toNamed(AppRoutes.updateInformation);
-              },
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                    horizontal: width34, vertical: height12),
-                decoration: BoxDecoration(
-                    color: const Color(0xFFff7700),
-                    gradient: const LinearGradient(colors: [
-                      Color(0xFFd47c24),
-                      Color(0xFFc96a0a),
-                    ]),
-                    borderRadius: BorderRadius.circular(width24)),
-                child: const Text(
-                  'Đăng nhập',
-                  style: TextStyle(color: white, fontSize: 16),
+              const Text(
+                "Đăng nhập",
+                style: TextStyle(
+                    color: Color(0xFFd46c11),
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20),
+              ),
+              SizedBox(
+                height: height64,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width24),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Số điện thoại",
+                          style: TextStyle(color: black600),
+                        ),
+                        Obx(() => SizedBox(width: width200, child: Directionality(
+                          textDirection: TextDirection.rtl,
+                          child: TextField(
+                            textDirection: TextDirection.rtl,
+                            controller: controller.controllerPhone,
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                errorText: controller.phoneError.value
+                            ),
+                            style: Styles.baseNotoSansTS.copyWith(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                color: const Color(0xFFd46c11)
+                            ),
+                          ),
+                        )))
+                      ],
+                    ),
+                    SizedBox(
+                      height: height4,
+                    ),
+                    const Divider(
+                      thickness: 1,
+                    ),
+                    SizedBox(
+                      height: height16,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Mật khẩu",
+                          style: TextStyle(color: black600),
+                        ),
+                        Row(
+                          children: [
+                            Obx(() => SizedBox(width: width120, child: Directionality(
+                              textDirection: TextDirection.rtl,
+                              child: TextField(
+                                textDirection: TextDirection.rtl,
+                                controller: controller.controllerPassword,
+                                obscureText: !controller.isShowPassword.value,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  errorText: controller.passwordError.value
+                                ),
+                                style: Styles.baseNotoSansTS.copyWith(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500
+                                ),
+                              ),
+                            ))),
+                            SizedBox(
+                              width: width8,
+                            ),
+                            Obx(() => GestureDetector(
+                              onTap: (){
+                                controller.isShowPassword.value = !controller.isShowPassword.value;
+                              },
+                              child: Icon(
+                                controller.isShowPassword.value ? Icons.visibility : Icons.visibility_off,
+                                color: black100,
+                              ),
+                            ))
+                          ],
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: height4,
+                    ),
+                    const Divider(
+                      thickness: 1,
+                    )
+                  ],
                 ),
               ),
-            ),
-            SizedBox(
-              height: height12,
-            ),
-            const Text("Quên mật khẩu", style: TextStyle(
-              color: Color(0xFFe68840)
-            ),)
+              SizedBox(
+                height: height16,
+              ),
+              GestureDetector(
+                onTap: () async{
+                  await controller.login();
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: width34, vertical: height12),
+                  decoration: BoxDecoration(
+                      color: const Color(0xFFff7700),
+                      gradient: const LinearGradient(colors: [
+                        Color(0xFFd47c24),
+                        Color(0xFFc96a0a),
+                      ]),
+                      borderRadius: BorderRadius.circular(width24)),
+                  child: const Text(
+                    'Đăng nhập',
+                    style: TextStyle(color: white, fontSize: 16),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: height12,
+              ),
+              const Text("Quên mật khẩu", style: TextStyle(
+                color: Color(0xFFe68840)
+              ),)
 
-          ],
+            ],
+          ),
         ),
       ),
     );

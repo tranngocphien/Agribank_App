@@ -1,5 +1,7 @@
 import 'package:agribank_banking/components/function_service_item.dart';
+import 'package:agribank_banking/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../app_theme.dart';
 
@@ -34,7 +36,9 @@ class ManageContactPage extends StatelessWidget {
                   FunctionServiceItem(
                       icon: Image.asset('assets/icons/ic_kieu_hoi.png'),
                       text: 'Danh bạ tài \nkhoản/Thẻ',
-                      onPress: () {}),
+                      onPress: () {
+                        Get.toNamed(AppRoutes.manageContactAccount);
+                      }),
                   FunctionServiceItem(
                       icon: Image.asset('assets/icons/ic_invoice.png'),
                       text: 'Danh bạ hóa đơn',

@@ -4,6 +4,8 @@ import 'package:agribank_banking/modules/buy_card_phone/buy_card_phone_binding.d
 import 'package:agribank_banking/modules/buy_card_phone/buy_card_phone_page.dart';
 import 'package:agribank_banking/modules/manage_contacts/manage_contact_binding.dart';
 import 'package:agribank_banking/modules/manage_contacts/manage_contact_page.dart';
+import 'package:agribank_banking/modules/manage_contacts/screens/account_contacts/account_contacts_binding.dart';
+import 'package:agribank_banking/modules/manage_contacts/screens/account_contacts/account_contacts_page.dart';
 import 'package:agribank_banking/modules/online_saving_money/online_saving_money_binding.dart';
 import 'package:agribank_banking/modules/online_saving_money/online_saving_money_page.dart';
 import 'package:agribank_banking/modules/online_saving_money/screens/online_deposit_settlement/online_deposit_settlement_binding.dart';
@@ -43,6 +45,7 @@ import 'package:agribank_banking/modules/history_transaction/history_transaction
 import 'package:agribank_banking/modules/history_transaction/history_transaction_page.dart';
 import 'package:agribank_banking/modules/transfer/screens/transfer_internal/transfer_internal_binding.dart';
 import 'package:agribank_banking/modules/transfer/transfer_binding.dart';
+import '../modules/transfer/screens/transfer_internal_detail/transfer_internal_detail_binding.dart';
 import '../modules/transfer/transfer_page.dart';
 import 'package:get/get.dart';
 import '../modules/card_service/card_service_page.dart';
@@ -113,7 +116,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.transferDetailInternal,
       page: () => const TransferInternalDetailPage(),
-      binding: TransferInternalBinding()
+      binding: TransferInternalDetailBinding()
     ),
     GetPage(
       name: AppRoutes.transferExQr,
@@ -144,6 +147,11 @@ class AppPages {
       name: AppRoutes.manageContact,
       page: () => const ManageContactPage(),
       binding: ManageContactBinding()
+    ),
+    GetPage(
+      name: AppRoutes.manageContactAccount,
+      page: () => const AccountContactsPage(),
+      binding: AccountContactsBinding()
     ),
     GetPage(
       name: AppRoutes.onlineSavingMoney,

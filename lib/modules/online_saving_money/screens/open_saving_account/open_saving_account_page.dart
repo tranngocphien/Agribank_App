@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../../app_theme.dart';
 import '../../../../components/button_border.dart';
+import '../../../../components/widget_input.dart';
 import '../../../../routes/app_routes.dart';
 
 class OpenSavingAccountPage extends StatelessWidget {
@@ -101,56 +102,35 @@ class OpenSavingAccountPage extends StatelessWidget {
                         )
                       ],
                     ),
-                    TextField(
-                      decoration: const InputDecoration(
-                        suffixIcon: Icon(Icons.keyboard_arrow_down),
-                        label: Text('Loại tiền gửi'),
-                        focusColor: black700,
-                        hoverColor: black700,
-                        fillColor: black700,
-                        border: InputBorder.none,
-                      ),
-                      style: Styles.baseNotoSansTS.copyWith(fontSize: 18),
+                    WidgetInput(
+                      text: 'Loại tiền gửi',
+                      onPress: () {},
+                      suffixIcon: const Icon(Icons.keyboard_arrow_down),
+                      enable: false,
                     ),
-                    TextField(
-                      decoration: const InputDecoration(
-                        suffixIcon: Icon(Icons.keyboard_arrow_down),
-                        label: Text('Chọn kỳ hạn'),
-                        focusColor: black700,
-                        hoverColor: black700,
-                        fillColor: black700,
-                        border: InputBorder.none,
-                      ),
-                      style: Styles.baseNotoSansTS.copyWith(fontSize: 18),
+                    WidgetInput(
+                      text: 'Chọn kỳ hạn',
+                      onPress: () {},
+                      suffixIcon: const Icon(Icons.keyboard_arrow_down),
+                      enable: false,
                     ),
-                    TextField(
-                      decoration: InputDecoration(
+                    WidgetInput(
+                        text: 'Số tiền',
+                        onPress: () {},
+                        keyboardType: TextInputType.number,
                         suffixIcon: Text(
                           'VND',
                           style: Styles.baseNotoSansTS
                               .copyWith(fontSize: 16, color: Colors.grey),
-                        ),
-                        label: Text('Số tiền'),
-                        focusColor: black700,
-                        hoverColor: black700,
-                        fillColor: black700,
-                        border: InputBorder.none,
-                      ),
-                      style: Styles.baseNotoSansTS.copyWith(fontSize: 18),
-                    ),
+                        )),
                     SizedBox(
                       height: height8,
                     ),
-                    TextField(
-                      decoration: const InputDecoration(
-                        suffixIcon: Icon(Icons.keyboard_arrow_down),
-                        label: Text('Hình thức gia hạn'),
-                        focusColor: black700,
-                        hoverColor: black700,
-                        fillColor: black700,
-                        border: InputBorder.none,
-                      ),
-                      style: Styles.baseNotoSansTS.copyWith(fontSize: 18),
+                    WidgetInput(
+                      text: 'Hình thức gia hạn',
+                      onPress: () {},
+                      suffixIcon: const Icon(Icons.keyboard_arrow_down),
+                      enable: false,
                     ),
                     SizedBox(
                       height: height8,
@@ -158,7 +138,9 @@ class OpenSavingAccountPage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: height16,),
+              SizedBox(
+                height: height16,
+              ),
               Row(
                 children: [
                   Checkbox(value: false, onChanged: (value) {}),
@@ -166,14 +148,13 @@ class OpenSavingAccountPage extends StatelessWidget {
                     width: width16,
                   ),
                   SizedBox(
-                    width: width*0.7,
-                      child: Text(
-                          'Tôi xác nhận đã đọc, hiểu rõ Điều kiện và Điều khoản mở tài khoản tiết kiệm trực tuyến',
-                        style: Styles.baseNotoSansTS.copyWith(
-                          fontSize: 14,
-
-                        ),
+                    width: width * 0.7,
+                    child: Text(
+                      'Tôi xác nhận đã đọc, hiểu rõ Điều kiện và Điều khoản mở tài khoản tiết kiệm trực tuyến',
+                      style: Styles.baseNotoSansTS.copyWith(
+                        fontSize: 14,
                       ),
+                    ),
                   )
                 ],
               ),

@@ -1,3 +1,6 @@
+import 'package:agribank_banking/data/storage/store_global.dart';
+import 'package:agribank_banking/modules/transfer/screens/transfer_internal_detail/transfer_internal_detail_controller.dart';
+import 'package:agribank_banking/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../app_theme.dart';
@@ -5,7 +8,7 @@ import '../../../../components/button_border.dart';
 import '../../../../components/information_tile.dart';
 import '../../../../routes/app_routes.dart';
 
-class TransferInternalDetailPage extends StatelessWidget {
+class TransferInternalDetailPage extends GetWidget<TransferInternalDetailController> {
   const TransferInternalDetailPage({Key? key}) : super(key: key);
 
   @override
@@ -32,39 +35,39 @@ class TransferInternalDetailPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(width16), color: white),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     InformationTile(
                       label: 'Tài khoản nguồn',
-                      content: '1504281024240',
+                      content: controller.senderAccount,
                     ),
                     InformationTile(
                       label: 'Số tài khoản thụ hưởng',
-                      content: '1504281024240',
+                      content: controller.receiverAccount,
                     ),
                     InformationTile(
                       label: 'Tên người thụ hưởng',
-                      content: 'Trần Thị Thu Cúc',
+                      content: StoreGlobal.user.value!.name,
                       isHighLight: true,
                     ),
 
                     InformationTile(
                       label: 'Số tiền',
-                      content: '10,000',
+                      content: '${controller.money} VND',
                     ),
 
-                    InformationTile(
+                    const InformationTile(
                       label: 'Phí giao dịch',
                       content: '0 VND',
                     ),
 
                     InformationTile(
                       label: 'Tổng tiền',
-                      content: '10,000 VNĐ',
+                      content: '${controller.money} VND',
                     ),
 
                     InformationTile(
                       label: 'Nội dung CK',
-                      content: 'TRAN NGOC PHIEN CK',
+                      content: controller.content,
                     )
                   ],
                 ),
@@ -98,7 +101,7 @@ class TransferInternalDetailPage extends StatelessWidget {
                     height: height48,
                     child: ButtonPrimaryText(
                       onTab: () {
-                        Get.toNamed(AppRoutes.confirmTransaction);
+                        Get.toNamed(AppRoutes.confirmTransaction, arguments: TransactionType.sendMoney);
                       },
                       margin: EdgeInsets.zero,
                       padding: EdgeInsets.all(width8),
