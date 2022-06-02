@@ -23,9 +23,20 @@ class LoginController extends GetxController {
         StoreGlobal.user.value = _response!.data.user;
         StoreGlobal.isLogin.value = true;
         Get.offAllNamed(AppRoutes.home);
-      } on DioError {
-        Get.toNamed(AppRoutes.updateInformation);
-
+      }  on DioError catch (e) {
+        final message = (e.response!.data as Map)['message'];
+        Get.dialog(CupertinoAlertDialog(
+          title: const Text('Thông báo'),
+          content: Text(message),
+          actions: [
+            CupertinoDialogAction(
+              onPressed: () {
+                Get.offAndToNamed(AppRoutes.home);
+              },
+              child: const Text('Đồng ý'),
+            )
+          ],
+        ));
       }
 
     }

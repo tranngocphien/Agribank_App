@@ -33,9 +33,7 @@ class TransferExByCardNumberPage
               AccountInformationWidget(
                 accounts: [],
                 indexSelected: 0,
-                onPress: (value){
-
-                },
+                onPress: (value) {},
               ),
               SizedBox(
                 height: height16,
@@ -63,15 +61,24 @@ class TransferExByCardNumberPage
                         )
                       ],
                     ),
-                    WidgetInput( text: 'Ngân hàng thụ hưởng', onPress: (){},suffixIcon: const Icon(Icons.keyboard_arrow_down),),
-                    WidgetInput( text: 'Số thẻ thụ hưởng', onPress: (){},suffixIcon: const Icon(Icons.keyboard_arrow_down),),
+                    WidgetInput(
+                      text: 'Ngân hàng thụ hưởng',
+                      onPress: () {},
+                      suffixIcon: const Icon(Icons.keyboard_arrow_down),
+                    ),
+                    WidgetInput(
+                      text: 'Số thẻ thụ hưởng',
+                      onPress: () {},
+                      suffixIcon: const Icon(Icons.keyboard_arrow_down),
+                    ),
                     WidgetInput(
                       text: 'Số tiền',
                       onPress: () {},
-                      suffixIcon: Text('VND', style: Styles.baseNotoSansTS.copyWith(
-                        fontSize: 16,
-                        color: black500
-                      ),),
+                      suffixIcon: Text(
+                        'VND',
+                        style: Styles.baseNotoSansTS
+                            .copyWith(fontSize: 16, color: black500),
+                      ),
                     ),
                     SizedBox(
                       height: height16,

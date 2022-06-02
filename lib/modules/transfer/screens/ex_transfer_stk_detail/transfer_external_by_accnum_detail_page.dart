@@ -1,10 +1,12 @@
+import 'package:agribank_banking/modules/transfer/screens/ex_transfer_stk_detail/transfer_external_by_accnum_detail_controller.dart';
+import 'package:agribank_banking/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../app_theme.dart';
 import '../../../../components/button_border.dart';
 import '../../../../routes/app_routes.dart';
 
-class TransferExternalByAccNumDetailPage extends StatelessWidget {
+class TransferExternalByAccNumDetailPage extends GetWidget<TransferExternalByAccNumDetailController> {
   const TransferExternalByAccNumDetailPage({Key? key}) : super(key: key);
 
   @override
@@ -31,39 +33,36 @@ class TransferExternalByAccNumDetailPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(width16), color: white),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     InformationTile(
                       label: 'Tài khoản nguồn',
-                      content: '1504281024240',
+                      content: controller.senderAccount! ,
                     ),
                     InformationTile(
                       label: 'Số tài khoản thụ hưởng',
-                      content: '1504281024240',
+                      content: controller.receiverAccount!,
                     ),
                     InformationTile(
                       label: 'Tên người thụ hưởng',
-                      content: 'Trần Thị Thu Cúc',
+                      content: controller.name!,
                       isHighLight: true,
                     ),
 
                     InformationTile(
                       label: 'Số tiền',
-                      content: '10,000',
+                      content: controller.amount!,
                     ),
-
-                    InformationTile(
+                    const InformationTile(
                       label: 'Phí giao dịch',
                       content: '0 VND',
                     ),
-
                     InformationTile(
                       label: 'Tổng tiền',
-                      content: '10,000 VNĐ',
+                      content: controller.amount!,
                     ),
-
                     InformationTile(
                       label: 'Nội dung CK',
-                      content: 'TRAN NGOC PHIEN CK',
+                      content: controller.content!,
                     )
                   ],
                 ),
@@ -97,7 +96,7 @@ class TransferExternalByAccNumDetailPage extends StatelessWidget {
                     height: height48,
                     child: ButtonPrimaryText(
                       onTab: () {
-                        Get.toNamed(AppRoutes.confirmTransaction);
+                        Get.toNamed(AppRoutes.confirmTransaction, arguments: TransactionType.sendMoneyInterbank);
                       },
                       margin: EdgeInsets.zero,
                       padding: EdgeInsets.all(width8),

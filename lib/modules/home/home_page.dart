@@ -569,7 +569,9 @@ class HomePage extends GetWidget<HomeController> {
                   color: Colors.deepOrangeAccent,
                 ),
                 title: 'Cài đặt Soft OTP',
-                onClick: () {},
+                onClick: () {
+                  Get.toNamed(AppRoutes.softOTP);
+                },
               ),
               DrawerNavigationItem(
                 icons: const Icon(

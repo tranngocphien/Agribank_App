@@ -1,7 +1,11 @@
 import 'package:agribank_banking/app_theme.dart';
+import 'package:agribank_banking/models/notification_entity.dart';
 import 'package:agribank_banking/modules/notification/notification_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../utils/enums.dart';
 
 class NotificationPage extends GetWidget<NotificationController> {
   const NotificationPage({Key? key}) : super(key: key);
@@ -9,51 +13,55 @@ class NotificationPage extends GetWidget<NotificationController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: const Color(0xFFF86F07),
-        title: const Text(
-          'THÔNG TIN AGRIBANK',
-          style: TextStyle(
-            fontSize: 18,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: const Color(0xFFF86F07),
+          title: const Text(
+            'THÔNG TIN AGRIBANK',
+            style: TextStyle(
+              fontSize: 18,
+            ),
           ),
-        ),
-        centerTitle: true,
-        actions: const [
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Icon(Icons.menu),
-          )
-        ],
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(height60),
-          child: Obx(
-            () => ListNotificationType(
-              indexSelected: controller.indexSelected.value,
-              onPress: (index) {
-                controller.indexSelected.value = index;
-              },
-              types: controller.types,
+          centerTitle: true,
+          actions: const [
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(Icons.menu),
+            )
+          ],
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(height60),
+            child: Obx(
+              () => ListNotificationType(
+                indexSelected: controller.indexSelected.value,
+                onPress: (index) {
+                  controller.indexSelected.value = index;
+                },
+                types: controller.types,
+              ),
             ),
           ),
         ),
-      ),
-      body: ListView(
-        children: [
-          NotificationItem(),
-          NotificationItem(),
-          NotificationItem(),
-          NotificationItem()
-        ],
-      ),
-    );
+        body: Obx(
+          () => controller.loadStatus.value == AppLoadStatus.loading
+              ? const Center(
+                  child: CupertinoActivityIndicator(),
+                )
+              : ListView(
+                  children: controller.notifications
+                      .map((e) => NotificationItem(notification: e,))
+                      .toList(),
+                ),
+        ));
   }
 }
 
 class NotificationItem extends StatelessWidget {
   const NotificationItem({
+    required this.notification,
     Key? key,
   }) : super(key: key);
+  final NotificationEntity notification;
 
   @override
   Widget build(BuildContext context) {
@@ -65,24 +73,27 @@ class NotificationItem extends StatelessWidget {
           Container(
             height: height48,
             width: width48,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.red
-            ),
+            decoration:
+                const BoxDecoration(shape: BoxShape.circle, image: DecorationImage(
+                  image: AssetImage('assets/images/logo.png'), fit: BoxFit.contain
+                )),
+
           ),
-          SizedBox(width: width8,),
+          SizedBox(
+            width: width8,
+          ),
           Container(
             width: width - width120,
             // height: height120,
-            padding: EdgeInsets.all(width4),
+            padding: EdgeInsets.all(width8),
             decoration: BoxDecoration(
-                color: white,
-                borderRadius: BorderRadius.circular(width8)
-            ),
+                color: white, borderRadius: BorderRadius.circular(width8)),
             child: Column(
               children: [
-                Image.asset('assets/images/home/banner_1.jpg'),
-                const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum')
+                // Image.asset('assets/images/home/banner_1.jpg'),
+                Text(notification.content, style: Styles.baseNotoSansTS.copyWith(
+                  fontSize: 15
+                ),)
               ],
             ),
           ),

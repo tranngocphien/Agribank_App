@@ -19,7 +19,8 @@ enum TransactionType {
   rechargePhone,
   sendMoney,
   sendMoneyInterbank,
-  buyCodePhone
+  buyCodePhone,
+  openSavingAccount
 
 }
 

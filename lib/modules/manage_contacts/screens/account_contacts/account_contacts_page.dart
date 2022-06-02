@@ -1,4 +1,5 @@
 import 'package:agribank_banking/modules/manage_contacts/screens/account_contacts/account_contacts_controller.dart';
+import 'package:agribank_banking/routes/app_routes.dart';
 import 'package:agribank_banking/utils/enums.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,13 @@ class AccountContactsPage extends GetWidget<AccountContactsController> {
           style: Styles.baseNotoSansTS.copyWith(
               fontSize: 16, color: white, fontWeight: FontWeight.w600),
         ),
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.add))],
+        actions: [
+          IconButton(
+              onPressed: () {
+                Get.toNamed(AppRoutes.createContact);
+              },
+              icon: const Icon(Icons.add))
+        ],
         elevation: 0,
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(height40),
@@ -88,8 +95,13 @@ class AccountContactsPage extends GetWidget<AccountContactsController> {
                                   child: Row(
                                     children: [
                                       Image.asset(
-                                          'assets/images/logo.png', width: width30, fit: BoxFit.cover,),
-                                      SizedBox(width: width8,),
+                                        'assets/images/logo.png',
+                                        width: width30,
+                                        fit: BoxFit.cover,
+                                      ),
+                                      SizedBox(
+                                        width: width8,
+                                      ),
                                       Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -128,13 +140,52 @@ class AccountContactsPage extends GetWidget<AccountContactsController> {
                           children: [
                             ...controller.externalContacts
                                 .map((element) => Container(
-                                      child: Column(
-                                        children: [
-                                          Text(element.nickName),
-                                          Text(element.accountNumber)
-                                        ],
+                              width: width,
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(color: black100))),
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    'assets/images/logo.png',
+                                    width: width30,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  SizedBox(
+                                    width: width8,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        element.nickName,
+                                        style: Styles.baseNotoSansTS
+                                            .copyWith(
+                                            fontSize: 16,
+                                            color:
+                                            const Color(0xFFF67D10),
+                                            fontWeight:
+                                            FontWeight.w600),
                                       ),
-                                    ))
+                                      SizedBox(
+                                        height: height4,
+                                      ),
+                                      Text(
+                                        element.accountNumber,
+                                        style: Styles.baseNotoSansTS
+                                            .copyWith(
+                                            fontSize: 14,
+                                            color: black400),
+                                      ),
+                                      SizedBox(
+                                        height: height2,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ))
                           ],
                         ),
                 ],

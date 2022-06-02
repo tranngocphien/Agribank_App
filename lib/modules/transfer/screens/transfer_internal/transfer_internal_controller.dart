@@ -46,11 +46,24 @@ class TransferInternalController extends GetxController {
           content: controllerContent.text,
           saveContact: isSaveAccount.value ? 1 : 0,
           pin: pin);
+      Get.dialog(CupertinoAlertDialog(
+        title: const Text('Thông báo'),
+        content: const Text('Giao dịch thành công'),
+        actions: [
+          CupertinoDialogAction(
+            onPressed: () {
+              Get.offAndToNamed(AppRoutes.home);
+            },
+            child: const Text('Đồng ý'),
+          )
+        ],
+      ));
+
     } on DioError catch (e) {
       final message = (e.response!.data as Map)['message'];
       Get.dialog(CupertinoAlertDialog(
         title: const Text('Thông báo'),
-        content: message,
+        content: Text(message),
         actions: [
           CupertinoDialogAction(
             onPressed: () {

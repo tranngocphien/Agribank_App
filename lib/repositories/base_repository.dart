@@ -241,9 +241,9 @@ class BaseRepository extends BaseRepositoryInterface {
   }
 
   @override
-  Future<List<T>> queryList<T extends BaseEntity>(T Function(dynamic e) convert) {
+  Future<List<T>> queryList<T extends BaseEntity>(T Function(dynamic e) convert, {dynamic data}) {
     // TODO: implement queryList
-    final response = dio.post(url);
+    final response = dio.post(url, data: data);
     return _getDocuments(response, convert);
   }
 }

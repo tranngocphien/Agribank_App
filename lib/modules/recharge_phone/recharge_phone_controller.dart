@@ -12,7 +12,6 @@ import '../../utils/enums.dart';
 class RechargePhoneController extends GetxController {
   final indexSelected = 0.obs;
   final values = [
-    Money(title: '20,000 VND', value: 20000),
     Money(title: '30,000 VND', value: 30000),
     Money(title: '50,000 VND', value: 50000),
     Money(title: '100,000 VND', value: 100000),

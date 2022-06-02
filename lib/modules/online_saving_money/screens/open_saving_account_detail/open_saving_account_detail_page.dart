@@ -1,4 +1,7 @@
+import 'package:agribank_banking/data/storage/store_global.dart';
 import 'package:agribank_banking/modules/online_saving_money/screens/open_saving_account_detail/open_saving_account_detail_controller.dart';
+import 'package:agribank_banking/utils/convert.dart';
+import 'package:agribank_banking/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,7 +10,8 @@ import '../../../../components/button_border.dart';
 import '../../../../components/information_tile.dart';
 import '../../../../routes/app_routes.dart';
 
-class OpenSavingAccountDetailPage extends GetWidget<OpenSavingAccountDetailController> {
+class OpenSavingAccountDetailPage
+    extends GetWidget<OpenSavingAccountDetailController> {
   const OpenSavingAccountDetailPage({Key? key}) : super(key: key);
 
   @override
@@ -34,43 +38,39 @@ class OpenSavingAccountDetailPage extends GetWidget<OpenSavingAccountDetailContr
                     borderRadius: BorderRadius.circular(width16), color: white),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     InformationTile(
                       label: 'Tài khoản nguồn',
-                      content: '1504281024240',
+                      content: controller.source!,
                     ),
                     InformationTile(
                       label: 'Tên Khách hàng',
-                      content: 'TRẦN NGỌC PHIÊN',
+                      content: StoreGlobal.user.value!.name.toUpperCase(),
                       isHighLight: false,
                     ),
                     InformationTile(
                       label: 'Loại tiền gửi',
-                      content: 'Tiền gửi trực tuyến',
+                      content: controller.type!,
                     ),
-
                     InformationTile(
                       label: 'Số tiền',
-                      content: '10,000',
+                      content: controller.money!,
                     ),
-
                     InformationTile(
-                      label: 'Kỳ hạn gửi',
-                      content: '1 tháng',
-                    ),
-
+                        label: 'Kỳ hạn gửi',
+                        content: '${controller.cycle!.month.toString()} tháng'),
                     InformationTile(
                       label: 'Ngày mở tài khoản',
-                      content: '18/05/2022',
+                      content: ConvertDateTime.convertDateTime(DateTime.now()),
                     ),
-
                     InformationTile(
                       label: 'Lãi suất',
-                      content: '3.10%/năm',
+                      content:
+                          '${controller.cycle!.interestRate.toString()}%/năm',
                     ),
                     InformationTile(
                       label: 'Hình thức gia hạn',
-                      content: '3.10%/năm',
+                      content: controller.typeRenew!,
                     )
                   ],
                 ),
@@ -100,11 +100,11 @@ class OpenSavingAccountDetailPage extends GetWidget<OpenSavingAccountDetailContr
                     ),
                   ),
                   SizedBox(
-                    width: width*0.4,
+                    width: width * 0.4,
                     height: height48,
                     child: ButtonPrimaryText(
                       onTab: () {
-                        Get.toNamed(AppRoutes.confirmTransaction);
+                        Get.toNamed(AppRoutes.confirmTransaction, arguments: TransactionType.openSavingAccount);
                       },
                       margin: EdgeInsets.zero,
                       padding: EdgeInsets.all(width8),

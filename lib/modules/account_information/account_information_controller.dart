@@ -10,10 +10,10 @@ class AccountInformationController extends GetxController {
   final accounts = List<BankAccountEntity>.empty(growable: true).obs;
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     // TODO: implement onInit
     loadStatus(AppLoadStatus.loading);
-    getListAccountInformation();
+    await getListAccountInformation();
     loadStatus(AppLoadStatus.success);
     super.onInit();
   }

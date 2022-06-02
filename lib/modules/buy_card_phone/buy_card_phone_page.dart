@@ -176,7 +176,7 @@ class BuyCardPhonePage extends GetWidget<BuyCardPhoneController> {
                                       backgroundColor: Colors.transparent,
                                       child: Container(
                                         width: width * 0.9,
-                                        height: height * 0.4,
+                                        height: height * 0.45,
                                         decoration: BoxDecoration(
                                             color: Colors.white,
                                             borderRadius:

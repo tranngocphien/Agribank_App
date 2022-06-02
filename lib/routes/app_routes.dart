@@ -36,6 +36,7 @@ class AppRoutes {
   static const manageInvoice = '/manageInvoice';
   static const manageRecharge = '/manageCharge';
   static const manageCreditCard = '/manageCreditCard';
+  static const createContact = '/createContact';
 
   /// online saving money
   static const onlineSavingMoney = '/onlineSavingMoney';
@@ -45,5 +46,8 @@ class AppRoutes {
 
   /// question and answer
   static const questionAnswer = '/questionAnswer';
+
+  /// otp
+  static const softOTP = '/softOTP';
 
 }

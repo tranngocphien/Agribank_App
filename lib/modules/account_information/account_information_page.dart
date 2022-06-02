@@ -11,11 +11,7 @@ class AccountInformationPage extends GetWidget<AccountInformationController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => controller.loadStatus.value == AppLoadStatus.loading
-        ? const Center(
-      child: CupertinoActivityIndicator(),
-    )
-        : Scaffold(
+    return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFF67D10),
         centerTitle: true,
@@ -26,85 +22,89 @@ class AccountInformationPage extends GetWidget<AccountInformationController> {
         ),
         elevation: 0,
       ),
-      body: Container(
-        width: width,
-        height: height,
-        padding: EdgeInsets.all(width16),
-        child: Column(
-          children: [
-            GestureDetector(
-              onTap: () {
-                Get.toNamed(AppRoutes.detailInformation,
-                    arguments: [controller.accounts.first]);
-              },
-              child: Container(
-                height: height160,
-                padding: EdgeInsets.all(width8),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(width16),
-                    color: white),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.credit_card,
-                          color: Colors.deepOrangeAccent,
-                        ),
-                        SizedBox(
-                          width: width16,
-                        ),
-                        Text(
-                          'Tài khoản thanh toán',
-                          style: Styles.baseNotoSansTS.copyWith(
-                              fontSize: 16, fontWeight: FontWeight.w500),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: height32,
-                    ),
-                    Text(
-                      controller.accounts.first.accountNumber,
-                      style: Styles.baseNotoSansTS.copyWith(
-                          color: Colors.deepOrangeAccent, fontSize: 18),
-                    ),
-                    SizedBox(
-                      height: height32,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Số dư: ${controller.accounts.first.money} VND',
-                          style: Styles.baseNotoSansTS
-                              .copyWith(fontSize: 16),
-                        ),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.qr_code_scanner_rounded,
-                              color: Colors.deepOrangeAccent,
-                            ),
-                            SizedBox(
-                              width: width16,
-                            ),
-                            const Icon(
-                              Icons.arrow_forward_ios,
-                              color: Colors.deepOrangeAccent,
-                            )
-                          ],
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ),
+      body: Obx(() => controller.loadStatus.value == AppLoadStatus.loading
+          ? const Center(
+              child: CupertinoActivityIndicator(),
             )
-          ],
-        ),
-      ),
-    ));
+          : Container(
+              width: width,
+              height: height,
+              padding: EdgeInsets.all(width16),
+              child: Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Get.toNamed(AppRoutes.detailInformation,
+                          arguments: [controller.accounts.first]);
+                    },
+                    child: Container(
+                      height: height160,
+                      padding: EdgeInsets.all(width8),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(width16),
+                          color: white),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.credit_card,
+                                color: Colors.deepOrangeAccent,
+                              ),
+                              SizedBox(
+                                width: width16,
+                              ),
+                              Text(
+                                'Tài khoản thanh toán',
+                                style: Styles.baseNotoSansTS.copyWith(
+                                    fontSize: 16, fontWeight: FontWeight.w500),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: height32,
+                          ),
+                          Text(
+                            controller.accounts.first.accountNumber,
+                            style: Styles.baseNotoSansTS.copyWith(
+                                color: Colors.deepOrangeAccent, fontSize: 18),
+                          ),
+                          SizedBox(
+                            height: height32,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Số dư: ${controller.accounts.first.money} VND',
+                                style: Styles.baseNotoSansTS
+                                    .copyWith(fontSize: 16),
+                              ),
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.qr_code_scanner_rounded,
+                                    color: Colors.deepOrangeAccent,
+                                  ),
+                                  SizedBox(
+                                    width: width16,
+                                  ),
+                                  const Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: Colors.deepOrangeAccent,
+                                  )
+                                ],
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            )),
+    );
   }
 }

@@ -69,42 +69,47 @@ class TransferExByAccNumberPage
                             ],
                           ),
                           TextField(
-                            onTap: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) => Dialog(
-                                        insetPadding: EdgeInsets.zero,
-                                        alignment: Alignment.center,
-                                        child: SizedBox(
-                                          height: height * 0.5,
-                                          width: width * 0.9,
-                                          child: Column(
-                                            children: [
-                                              Container(
+                            controller: controller.controllerBank,
+                            decoration: InputDecoration(
+                              suffixIcon: GestureDetector(
+                                  onTap: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) => Dialog(
+                                              insetPadding: EdgeInsets.zero,
+                                              alignment: Alignment.center,
+                                              child: SizedBox(
+                                                height: height * 0.5,
                                                 width: width * 0.9,
-                                                height: height48,
-                                                decoration: const BoxDecoration(
-                                                    color: Color(0xFFF67D10)),
-                                                child: Center(
-                                                  child: Text(
-                                                    "Ngân hàng thụ hưởng",
-                                                    style: Styles.baseNotoSansTS
-                                                        .copyWith(
-                                                            fontSize: 16,
-                                                            color: white,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w600),
-                                                  ),
+                                                child: Column(
+                                                  children: [
+                                                    Container(
+                                                      width: width * 0.9,
+                                                      height: height48,
+                                                      decoration:
+                                                          const BoxDecoration(
+                                                              color: Color(
+                                                                  0xFFF67D10)),
+                                                      child: Center(
+                                                        child: Text(
+                                                          "Ngân hàng thụ hưởng",
+                                                          style: Styles
+                                                              .baseNotoSansTS
+                                                              .copyWith(
+                                                                  fontSize: 16,
+                                                                  color: white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
-                                            ],
-                                          ),
-                                        ),
-                                      ));
-                            },
-                            decoration: InputDecoration(
-                              suffixIcon: const Icon(Icons.keyboard_arrow_down),
+                                            ));
+                                  },
+                                  child: const Icon(Icons.keyboard_arrow_down)),
                               label: const Text('Ngân hàng thụ hưởng'),
                               labelStyle: Styles.baseNotoSansTS
                                   .copyWith(fontSize: 16, color: black500),
@@ -116,6 +121,7 @@ class TransferExByAccNumberPage
                             style: Styles.baseNotoSansTS.copyWith(fontSize: 16),
                           ),
                           TextField(
+                            controller: controller.controllerPhone,
                             decoration: InputDecoration(
                               suffixIcon: const Icon(Icons.keyboard_arrow_down),
                               label: const Text('Số tài khoản thụ hưởng'),
@@ -131,6 +137,7 @@ class TransferExByAccNumberPage
                             style: Styles.baseNotoSansTS.copyWith(fontSize: 18),
                           ),
                           TextField(
+                            controller: controller.controllerAmount,
                             decoration: InputDecoration(
                               suffixIcon: Text(
                                 'VND',
@@ -138,6 +145,20 @@ class TransferExByAccNumberPage
                                     .copyWith(color: black700, fontSize: 16),
                               ),
                               label: const Text('Số tiền'),
+                              focusColor: black700,
+                              hoverColor: black700,
+                              fillColor: black700,
+                              labelStyle: Styles.baseNotoSansTS
+                                  .copyWith(fontSize: 16, color: black500),
+                              border: InputBorder.none,
+                            ),
+                            style: Styles.baseNotoSansTS.copyWith(fontSize: 18),
+                            keyboardType: TextInputType.number,
+                          ),
+                          TextField(
+                            controller: controller.controllerName,
+                            decoration: InputDecoration(
+                              label: const Text('Tên tài khoản thụ hưởng'),
                               focusColor: black700,
                               hoverColor: black700,
                               fillColor: black700,
@@ -159,6 +180,7 @@ class TransferExByAccNumberPage
                             ),
                           ),
                           TextField(
+                            controller: controller.controllerContent,
                             decoration: const InputDecoration(),
                             style: Styles.baseNotoSansTS.copyWith(fontSize: 18),
                           ),
@@ -172,8 +194,11 @@ class TransferExByAccNumberPage
                                     fontWeight: FontWeight.w500,
                                     color: black800),
                               ),
-                              CupertinoSwitch(
-                                  value: false, onChanged: (value) {})
+                              Obx(() => CupertinoSwitch(
+                                  value: controller.isSaveAccount.value,
+                                  onChanged: (value) {
+                                    controller.isSaveAccount.value = value;
+                                  }))
                             ],
                           )
                         ],
@@ -208,7 +233,21 @@ class TransferExByAccNumberPage
                           height: height48,
                           child: ButtonPrimaryText(
                             onTab: () {
-                              Get.toNamed(AppRoutes.transferExAccNumberDetail);
+                              Get.toNamed(AppRoutes.transferExAccNumberDetail,
+                                  arguments: {
+                                    'sender_account': controller
+                                        .accounts[controller.indexAccount.value]
+                                        .accountNumber,
+                                    'bank': controller.controllerBank.text,
+                                    'receiver_account':
+                                        controller.controllerPhone.text,
+                                    'amount': controller.controllerAmount.text,
+                                    'name': controller.controllerName.text,
+                                    'content':
+                                        controller.controllerContent.text,
+                                    'isSaveAccount':
+                                        controller.isSaveAccount.value
+                                  });
                             },
                             margin: EdgeInsets.zero,
                             padding: EdgeInsets.all(width8),

@@ -6,6 +6,8 @@ import 'package:agribank_banking/modules/manage_contacts/manage_contact_binding.
 import 'package:agribank_banking/modules/manage_contacts/manage_contact_page.dart';
 import 'package:agribank_banking/modules/manage_contacts/screens/account_contacts/account_contacts_binding.dart';
 import 'package:agribank_banking/modules/manage_contacts/screens/account_contacts/account_contacts_page.dart';
+import 'package:agribank_banking/modules/manage_contacts/screens/create_account_contact/create_account_contact_binding.dart';
+import 'package:agribank_banking/modules/manage_contacts/screens/create_account_contact/create_account_contact_page.dart';
 import 'package:agribank_banking/modules/online_saving_money/online_saving_money_binding.dart';
 import 'package:agribank_banking/modules/online_saving_money/online_saving_money_page.dart';
 import 'package:agribank_banking/modules/online_saving_money/screens/online_deposit_settlement/online_deposit_settlement_binding.dart';
@@ -18,6 +20,8 @@ import 'package:agribank_banking/modules/question_answer/question_answer_binding
 import 'package:agribank_banking/modules/question_answer/question_answer_page.dart';
 import 'package:agribank_banking/modules/recharge_phone/recharge_phone_binding.dart';
 import 'package:agribank_banking/modules/recharge_phone/recharge_phone_page.dart';
+import 'package:agribank_banking/modules/soft_otp/soft_otp_binding.dart';
+import 'package:agribank_banking/modules/soft_otp/soft_otp_page.dart';
 import 'package:agribank_banking/modules/transfer/screens/confirm_transaction/confirm_transaction_binding.dart';
 import 'package:agribank_banking/modules/transfer/screens/confirm_transaction/confirm_transaction_page.dart';
 import 'package:agribank_banking/modules/transfer/screens/ex_transfer_st/transfer_external_by_cardnum_binding.dart';
@@ -192,7 +196,17 @@ class AppPages {
       name: AppRoutes.transferExAccNumberDetail,
       page: () => const TransferExternalByAccNumDetailPage(),
       binding: TransferExternalByAccNumberDetailBinding()
-
+    ),
+    GetPage(
+      name: AppRoutes.softOTP,
+      page: () => const SoftOPTPage(),
+      binding: SoftOTPBinding()
+    ),
+    GetPage(
+      name: AppRoutes.createContact,
+      page: () => const CreateAccountContactPage(),
+      binding: CreateAccountContactBinding()
     )
+
   ];
 }
