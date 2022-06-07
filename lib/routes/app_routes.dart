@@ -24,6 +24,7 @@ class AppRoutes {
   static const transferExCardNumber = '/transferExCardNumber';
   static const transferExQr = '/transferQR';
   static const confirmTransaction = '/confirmTransaction';
+  static const confirmTransactionPassword = '/confirmTransactionPassword';
 
   /// recharge phone money
   static const rechargePhone = '/rechargePhone';
@@ -49,5 +50,8 @@ class AppRoutes {
 
   /// otp
   static const softOTP = '/softOTP';
+  static const turnOnPin = '/turnOnPin';
+  static const updatePin = '/updatePin';
+  static const enterOldPin = '/enterOldPin';
 
 }

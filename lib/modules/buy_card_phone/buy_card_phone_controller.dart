@@ -68,6 +68,19 @@ class BuyCardPhoneController extends GetxController {
           homeNetword: homeNetworks[indexHomeNetword.value].value,
           money: int.parse(moneys[indexMoney.value].value),
           pin: pin);
+      Get.dialog(CupertinoAlertDialog(
+        title: const Text('Thông báo'),
+        content: const Text('Thanh toán thành công'),
+        actions: [
+          CupertinoDialogAction(
+            onPressed: () {
+              Get.toNamed(AppRoutes.home);
+            },
+            child: const Text('Đồng ý'),
+          )
+        ],
+      ));
+
     } on DioError catch (e) {
       final message = (e.response!.data as Map)['message'];
       Get.dialog(CupertinoAlertDialog(

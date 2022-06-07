@@ -20,10 +20,17 @@ import 'package:agribank_banking/modules/question_answer/question_answer_binding
 import 'package:agribank_banking/modules/question_answer/question_answer_page.dart';
 import 'package:agribank_banking/modules/recharge_phone/recharge_phone_binding.dart';
 import 'package:agribank_banking/modules/recharge_phone/recharge_phone_page.dart';
+import 'package:agribank_banking/modules/soft_otp/screens/set_pin/set_pin_binding.dart';
+import 'package:agribank_banking/modules/soft_otp/screens/set_pin/set_pin_page.dart';
+import 'package:agribank_banking/modules/soft_otp/screens/update_pin/old_pin_page.dart';
+import 'package:agribank_banking/modules/soft_otp/screens/update_pin/update_pin_binding.dart';
+import 'package:agribank_banking/modules/soft_otp/screens/update_pin/update_pin_page.dart';
 import 'package:agribank_banking/modules/soft_otp/soft_otp_binding.dart';
 import 'package:agribank_banking/modules/soft_otp/soft_otp_page.dart';
 import 'package:agribank_banking/modules/transfer/screens/confirm_transaction/confirm_transaction_binding.dart';
 import 'package:agribank_banking/modules/transfer/screens/confirm_transaction/confirm_transaction_page.dart';
+import 'package:agribank_banking/modules/transfer/screens/confirm_transaction_password/confirm_transaction_password_bindings.dart';
+import 'package:agribank_banking/modules/transfer/screens/confirm_transaction_password/confirm_transaction_password_page.dart';
 import 'package:agribank_banking/modules/transfer/screens/ex_transfer_st/transfer_external_by_cardnum_binding.dart';
 import 'package:agribank_banking/modules/transfer/screens/ex_transfer_st/transfer_external_by_cardnum_page.dart';
 import 'package:agribank_banking/modules/transfer/screens/ex_transfer_stk/transfer_external_by_accnum_binding.dart';
@@ -193,6 +200,11 @@ class AppPages {
       binding: ConfirmTransactionBinding()
     ),
     GetPage(
+      name: AppRoutes.confirmTransactionPassword,
+      page: () => const ConfirmTransactionPasswordPage(),
+      binding: ConfirmTransactionPasswordBinding()
+    ),
+    GetPage(
       name: AppRoutes.transferExAccNumberDetail,
       page: () => const TransferExternalByAccNumDetailPage(),
       binding: TransferExternalByAccNumberDetailBinding()
@@ -201,6 +213,21 @@ class AppPages {
       name: AppRoutes.softOTP,
       page: () => const SoftOPTPage(),
       binding: SoftOTPBinding()
+    ),
+    GetPage(
+      name: AppRoutes.turnOnPin,
+      page: () => const SetPinPage(),
+      binding: SetPinBinding()
+    ),
+    GetPage(
+      name: AppRoutes.enterOldPin,
+      page: () => const OldPinPage()
+    ),
+    GetPage(
+      name: AppRoutes.updatePin,
+      page: () => const UpdatePinPage(),
+      binding: UpdatePinBinding()
+
     ),
     GetPage(
       name: AppRoutes.createContact,

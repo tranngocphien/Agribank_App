@@ -1,4 +1,5 @@
 import 'package:agribank_banking/modules/soft_otp/soft_otp_controller.dart';
+import 'package:agribank_banking/routes/app_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -85,65 +86,75 @@ class SoftOPTPage extends GetWidget<SoftOTPController> {
               ],
             ),
           ),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: width16),
-            padding: EdgeInsets.all(width16),
-            decoration: BoxDecoration(
-                color: white, borderRadius: BorderRadius.circular(width10)),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Đổi PIN',
-                  style: Styles.baseNotoSansTS.copyWith(
-                      fontSize: 16,
-                      color: const Color(0xFFF67D10),
-                      fontWeight: FontWeight.w600),
-                ),
-                const Icon(
-                  Icons.arrow_forward_ios,
-                  color: Color(0xFFF67D10),
-                  size: 16,
-                )
-              ],
+          GestureDetector(
+            onTap: (){
+              Get.toNamed(AppRoutes.enterOldPin);
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: width16),
+              padding: EdgeInsets.all(width16),
+              decoration: BoxDecoration(
+                  color: white, borderRadius: BorderRadius.circular(width10)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Đổi PIN',
+                    style: Styles.baseNotoSansTS.copyWith(
+                        fontSize: 16,
+                        color: const Color(0xFFF67D10),
+                        fontWeight: FontWeight.w600),
+                  ),
+                  const Icon(
+                    Icons.arrow_forward_ios,
+                    color: Color(0xFFF67D10),
+                    size: 16,
+                  )
+                ],
+              ),
             ),
           ),
           SizedBox(
             height: height8,
           ),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: width16),
-            padding: EdgeInsets.all(width16),
-            decoration: BoxDecoration(
-                color: white, borderRadius: BorderRadius.circular(width10)),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Quên PIN',
-                      style: Styles.baseNotoSansTS.copyWith(
-                          fontSize: 16,
-                          color: const Color(0xFFF67D10),
-                          fontWeight: FontWeight.w600),
-                    ),
-                    const Icon(
-                      Icons.arrow_forward_ios,
-                      color: Color(0xFFF67D10),
-                      size: 16,
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: height8,
-                ),
-                Text(
-                  'Quý khách sẽ được yêu cầu kích hoạt Soft OTP trong trường hợp sử dụng tính năng quên PIN.',
-                  style: Styles.baseNotoSansTS
-                      .copyWith(fontSize: 13, color: black500),
-                )
-              ],
+          GestureDetector(
+            onTap: (){
+              Get.toNamed(AppRoutes.turnOnPin);
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: width16),
+              padding: EdgeInsets.all(width16),
+              decoration: BoxDecoration(
+                  color: white, borderRadius: BorderRadius.circular(width10)),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Quên PIN',
+                        style: Styles.baseNotoSansTS.copyWith(
+                            fontSize: 16,
+                            color: const Color(0xFFF67D10),
+                            fontWeight: FontWeight.w600),
+                      ),
+                      const Icon(
+                        Icons.arrow_forward_ios,
+                        color: Color(0xFFF67D10),
+                        size: 16,
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: height8,
+                  ),
+                  Text(
+                    'Quý khách sẽ được yêu cầu kích hoạt Soft OTP trong trường hợp sử dụng tính năng quên PIN.',
+                    style: Styles.baseNotoSansTS
+                        .copyWith(fontSize: 13, color: black500),
+                  )
+                ],
+              ),
             ),
           )
         ],
