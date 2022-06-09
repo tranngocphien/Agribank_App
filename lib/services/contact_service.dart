@@ -1,6 +1,7 @@
 import 'package:agribank_banking/data/network/api_constants.dart';
 import 'package:agribank_banking/models/base_entity.dart';
 import 'package:agribank_banking/models/response_list_contact.dart';
+import 'package:agribank_banking/models/response_message.dart';
 import 'package:agribank_banking/repositories/base_repository.dart';
 import 'package:agribank_banking/services/dio_service.dart';
 import 'package:agribank_banking/utils/enums.dart';
@@ -41,13 +42,30 @@ class ContactService {
     return res;
   }
 
-  Future<void> deleteContact({required String id}) async {
+  Future<ContactEntity?> updateContact({required String id, required String type}) async {
+    _repo.method = HttpMethod.post;
+    _repo.url = APIConstants.baseURL + APIConstants.updateContact;
+    _repo.keyData = 'data';
+    try {
+      final res = await _repo.queryByPath((e) => ContactEntity.fromJson(e), data: {
+        'id': id,
+        'type_contact': type
+      });
+      return res;
+    }
+    catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<ResponseMessage?> deleteContact({required String id}) async {
     _repo.method = HttpMethod.post;
     _repo.url = APIConstants.baseURL + APIConstants.deleteContact;
     try {
-      final res = await _repo.queryByPath((e) => BaseEntity(), data: {
+      final res = await _repo.queryByPath((e) => ResponseMessage.fromJson(e), data: {
         'id': id
       });
+      return res;
     }
     catch (e) {
       rethrow;

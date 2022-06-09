@@ -277,7 +277,9 @@ class DetailInformationPage extends GetWidget<DetailInformationController> {
                                               child: CupertinoDatePicker(
                                                 mode: CupertinoDatePickerMode
                                                     .date,
-                                                onDateTimeChanged: (value) {},
+                                                onDateTimeChanged: (value) {
+                                                  controller.endDate.value = value;
+                                                },
                                                 initialDateTime: DateTime.now(),
                                               ),
                                             );

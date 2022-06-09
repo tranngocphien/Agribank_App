@@ -23,8 +23,16 @@ class AccountContactsController extends GetxController {
 
   Future<void> getListContacts() async {
     var temp = await _contactService.getListContact(typeContact: 1);
-    internalContacts.addAll(temp!.rows);
+    internalContacts..clear()..addAll(temp!.rows);
     temp = await _contactService.getListContact(typeContact: 2);
-    externalContacts.addAll(temp!.rows);
+    externalContacts..clear()..addAll(temp!.rows);
+  }
+
+  Future<void> deleteContact(String contactId) async {
+    loadStatus(AppLoadStatus.loading);
+    await _contactService.deleteContact(id: contactId);
+    await getListContacts();
+    loadStatus(AppLoadStatus.success);
+
   }
 }

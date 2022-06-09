@@ -23,7 +23,7 @@ class OpenSavingAccountEntity extends BaseEntity{
   );
 }
 
-class AccountSaving {
+class AccountSaving extends BaseEntity{
   AccountSaving({
     required this.id,
     required this.typeSaving,
@@ -111,4 +111,29 @@ class BankAccountSource {
   );
 
 }
+
+class MoneySaving extends BaseEntity {
+  MoneySaving({
+    required this.money,
+    required this.cycleInterestRate,
+    required this.cycleMonth,
+  });
+
+  int money;
+  double cycleInterestRate;
+  int cycleMonth;
+
+  factory MoneySaving.fromJson(Map<String, dynamic> json) => MoneySaving(
+    money: json["money"] ?? 0,
+    cycleInterestRate: json["cycle_interest_rate"] ?? 0,
+    cycleMonth: json["cycle_month"] ?? 0,
+  );
+
+  Map<String, dynamic> toJson() => {
+    "money": money == null ? null : money,
+    "cycle_interest_rate": cycleInterestRate == null ? null : cycleInterestRate,
+    "cycle_month": cycleMonth == null ? null : cycleMonth,
+  };
+}
+
 

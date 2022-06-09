@@ -40,11 +40,11 @@ class HistoryTransactionEntity extends BaseEntity {
     bankBranch: json["bank_branch"],
     contentTransaction: json["content_transaction"],
     accountNumberTransaction: json["account_number_transaction"],
-    accountNumberDestination: json["account_number_destination"],
+    accountNumberDestination: json["account_number_destination"] ?? '',
     transactionFee: json["transaction_fee"],
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
-    detail: json["detail"] == null ? null : DetailHistoryTransactionEntity.fromJson(json["detail"]),
+    detail: json["detail"]['id'] == null ? null : DetailHistoryTransactionEntity.fromJson(json["detail"]),
   );
 }
 
@@ -81,16 +81,16 @@ class DetailHistoryTransactionEntity extends BaseEntity {
 
   factory DetailHistoryTransactionEntity.fromJson(Map<String, dynamic> json) => DetailHistoryTransactionEntity(
     id: json["id"],
-    userIdSender: json["user_id_sender"],
+    userIdSender: json["user_id_sender"] ?? '',
     transactionHistoryId: json["transaction_history_id"],
-    userIdReceiver: json["user_id_receiver"],
-    nameSender: json["name_sender"],
-    nameReceiver: json["name_receiver"],
-    content: json["content"],
-    saveContact: json["save_contact"],
+    userIdReceiver: json["user_id_receiver"] ?? '',
+    nameSender: json["name_sender"] ?? '',
+    nameReceiver: json["name_receiver"] ?? '',
+    content: json["content"] ?? '',
+    saveContact: json["save_contact"] ?? false,
     nameInterbank: json["name_interbank"] ?? '',
     codeInterbank: json["code_interbank"] ?? '',
-    type: json["type"],
+    type: json["type"] ?? '',
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
   );

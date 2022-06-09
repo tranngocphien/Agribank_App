@@ -1,5 +1,6 @@
 import 'package:agribank_banking/data/network/api_constants.dart';
 import 'package:agribank_banking/models/bank_account_entity.dart';
+import 'package:agribank_banking/models/open_saving_account_entity.dart';
 import 'package:agribank_banking/repositories/base_repository.dart';
 import 'package:agribank_banking/services/dio_service.dart';
 import 'package:agribank_banking/utils/enums.dart';
@@ -16,6 +17,14 @@ class UserService {
     _repo.url = APIConstants.baseURL + APIConstants.listBankAccount;
     _repo.keyData = 'data';
     final accounts = _repo.queryList((e) => BankAccountEntity.fromJson(e));
+    return accounts;
+  }
+
+  Future<List<AccountSaving>> getListSavingAccount() async {
+    _repo.dio = DioService.instance.get();
+    _repo.url = APIConstants.baseURL + APIConstants.listSavingAccount;
+    _repo.keyData = 'data';
+    final accounts = _repo.queryList((e) => AccountSaving.fromJson(e));
     return accounts;
   }
 

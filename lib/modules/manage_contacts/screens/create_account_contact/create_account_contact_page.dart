@@ -1,7 +1,6 @@
 import 'package:agribank_banking/components/button_border.dart';
 import 'package:agribank_banking/components/widget_input.dart';
 import 'package:agribank_banking/modules/manage_contacts/screens/create_account_contact/create_account_contact_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -146,7 +145,7 @@ class CreateAccountContactPage
                                                                     width16))),
                                                 child: Center(
                                                     child: Text(
-                                                  "Loại giao dịch",
+                                                  "Ngân hàng",
                                                   style: Styles.baseNotoSansTS
                                                       .copyWith(
                                                           fontSize: 18,

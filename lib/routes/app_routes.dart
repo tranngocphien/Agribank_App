@@ -38,6 +38,7 @@ class AppRoutes {
   static const manageRecharge = '/manageCharge';
   static const manageCreditCard = '/manageCreditCard';
   static const createContact = '/createContact';
+  static const detailContact = '/detailContact';
 
   /// online saving money
   static const onlineSavingMoney = '/onlineSavingMoney';
@@ -53,5 +54,6 @@ class AppRoutes {
   static const turnOnPin = '/turnOnPin';
   static const updatePin = '/updatePin';
   static const enterOldPin = '/enterOldPin';
+  static const turnOffPin = '/turnOffPin';
 
 }

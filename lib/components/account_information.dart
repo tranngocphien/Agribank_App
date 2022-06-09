@@ -1,6 +1,8 @@
 import 'package:agribank_banking/models/bank_account_entity.dart';
+import 'package:agribank_banking/utils/convert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../app_theme.dart';
 
 class AccountInformationWidget extends StatefulWidget {
@@ -127,7 +129,7 @@ class _AccountInformationWidgetState extends State<AccountInformationWidget> {
               const Spacer(),
               Text(
                 isHideMoney
-                    ? "${widget.accounts[widget.indexSelected].money} VND"
+                    ? "${MoneyFormat.formatMoneyInteger(widget.accounts[widget.indexSelected].money)} VND"
                     : '*******',
                 style: Styles.baseNotoSansTS.copyWith(
                     fontSize: 16,

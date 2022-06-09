@@ -20,14 +20,16 @@ class TransactionService {
       {required String accountNumber,
       required String phone,
       required int money,
-      required String pin}) async {
+      String? pin,
+      String? password}) async {
     _repo.url = APIConstants.baseURL + APIConstants.rechargePhone;
     try {
       await _repo.queryByPath((e) => ResponseMessage.fromJson(e), data: {
         'account_number': accountNumber,
         'phone_number': phone,
         'money': money,
-        'pin': pin
+        'pin': pin,
+        'password': password
       });
     } catch (e) {
       rethrow;
@@ -38,14 +40,17 @@ class TransactionService {
       {required String accountNumber,
       required String homeNetword,
       required int money,
-      required String pin}) async {
+      String? pin,
+        String? password
+      }) async {
     _repo.url = APIConstants.baseURL + APIConstants.buyCodePhone;
     try {
       await _repo.queryByPath((e) => ResponseMessage.fromJson(e), data: {
         'account_number': accountNumber,
         'home_network': homeNetword,
         'money': money,
-        'pin': pin
+        'pin': pin,
+        'password': password
       });
     } catch (e) {
       rethrow;
@@ -58,7 +63,9 @@ class TransactionService {
       required int money,
       required String content,
       required int saveContact,
-      required String pin}) async {
+      String? pin,
+        String? password
+      }) async {
     _repo.url = APIConstants.baseURL + APIConstants.sendMoney;
     try {
       await _repo.queryByPath((e) => ResponseMessage.fromJson(e), data: {
@@ -67,7 +74,8 @@ class TransactionService {
         'money': money,
         'content': content,
         'save_contact': saveContact,
-        'pin': pin
+        'pin': pin,
+        'password': password
       });
     } catch (e) {
       rethrow;
@@ -82,7 +90,9 @@ class TransactionService {
       required int saveContact,
       required String nameReceiver,
       required String nameInterbank,
-      required String pin}) async {
+      String? pin,
+        String? password
+      }) async {
     _repo.url = APIConstants.baseURL + APIConstants.sendMoney;
     try {
       await _repo.queryByPath((e) => ResponseMessage.fromJson(e), data: {
@@ -92,6 +102,7 @@ class TransactionService {
         'content': content,
         'save_contact': saveContact,
         'pin': pin,
+        'password': password,
         'otp': pin,
         'name_receiver': nameReceiver,
         'name_interbank': nameInterbank
@@ -131,6 +142,17 @@ class TransactionService {
       'money': money,
       'type_renew': typeRenew,
       'cycle_id': cycleId
+    });
+  }
+
+  Future<MoneySaving?> finishSavingMoney(
+      {required String savingAccountNumber,
+      required String receiveAccountNumber}) async {
+    _repo.url = APIConstants.baseURL + APIConstants.finishSavingAccount;
+    _repo.keyData = 'data';
+    return await _repo.queryByPath((e) => MoneySaving.fromJson(e), data: {
+      'saving_account_number': savingAccountNumber,
+      'reciver_account_number': receiveAccountNumber
     });
   }
 }

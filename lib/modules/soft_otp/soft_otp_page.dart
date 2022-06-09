@@ -3,6 +3,7 @@ import 'package:agribank_banking/routes/app_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../app_theme.dart';
 
@@ -13,6 +14,11 @@ class SoftOPTPage extends GetWidget<SoftOTPController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: GestureDetector(
+          onTap: (){
+            Get.back();
+          },
+            child: const Icon(Icons.arrow_back)),
         backgroundColor: const Color(0xFFF67D10),
         centerTitle: true,
         title: Text(
@@ -49,7 +55,32 @@ class SoftOPTPage extends GetWidget<SoftOTPController> {
                     )),
                     CupertinoSwitch(
                         value: controller.turnOnOTP.value,
-                        onChanged: (value) {})
+                        onChanged: (value) {
+                          if (value) {
+                            Get.toNamed(AppRoutes.turnOnPin);
+                          } else {
+                            Get.dialog(CupertinoAlertDialog(
+                              title: const Text('Thông báo'),
+                              content: const Text(
+                                  'Quý khách có chắc chắn muốn tắt chức năng Soft OTP không.'),
+                              actions: [
+                                CupertinoDialogAction(
+                                  onPressed: () async {
+                                    Get.back();
+                                  },
+                                  child: const Text('Hủy'),
+                                ),
+                                CupertinoDialogAction(
+                                  onPressed: () {
+                                    Get.back();
+                                    Get.toNamed(AppRoutes.turnOffPin);
+                                  },
+                                  child: const Text('Đồng ý'),
+                                )
+                              ],
+                            ));
+                          }
+                        })
                   ],
                 ),
                 const Divider(
@@ -87,7 +118,7 @@ class SoftOPTPage extends GetWidget<SoftOTPController> {
             ),
           ),
           GestureDetector(
-            onTap: (){
+            onTap: () {
               Get.toNamed(AppRoutes.enterOldPin);
             },
             child: Container(
@@ -118,7 +149,7 @@ class SoftOPTPage extends GetWidget<SoftOTPController> {
             height: height8,
           ),
           GestureDetector(
-            onTap: (){
+            onTap: () {
               Get.toNamed(AppRoutes.turnOnPin);
             },
             child: Container(

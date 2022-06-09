@@ -1,5 +1,6 @@
 import 'package:agribank_banking/components/account_information.dart';
 import 'package:agribank_banking/components/widget_input.dart';
+import 'package:agribank_banking/data/storage/store_global.dart';
 import 'package:agribank_banking/modules/buy_card_phone/buy_card_phone_controller.dart';
 import 'package:agribank_banking/utils/enums.dart';
 import 'package:flutter/cupertino.dart';
@@ -291,7 +292,12 @@ class BuyCardPhonePage extends GetWidget<BuyCardPhoneController> {
                           height: height48,
                           child: ButtonPrimaryText(
                             onTab: () {
-                              Get.toNamed(AppRoutes.confirmTransaction, arguments: TransactionType.buyCodePhone);
+                              if(StoreGlobal.user.value!.softOtp){
+                                Get.toNamed(AppRoutes.confirmTransaction, arguments: TransactionType.buyCodePhone);
+                              }
+                              else {
+                                Get.toNamed(AppRoutes.confirmTransactionPassword, arguments: TransactionType.buyCodePhone);
+                              }
                             },
                             margin: EdgeInsets.zero,
                             padding: EdgeInsets.all(width8),

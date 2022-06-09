@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../../app_theme.dart';
 import '../../../../components/button_border.dart';
+import '../../../../components/widget_input.dart';
 
 class ConfirmTransactionPasswordPage extends GetWidget<ConfirmTransactionPasswordController> {
   const ConfirmTransactionPasswordPage({Key? key}) : super(key: key);
@@ -35,38 +36,20 @@ class ConfirmTransactionPasswordPage extends GetWidget<ConfirmTransactionPasswor
               child: Column(
                 children: [
                   SizedBox(
-                    height: height16,
-                  ),
-                  Image.asset(
-                    'assets/icons/ic_phone.png',
-                    width: width60,
-                    height: height60,
-                  ),
-                  SizedBox(
                     height: height8,
                   ),
                   Text(
                     "Vui lòng nhập mật khẩu đăng nhập ứng dụng để xác thực giao dịch",
                     style: Styles.baseNotoSansTS.copyWith(
-                      fontSize: 16,
+                      fontSize: 15,
                     ),
                   ),
-                  // RichText(
-                  //   textAlign: TextAlign.center,
-                  //   text: TextSpan(children: <TextSpan>[
-                  //     TextSpan(
-                  //         text: "0377016054",
-                  //         style: Styles.baseNotoSansTS.copyWith(
-                  //             fontSize: 16, fontWeight: FontWeight.w600)),
-                  //     TextSpan(
-                  //         text:
-                  //             ".Quý khách vui lòng nhập OTP để xác thực giao dịch",
-                  //         style: Styles.baseNotoSansTS.copyWith(fontSize: 16))
-                  //   ]),
-                  // ),
-                  // SizedBox(
-                  //   height: height16,
-                  // ),,
+                  SizedBox(height: height8,),
+                  WidgetInput(
+                    text: 'Nhập mật khẩu',
+                    obscureText: true,
+                    controller: controller.controllerPassword,
+                  ),
                   SizedBox(
                     height: height16,
                   ),
@@ -96,6 +79,7 @@ class ConfirmTransactionPasswordPage extends GetWidget<ConfirmTransactionPasswor
                         height: height48,
                         child: ButtonPrimaryText(
                           onTab: () async {
+                            await controller.onConfirmTransaction();
                           },
                           margin: EdgeInsets.zero,
                           padding: EdgeInsets.all(width8),

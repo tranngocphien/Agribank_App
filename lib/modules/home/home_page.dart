@@ -2,10 +2,12 @@ import 'package:agribank_banking/app_theme.dart';
 import 'package:agribank_banking/modules/home/home_controller.dart';
 import 'package:agribank_banking/routes/app_routes.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../data/storage/store_global.dart';
+import '../../utils/enums.dart';
 import 'widgets/BottomNavigation.dart';
 
 class HomePage extends GetWidget<HomeController> {
@@ -51,330 +53,518 @@ class HomePage extends GetWidget<HomeController> {
           }),
         ],
       ),
-      body: SizedBox(
-        width: width,
-        height: height,
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
+      body: Obx(
+        () => controller.loadStatus.value == AppLoadStatus.loading
+            ? const Center(
+                child: CupertinoActivityIndicator(),
+              )
+            : SizedBox(
+                width: width,
+                height: height,
                 child: Column(
                   children: [
-                    Stack(
-                      children: [
-                        SizedBox(
-                          height: height225,
-                        ),
-                        Image.asset(
-                          'assets/images/background.jpg',
-                          width: width,
-                          height: height180,
-                          fit: BoxFit.cover,
-                        ),
-                        Positioned.fill(
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Container(
-                              height: height75,
-                              width: width75,
-                              padding: EdgeInsets.all(width8),
-                              decoration: const BoxDecoration(
-                                  color: Colors.white, shape: BoxShape.circle),
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                    color: Color(0xFFc96a0a),
-                                    shape: BoxShape.circle),
-                                child: Icon(Icons.person,
-                                    color: white, size: width45),
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: height8,
-                    ),
-                    StoreGlobal.isLogin.value
-                        ? Text(StoreGlobal.user.value!.name.toUpperCase(), style: Styles.baseNotoSansTS.copyWith(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-
-                    ),)
-                        : GestureDetector(
-                            onTap: () {
-                              Get.toNamed(AppRoutes.login);
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: width24, vertical: height8),
-                              decoration: BoxDecoration(
-                                  color: const Color(0xFFff7700),
-                                  gradient: const LinearGradient(colors: [
-                                    Color(0xFFd47c24),
-                                    Color(0xFFc96a0a),
-                                  ]),
-                                  borderRadius: BorderRadius.circular(width16)),
-                              child: const Text(
-                                'Đăng nhập',
-                                style: TextStyle(color: white, fontSize: 16),
-                              ),
-                            ),
-                          ),
-                    SizedBox(
-                      height: height8,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(width8),
-                      child: const Divider(
-                        thickness: 1,
-                      ),
-                    ),
-                    SizedBox(
-                      height: height8,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            StoreGlobal.isLogin.value ?
-                            Get.toNamed(AppRoutes.accountInformation) : Get.toNamed(AppRoutes.login);
-                          },
-                          child: Column(
-                            children: [
-                              Container(
-                                height: height60,
-                                width: width60,
-                                padding: EdgeInsets.all(width16),
-                                decoration: BoxDecoration(
-                                    color: const Color(0xFFf2f2f2),
-                                    borderRadius:
-                                        BorderRadius.circular(width25)),
-                                child: Image.asset(
-                                  'assets/icons/ic_wallet.png',
-                                  width: width40,
-                                  height: height40,
-                                ),
-                              ),
-                              SizedBox(
-                                height: height4,
-                              ),
-                              const Text(
-                                "Tài khoản",
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    color: black),
-                              )
-                            ],
-                          ),
-                        ),
-                        Column(
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
                           children: [
-                            Container(
-                              height: height60,
-                              width: width60,
-                              padding: EdgeInsets.all(width16),
-                              decoration: BoxDecoration(
-                                  color: const Color(0xFFf2f2f2),
-                                  borderRadius: BorderRadius.circular(width25)),
-                              child: Image.asset('assets/icons/ic_qr_scan.png'),
+                            Stack(
+                              children: [
+                                SizedBox(
+                                  height: height225,
+                                ),
+                                Image.asset(
+                                  'assets/images/background.jpg',
+                                  width: width,
+                                  height: height180,
+                                  fit: BoxFit.cover,
+                                ),
+                                Positioned.fill(
+                                  child: Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Container(
+                                      height: height75,
+                                      width: width75,
+                                      padding: EdgeInsets.all(width8),
+                                      decoration: const BoxDecoration(
+                                          color: Colors.white,
+                                          shape: BoxShape.circle),
+                                      child: Container(
+                                        decoration: const BoxDecoration(
+                                            color: Color(0xFFc96a0a),
+                                            shape: BoxShape.circle),
+                                        child: Icon(Icons.person,
+                                            color: white, size: width45),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
                             SizedBox(
-                              height: height4,
+                              height: height8,
                             ),
-                            const Text(
-                              "QR Pay",
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: black),
+                            StoreGlobal.isLogin.value
+                                ? Text(
+                                    StoreGlobal.user.value!.name.toUpperCase(),
+                                    style: Styles.baseNotoSansTS.copyWith(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  )
+                                : GestureDetector(
+                                    onTap: () {
+                                      Get.toNamed(AppRoutes.login);
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: width24,
+                                          vertical: height8),
+                                      decoration: BoxDecoration(
+                                          color: const Color(0xFFff7700),
+                                          gradient:
+                                              const LinearGradient(colors: [
+                                            Color(0xFFd47c24),
+                                            Color(0xFFc96a0a),
+                                          ]),
+                                          borderRadius:
+                                              BorderRadius.circular(width16)),
+                                      child: const Text(
+                                        'Đăng nhập',
+                                        style: TextStyle(
+                                            color: white, fontSize: 16),
+                                      ),
+                                    ),
+                                  ),
+                            SizedBox(
+                              height: height8,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(width8),
+                              child: const Divider(
+                                thickness: 1,
+                              ),
+                            ),
+                            SizedBox(
+                              height: height8,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    StoreGlobal.isLogin.value
+                                        ? Get.toNamed(
+                                            AppRoutes.accountInformation)
+                                        : Get.toNamed(AppRoutes.login);
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: height60,
+                                        width: width60,
+                                        padding: EdgeInsets.all(width16),
+                                        decoration: BoxDecoration(
+                                            color: const Color(0xFFf2f2f2),
+                                            borderRadius:
+                                                BorderRadius.circular(width25)),
+                                        child: Image.asset(
+                                          'assets/icons/ic_wallet.png',
+                                          width: width40,
+                                          height: height40,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: height4,
+                                      ),
+                                      const Text(
+                                        "Tài khoản",
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                            color: black),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Column(
+                                  children: [
+                                    Container(
+                                      height: height60,
+                                      width: width60,
+                                      padding: EdgeInsets.all(width16),
+                                      decoration: BoxDecoration(
+                                          color: const Color(0xFFf2f2f2),
+                                          borderRadius:
+                                              BorderRadius.circular(width25)),
+                                      child: Image.asset(
+                                          'assets/icons/ic_qr_scan.png'),
+                                    ),
+                                    SizedBox(
+                                      height: height4,
+                                    ),
+                                    const Text(
+                                      "QR Pay",
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          color: black),
+                                    )
+                                  ],
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.toNamed(AppRoutes.cardService);
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                          height: height60,
+                                          width: width60,
+                                          padding: EdgeInsets.all(width16),
+                                          decoration: BoxDecoration(
+                                              color: const Color(0xFFf2f2f2),
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      width25)),
+                                          child: Image.asset(
+                                              'assets/icons/ic_card.png')),
+                                      SizedBox(
+                                        height: height4,
+                                      ),
+                                      const Text(
+                                        "Dịch vụ thẻ",
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                            color: black),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: height8,
+                            ),
+                            CarouselSlider.builder(
+                              itemCount: controller.banners.length,
+                              itemBuilder: (BuildContext context, int itemIndex,
+                                      int pageViewIndex) =>
+                                  Image.asset(controller.banners[itemIndex]),
+                              options: CarouselOptions(
+                                height: height241,
+                                aspectRatio: 16 / 9,
+                                viewportFraction: 0.8,
+                                autoPlay: true,
+                                autoPlayInterval: const Duration(seconds: 3),
+                                autoPlayAnimationDuration:
+                                    const Duration(milliseconds: 800),
+                                autoPlayCurve: Curves.fastOutSlowIn,
+                                enableInfiniteScroll: true,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(width16),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Tài chính',
+                                        style: Styles.baseNotoSansTS.copyWith(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                      Text(
+                                        'Xem thêm',
+                                        style: Styles.baseNotoSansTS.copyWith(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 14,
+                                            color: Colors.deepOrange),
+                                      )
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: height8,
+                                  ),
+                                  SizedBox(
+                                    width: width,
+                                    // height: height110 * 3,
+                                    child: GridView.count(
+                                        crossAxisCount: 3,
+                                        shrinkWrap: true,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        children: [
+                                          FunctionItem(
+                                            icon: Image.asset(
+                                              'assets/icons/ic_transfer_money.png',
+                                              height: height40,
+                                              width: width40,
+                                            ),
+                                            text: 'Chuyển khoản',
+                                            onClick: () {
+                                              StoreGlobal.isLogin.value
+                                                  ? Get.toNamed(
+                                                      AppRoutes.transfer)
+                                                  : Get.toNamed(
+                                                      AppRoutes.login);
+                                            },
+                                          ),
+                                          FunctionItem(
+                                            icon: Image.asset(
+                                              'assets/icons/ic_phone.png',
+                                              height: height40,
+                                              width: width40,
+                                            ),
+                                            text: 'Nạp tiền điện thoại',
+                                            onClick: () {
+                                              StoreGlobal.isLogin.value
+                                                  ? Get.toNamed(
+                                                      AppRoutes.rechargePhone)
+                                                  : Get.toNamed(
+                                                      AppRoutes.login);
+                                            },
+                                          ),
+                                          FunctionItem(
+                                            icon: Image.asset(
+                                              'assets/icons/ic_invoice.png',
+                                              height: height40,
+                                              width: width40,
+                                            ),
+                                            text: 'Thanh toán hóa đơn',
+                                            onClick: () {},
+                                          ),
+                                          FunctionItem(
+                                            icon: Image.asset(
+                                              'assets/icons/ic_buy_card.png',
+                                              height: height40,
+                                              width: width40,
+                                            ),
+                                            text: 'Mua mã thẻ',
+                                            onClick: () {
+                                              StoreGlobal.isLogin.value
+                                                  ? Get.toNamed(
+                                                      AppRoutes.buyPhoneCard)
+                                                  : Get.toNamed(
+                                                      AppRoutes.login);
+                                            },
+                                          ),
+                                          FunctionItem(
+                                            icon: Image.asset(
+                                              'assets/icons/ic_picky_money.png',
+                                              height: height40,
+                                              width: width40,
+                                            ),
+                                            text: 'Tiền gửi trực tuyến',
+                                            onClick: () {
+                                              StoreGlobal.isLogin.value
+                                                  ? Get.toNamed(AppRoutes
+                                                      .onlineSavingMoney)
+                                                  : Get.toNamed(
+                                                      AppRoutes.login);
+                                            },
+                                          ),
+                                          FunctionItem(
+                                            icon: Image.asset(
+                                              'assets/icons/ic_stock.png',
+                                              height: height40,
+                                              width: width40,
+                                            ),
+                                            text: 'Nạp tiền chứng khoán',
+                                            onClick: () {},
+                                          ),
+                                          FunctionItem(
+                                            icon: Image.asset(
+                                              'assets/icons/ic_add_money.png',
+                                              height: height40,
+                                              width: width40,
+                                            ),
+                                            text: 'Nạp tiền dịch vụ',
+                                            onClick: () {},
+                                          ),
+                                          FunctionItem(
+                                            icon: Image.asset(
+                                              'assets/icons/ic_lucky_money.png',
+                                              height: height40,
+                                              width: width40,
+                                            ),
+                                            text: 'Gửi tiền mừng',
+                                            onClick: () {},
+                                          ),
+                                          FunctionItem(
+                                            icon: Image.asset(
+                                              'assets/icons/ic_kieu_hoi.png',
+                                              height: height40,
+                                              width: width40,
+                                            ),
+                                            text: 'Nhận tiền kiều hối',
+                                            onClick: () {},
+                                          ),
+                                          FunctionItem(
+                                            icon: Image.asset(
+                                              'assets/icons/ic_money_bag.png',
+                                              height: height40,
+                                              width: width40,
+                                            ),
+                                            text: 'Trả nợ',
+                                            onClick: () {},
+                                          ),
+                                        ]),
+                                  ),
+                                ],
+                              ),
                             )
                           ],
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            Get.toNamed(AppRoutes.cardService);
-                          },
-                          child: Column(
-                            children: [
-                              Container(
-                                  height: height60,
-                                  width: width60,
-                                  padding: EdgeInsets.all(width16),
-                                  decoration: BoxDecoration(
-                                      color: const Color(0xFFf2f2f2),
-                                      borderRadius:
-                                          BorderRadius.circular(width25)),
-                                  child:
-                                      Image.asset('assets/icons/ic_card.png')),
-                              SizedBox(
-                                height: height4,
-                              ),
-                              const Text(
-                                "Dịch vụ thẻ",
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    color: black),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: height8,
-                    ),
-                    CarouselSlider.builder(
-                      itemCount: controller.banners.length,
-                      itemBuilder: (BuildContext context, int itemIndex,
-                              int pageViewIndex) =>
-                          Image.asset(controller.banners[itemIndex]),
-                      options: CarouselOptions(
-                        height: height241,
-                        aspectRatio: 16 / 9,
-                        viewportFraction: 0.8,
-                        autoPlay: true,
-                        autoPlayInterval: const Duration(seconds: 3),
-                        autoPlayAnimationDuration:
-                            const Duration(milliseconds: 800),
-                        autoPlayCurve: Curves.fastOutSlowIn,
-                        enableInfiniteScroll: true,
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.all(width16),
-                      child: Column(
+                    const Divider(
+                      thickness: 1,
+                    ),
+                    Container(
+                      height: height54,
+                      padding: EdgeInsets.all(width8),
+                      width: width,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Tài chính',
-                                style: Styles.baseNotoSansTS.copyWith(
-                                    fontSize: 16, fontWeight: FontWeight.w700),
-                              ),
-                              Text(
-                                'Xem thêm',
-                                style: Styles.baseNotoSansTS.copyWith(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14,
-                                    color: Colors.deepOrange),
-                              )
-                            ],
+                          BottomNavigationItem(
+                            icon: const Icon(
+                              Icons.home_outlined,
+                              color: Color(0xFF246e38),
+                            ),
+                            text: const Text('Home',
+                                style: TextStyle(
+                                    color: Color(0xFF246e38), fontSize: 12)),
+                            onClick: () {
+                              print('a');
+                            },
                           ),
-                          SizedBox(
-                            height: height8,
+                          BottomNavigationItem(
+                            icon: const Icon(Icons.notifications_none_outlined),
+                            text: const Text('Thông báo',
+                                style: TextStyle(fontSize: 12)),
+                            onClick: () {
+                              Get.toNamed(AppRoutes.notification);
+                            },
                           ),
-                          SizedBox(
-                            width: width,
-                            // height: height110 * 3,
-                            child: GridView.count(
-                                crossAxisCount: 3,
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                children: [
-                                  FunctionItem(
-                                    icon: Image.asset(
-                                      'assets/icons/ic_transfer_money.png',
-                                      height: height40,
-                                      width: width40,
+                          BottomNavigationItem(
+                            icon: const Icon(Icons.shopping_bag_outlined),
+                            text: const Text('Mua sắm',
+                                style: TextStyle(fontSize: 12)),
+                            onClick: () {
+                              Get.bottomSheet(Container(
+                                margin: EdgeInsets.only(
+                                    bottom: width16,
+                                    left: width16,
+                                    right: width16),
+                                padding: EdgeInsets.all(width16),
+                                height: height36 * 10,
+                                width: width100,
+                                decoration: BoxDecoration(
+                                    color: white,
+                                    borderRadius:
+                                        BorderRadius.circular(width32)),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      'Mua sắm',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600),
                                     ),
-                                    text: 'Chuyển khoản',
-                                    onClick: () {
-                                      StoreGlobal.isLogin.value ?Get.toNamed(AppRoutes.transfer) : Get.toNamed(AppRoutes.login);
-                                    },
-                                  ),
-                                  FunctionItem(
-                                    icon: Image.asset(
-                                      'assets/icons/ic_phone.png',
-                                      height: height40,
-                                      width: width40,
+                                    SizedBox(
+                                      height: height8,
                                     ),
-                                    text: 'Nạp tiền điện thoại',
-                                    onClick: () {
-                                      StoreGlobal.isLogin.value ? Get.toNamed(AppRoutes.rechargePhone): Get.toNamed(AppRoutes.login);
-                                    },
-                                  ),
-                                  FunctionItem(
-                                    icon: Image.asset(
-                                      'assets/icons/ic_invoice.png',
-                                      height: height40,
-                                      width: width40,
+                                    const Divider(
+                                      thickness: 1,
                                     ),
-                                    text: 'Thanh toán hóa đơn',
-                                    onClick: () {},
-                                  ),
-                                  FunctionItem(
-                                    icon: Image.asset(
-                                      'assets/icons/ic_buy_card.png',
-                                      height: height40,
-                                      width: width40,
-                                    ),
-                                    text: 'Mua mã thẻ',
-                                    onClick: () {
-                                      StoreGlobal.isLogin.value ? Get.toNamed(AppRoutes.buyPhoneCard): Get.toNamed(AppRoutes.login);
-                                    },
-                                  ),
-                                  FunctionItem(
-                                    icon: Image.asset(
-                                      'assets/icons/ic_picky_money.png',
-                                      height: height40,
-                                      width: width40,
-                                    ),
-                                    text: 'Tiền gửi trực tuyến',
-                                    onClick: () {
-                                      StoreGlobal.isLogin.value ? Get.toNamed(AppRoutes.onlineSavingMoney): Get.toNamed(AppRoutes.login);
-                                    },
-                                  ),
-                                  FunctionItem(
-                                    icon: Image.asset(
-                                      'assets/icons/ic_stock.png',
-                                      height: height40,
-                                      width: width40,
-                                    ),
-                                    text: 'Nạp tiền chứng khoán',
-                                    onClick: () {},
-                                  ),
-                                  FunctionItem(
-                                    icon: Image.asset(
-                                      'assets/icons/ic_add_money.png',
-                                      height: height40,
-                                      width: width40,
-                                    ),
-                                    text: 'Nạp tiền dịch vụ',
-                                    onClick: () {},
-                                  ),
-                                  FunctionItem(
-                                    icon: Image.asset(
-                                      'assets/icons/ic_lucky_money.png',
-                                      height: height40,
-                                      width: width40,
-                                    ),
-                                    text: 'Gửi tiền mừng',
-                                    onClick: () {},
-                                  ),
-                                  FunctionItem(
-                                    icon: Image.asset(
-                                      'assets/icons/ic_kieu_hoi.png',
-                                      height: height40,
-                                      width: width40,
-                                    ),
-                                    text: 'Nhận tiền kiều hối',
-                                    onClick: () {},
-                                  ),
-                                  FunctionItem(
-                                    icon: Image.asset(
-                                      'assets/icons/ic_money_bag.png',
-                                      height: height40,
-                                      width: width40,
-                                    ),
-                                    text: 'Trả nợ',
-                                    onClick: () {},
-                                  ),
-                                ]),
+                                    GridView.count(
+                                        shrinkWrap: true,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        crossAxisCount: 3,
+                                        children: [
+                                          FunctionItem(
+                                            icon: Image.asset(
+                                              'assets/icons/ic_transfer_money.png',
+                                              height: height40,
+                                              width: width40,
+                                            ),
+                                            text: 'Chuyển khoản',
+                                            onClick: () {},
+                                          ),
+                                          FunctionItem(
+                                            icon: Image.asset(
+                                              'assets/icons/ic_phone.png',
+                                              height: height40,
+                                              width: width40,
+                                            ),
+                                            text: 'Nạp tiền điện thoại',
+                                            onClick: () {},
+                                          ),
+                                          FunctionItem(
+                                            icon: Image.asset(
+                                              'assets/icons/ic_invoice.png',
+                                              height: height40,
+                                              width: width40,
+                                            ),
+                                            text: 'Thanh toán hóa đơn',
+                                            onClick: () {},
+                                          ),
+                                          FunctionItem(
+                                            icon: Image.asset(
+                                              'assets/icons/ic_buy_card.png',
+                                              height: height40,
+                                              width: width40,
+                                            ),
+                                            text: 'Mua mã thẻ',
+                                            onClick: () {},
+                                          ),
+                                          FunctionItem(
+                                            icon: Image.asset(
+                                              'assets/icons/ic_picky_money.png',
+                                              height: height40,
+                                              width: width40,
+                                            ),
+                                            text: 'Tiền gửi trực tuyến',
+                                            onClick: () {
+                                              Get.toNamed(
+                                                  AppRoutes.onlineSavingMoney);
+                                            },
+                                          ),
+                                          FunctionItem(
+                                            icon: Image.asset(
+                                              'assets/icons/ic_stock.png',
+                                              height: height40,
+                                              width: width40,
+                                            ),
+                                            text: 'Nạp tiền chứng khoán',
+                                            onClick: () {},
+                                          ),
+                                        ]),
+                                  ],
+                                ),
+                              ));
+                            },
+                          ),
+                          BottomNavigationItem(
+                            icon: const Icon(Icons.sports_golf),
+                            text: const Text('Sân Golf',
+                                style: TextStyle(fontSize: 12)),
+                            onClick: () {},
+                          ),
+                          BottomNavigationItem(
+                            icon: const Icon(Icons.history),
+                            text: const Text('Lịch sử GD',
+                                style: TextStyle(fontSize: 12)),
+                            onClick: () {
+                              Get.toNamed(AppRoutes.historyTransaction);
+                            },
                           ),
                         ],
                       ),
@@ -382,150 +572,6 @@ class HomePage extends GetWidget<HomeController> {
                   ],
                 ),
               ),
-            ),
-            const Divider(
-              thickness: 1,
-            ),
-            Container(
-              height: height54,
-              padding: EdgeInsets.all(width8),
-              width: width,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  BottomNavigationItem(
-                    icon: const Icon(
-                      Icons.home_outlined,
-                      color: Color(0xFF246e38),
-                    ),
-                    text: const Text('Home',
-                        style:
-                            TextStyle(color: Color(0xFF246e38), fontSize: 12)),
-                    onClick: () {
-                      print('a');
-                    },
-                  ),
-                  BottomNavigationItem(
-                    icon: const Icon(Icons.notifications_none_outlined),
-                    text:
-                        const Text('Thông báo', style: TextStyle(fontSize: 12)),
-                    onClick: () {
-                      Get.toNamed(AppRoutes.notification);
-                    },
-                  ),
-                  BottomNavigationItem(
-                    icon: const Icon(Icons.shopping_bag_outlined),
-                    text: const Text('Mua sắm', style: TextStyle(fontSize: 12)),
-                    onClick: () {
-                      Get.bottomSheet(Container(
-                        margin: EdgeInsets.only(
-                            bottom: width16, left: width16, right: width16),
-                        padding: EdgeInsets.all(width16),
-                        height: height36 * 10,
-                        width: width100,
-                        decoration: BoxDecoration(
-                            color: white,
-                            borderRadius: BorderRadius.circular(width32)),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Mua sắm',
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w600),
-                            ),
-                            SizedBox(
-                              height: height8,
-                            ),
-                            const Divider(
-                              thickness: 1,
-                            ),
-                            GridView.count(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                crossAxisCount: 3,
-                                children: [
-                                  FunctionItem(
-                                    icon: Image.asset(
-                                      'assets/icons/ic_transfer_money.png',
-                                      height: height40,
-                                      width: width40,
-                                    ),
-                                    text: 'Chuyển khoản',
-                                    onClick: () {},
-                                  ),
-                                  FunctionItem(
-                                    icon: Image.asset(
-                                      'assets/icons/ic_phone.png',
-                                      height: height40,
-                                      width: width40,
-                                    ),
-                                    text: 'Nạp tiền điện thoại',
-                                    onClick: () {},
-                                  ),
-                                  FunctionItem(
-                                    icon: Image.asset(
-                                      'assets/icons/ic_invoice.png',
-                                      height: height40,
-                                      width: width40,
-                                    ),
-                                    text: 'Thanh toán hóa đơn',
-                                    onClick: () {},
-                                  ),
-                                  FunctionItem(
-                                    icon: Image.asset(
-                                      'assets/icons/ic_buy_card.png',
-                                      height: height40,
-                                      width: width40,
-                                    ),
-                                    text: 'Mua mã thẻ',
-                                    onClick: () {},
-                                  ),
-                                  FunctionItem(
-                                    icon: Image.asset(
-                                      'assets/icons/ic_picky_money.png',
-                                      height: height40,
-                                      width: width40,
-                                    ),
-                                    text: 'Tiền gửi trực tuyến',
-                                    onClick: () {
-                                      Get.toNamed(AppRoutes.onlineSavingMoney);
-                                    },
-                                  ),
-                                  FunctionItem(
-                                    icon: Image.asset(
-                                      'assets/icons/ic_stock.png',
-                                      height: height40,
-                                      width: width40,
-                                    ),
-                                    text: 'Nạp tiền chứng khoán',
-                                    onClick: () {},
-                                  ),
-                                ]),
-                          ],
-                        ),
-                      ));
-                    },
-                  ),
-                  BottomNavigationItem(
-                    icon: const Icon(Icons.sports_golf),
-                    text:
-                        const Text('Sân Golf', style: TextStyle(fontSize: 12)),
-                    onClick: () {},
-                  ),
-                  BottomNavigationItem(
-                    icon: const Icon(Icons.history),
-                    text: const Text('Lịch sử GD',
-                        style: TextStyle(fontSize: 12)),
-                    onClick: () {
-                      Get.toNamed(AppRoutes.historyTransaction);
-                    },
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
       ),
       endDrawer: buildDrawer(),
     );
@@ -570,7 +616,12 @@ class HomePage extends GetWidget<HomeController> {
                 ),
                 title: 'Cài đặt Soft OTP',
                 onClick: () {
-                  Get.toNamed(AppRoutes.softOTP);
+                  if(StoreGlobal.isLogin.value){
+                    Get.toNamed(AppRoutes.softOTP);
+                  }
+                  else {
+                    Get.toNamed(AppRoutes.login);
+                  }
                 },
               ),
               DrawerNavigationItem(
@@ -628,7 +679,12 @@ class HomePage extends GetWidget<HomeController> {
                 ),
                 title: 'Quản lý danh bạ',
                 onClick: () {
-                  Get.toNamed(AppRoutes.manageContact);
+                  if(StoreGlobal.isLogin.value){
+                    Get.toNamed(AppRoutes.manageContact);
+                  }
+                  else {
+                    Get.toNamed(AppRoutes.login);
+                  }
                 },
               ),
               DrawerNavigationItem(

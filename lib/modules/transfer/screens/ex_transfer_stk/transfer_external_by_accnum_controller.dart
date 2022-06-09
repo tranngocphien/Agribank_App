@@ -1,8 +1,10 @@
+import 'package:agribank_banking/services/contact_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../../../models/bank_account_entity.dart';
+import '../../../../models/response_list_contact.dart';
 import '../../../../routes/app_routes.dart';
 import '../../../../services/transaction_service.dart';
 import '../../../../services/user_service.dart';
@@ -13,6 +15,7 @@ class TransferExternalByAccNumberController extends GetxController {
 
   final _userService = UserService.instance;
   final _transactionService = TransactionService.instance;
+  final _contactService = ContactService.instance;
 
   final accounts = List<BankAccountEntity>.empty(growable: true);
   final indexAccount = 0.obs;
@@ -27,11 +30,15 @@ class TransferExternalByAccNumberController extends GetxController {
   final TextEditingController controllerBank = TextEditingController();
   final TextEditingController controllerName = TextEditingController();
 
+  final indexContact = 0.obs;
+  final internalContacts = List<ContactEntity>.empty(growable: true).obs;
+
   @override
   Future<void> onInit() async {
     // TODO: implement onInit
     loadStatus(AppLoadStatus.loading);
     await getListAccountInformation();
+    await getListContacts();
     loadStatus(AppLoadStatus.success);
     super.onInit();
   }
@@ -41,7 +48,12 @@ class TransferExternalByAccNumberController extends GetxController {
     accounts.addAll(listAcc);
   }
 
-  Future<void> sendMoneyInterbank({required String pin}) async {
+  Future<void> getListContacts() async {
+    var temp = await _contactService.getListContact(typeContact: 2);
+    internalContacts.addAll(temp!.rows);
+  }
+
+  Future<void> sendMoneyInterbank({String? pin, String? password}) async {
     try {
       await _transactionService.sendMoneyInterbank(
           accountSender: accounts[indexAccount.value].accountNumber,
@@ -50,6 +62,7 @@ class TransferExternalByAccNumberController extends GetxController {
           content: controllerContent.text,
           saveContact: isSaveAccount.value ? 1 : 0,
           pin: pin,
+          password: password,
           nameInterbank: controllerBank.text,
           nameReceiver: controllerName.text);
       Get.dialog(CupertinoAlertDialog(

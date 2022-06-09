@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../app_theme.dart';
+import '../../../components/widget_input.dart';
 
 class UpdateInformationPage extends GetWidget<UpdateInformationController> {
   const UpdateInformationPage({Key? key}) : super(key: key);
@@ -34,64 +35,44 @@ class UpdateInformationPage extends GetWidget<UpdateInformationController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Họ và tên',
-                    style: Styles.baseNotoSansTS.copyWith(
-                      fontSize: 16,
-                      color: black700,
-                    ),
-                  ),
-                  SizedBox(
-                    height: height8,
-                  ),
-                  TextField(
+                  WidgetInput(
                     textCapitalization: TextCapitalization.characters,
                     controller: controller.controllerName,
-                    style: Styles.baseNotoSansTS.copyWith(fontSize: 16),
+                    text: 'Họ và tên',
                   ),
                   SizedBox(
                     height: height8,
                   ),
-                  Text(
-                    'Số CCCD/CMND',
-                    style: Styles.baseNotoSansTS.copyWith(
-                      fontSize: 16,
-                      color: black700,
-                    ),
-                  ),
-                  TextField(
+                  WidgetInput(
                     controller: controller.controllerCCCD,
-                    style: Styles.baseNotoSansTS.copyWith(fontSize: 16),
+                    text: 'Số CCCD/CMND',
                   ),
                   SizedBox(
                     height: height8,
                   ),
-                  Text(
-                    'Chi nhánh mở tài khoản',
-                    style: Styles.baseNotoSansTS.copyWith(
-                      fontSize: 16,
-                      color: black700,
-                    ),
-                  ),
-                  TextField(
-                    style: Styles.baseNotoSansTS.copyWith(fontSize: 16),
+                  WidgetInput(
+                    controller: controller.controllerPhone,
+                    text: 'Số điện thoại',
                   ),
                   SizedBox(
-                    height: height16,
+                    height: height8,
                   ),
+                  WidgetInput(
+                    controller: controller.controllerPassword,
+                    text: 'Mật khẩu',
+                    obscureText: true,
+                  ),
+                  SizedBox(height: height16,),
                   ButtonPrimaryText(
-                      onTab: () {
-                        Get.toNamed(AppRoutes.cccdAuthentication, arguments: [
-                          controller.controllerName.text,
-                          controller.controllerCCCD.text
-                        ]);
+                      onTab: () async {
+                        await controller.register();
                       },
                       margin: EdgeInsets.zero,
                       padding: EdgeInsets.all(width16),
                       radius: width30,
                       fontWeightText: FontWeight.w500,
                       sizeText: 20,
-                      colorBackground: Colors.deepOrangeAccent,
+                      colorBackground: Color(0xFFF67D10),
                       colorText: white,
                       textPrimary: 'ĐĂNG KÝ')
                 ],

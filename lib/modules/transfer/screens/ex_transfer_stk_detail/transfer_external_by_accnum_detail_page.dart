@@ -1,3 +1,4 @@
+import 'package:agribank_banking/data/storage/store_global.dart';
 import 'package:agribank_banking/modules/transfer/screens/ex_transfer_stk_detail/transfer_external_by_accnum_detail_controller.dart';
 import 'package:agribank_banking/utils/enums.dart';
 import 'package:flutter/material.dart';
@@ -96,7 +97,13 @@ class TransferExternalByAccNumDetailPage extends GetWidget<TransferExternalByAcc
                     height: height48,
                     child: ButtonPrimaryText(
                       onTab: () {
-                        Get.toNamed(AppRoutes.confirmTransaction, arguments: TransactionType.sendMoneyInterbank);
+                        if(StoreGlobal.user.value!.softOtp){
+                          Get.toNamed(AppRoutes.confirmTransaction, arguments: TransactionType.sendMoneyInterbank);
+                        }
+                        else {
+                          Get.toNamed(AppRoutes.confirmTransactionPassword, arguments: TransactionType.sendMoneyInterbank);
+
+                        }
                       },
                       margin: EdgeInsets.zero,
                       padding: EdgeInsets.all(width8),

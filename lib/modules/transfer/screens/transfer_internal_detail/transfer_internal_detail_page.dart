@@ -101,7 +101,12 @@ class TransferInternalDetailPage extends GetWidget<TransferInternalDetailControl
                     height: height48,
                     child: ButtonPrimaryText(
                       onTab: () {
-                        Get.toNamed(AppRoutes.confirmTransaction, arguments: TransactionType.sendMoney);
+                        if(StoreGlobal.user.value!.softOtp){
+                          Get.toNamed(AppRoutes.confirmTransaction, arguments: TransactionType.sendMoney);
+                        }
+                        else {
+                          Get.toNamed(AppRoutes.confirmTransactionPassword, arguments: TransactionType.sendMoney);
+                        }
                       },
                       margin: EdgeInsets.zero,
                       padding: EdgeInsets.all(width8),

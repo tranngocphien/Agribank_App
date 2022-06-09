@@ -9,6 +9,9 @@ class CreateAccountContactController extends GetxController {
     Attribute(title: 'Chuyển khoản nội bộ', value: '1'),
     Attribute(title: 'Chuyển khoản liên ngân hàng', value: '2')
   ];
+  final banks = [
+
+  ];
   final indexType = 0.obs;
 
   final controllerType = TextEditingController();

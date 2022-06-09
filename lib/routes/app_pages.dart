@@ -8,6 +8,8 @@ import 'package:agribank_banking/modules/manage_contacts/screens/account_contact
 import 'package:agribank_banking/modules/manage_contacts/screens/account_contacts/account_contacts_page.dart';
 import 'package:agribank_banking/modules/manage_contacts/screens/create_account_contact/create_account_contact_binding.dart';
 import 'package:agribank_banking/modules/manage_contacts/screens/create_account_contact/create_account_contact_page.dart';
+import 'package:agribank_banking/modules/manage_contacts/screens/detail_contact/detail_contact_binding.dart';
+import 'package:agribank_banking/modules/manage_contacts/screens/detail_contact/detail_contact_page.dart';
 import 'package:agribank_banking/modules/online_saving_money/online_saving_money_binding.dart';
 import 'package:agribank_banking/modules/online_saving_money/online_saving_money_page.dart';
 import 'package:agribank_banking/modules/online_saving_money/screens/online_deposit_settlement/online_deposit_settlement_binding.dart';
@@ -22,6 +24,8 @@ import 'package:agribank_banking/modules/recharge_phone/recharge_phone_binding.d
 import 'package:agribank_banking/modules/recharge_phone/recharge_phone_page.dart';
 import 'package:agribank_banking/modules/soft_otp/screens/set_pin/set_pin_binding.dart';
 import 'package:agribank_banking/modules/soft_otp/screens/set_pin/set_pin_page.dart';
+import 'package:agribank_banking/modules/soft_otp/screens/turn_off_pin/turn_off_binding.dart';
+import 'package:agribank_banking/modules/soft_otp/screens/turn_off_pin/turn_off_page.dart';
 import 'package:agribank_banking/modules/soft_otp/screens/update_pin/old_pin_page.dart';
 import 'package:agribank_banking/modules/soft_otp/screens/update_pin/update_pin_binding.dart';
 import 'package:agribank_banking/modules/soft_otp/screens/update_pin/update_pin_page.dart';
@@ -224,15 +228,24 @@ class AppPages {
       page: () => const OldPinPage()
     ),
     GetPage(
+      name: AppRoutes.turnOffPin,
+      page: () => const TurnOffPage(),
+      binding: TurnOffBinding()
+    ),
+    GetPage(
       name: AppRoutes.updatePin,
       page: () => const UpdatePinPage(),
       binding: UpdatePinBinding()
-
     ),
     GetPage(
       name: AppRoutes.createContact,
       page: () => const CreateAccountContactPage(),
       binding: CreateAccountContactBinding()
+    ),
+    GetPage(
+      name: AppRoutes.detailContact,
+      page: () => const DetailContactPage(),
+      binding: DetailContactBinding()
     )
 
   ];

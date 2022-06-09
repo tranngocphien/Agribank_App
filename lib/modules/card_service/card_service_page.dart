@@ -49,46 +49,46 @@ class CardServicePage extends GetWidget<CardServiceController> {
                 childAspectRatio: 0.8,
                 children: [
                   FunctionServiceItem(
-                    icon: const Icon(Icons.credit_card, color: Colors.green,),
+                    icon: Image.asset('assets/icons/ic_credit_card.png'),
                     text: 'Truy vấn thông tin thẻ',
                     onPress: (){},
                   ),
                   FunctionServiceItem(
-                    icon: const Icon(Icons.credit_card, color: Colors.green,),
+                    icon: Image.asset('assets/icons/ic_credit_card.png'),
                     text: 'CK liên NH qua số tài khoản',
                     onPress: (){
                       Get.toNamed(AppRoutes.transferExAccNumber);
                     },
                   ),
                   FunctionServiceItem(
-                    icon: const Icon(Icons.credit_card, color: Colors.green,),
+                    icon: Image.asset('assets/icons/ic_credit_card.png'),
                     text: 'CK liên NH qua số thẻ',
                     onPress: (){
                       Get.toNamed(AppRoutes.transferExCardNumber);
                     },
                   ),
                   FunctionServiceItem(
-                    icon: const Icon(Icons.credit_card, color: Colors.green,),
+                    icon: Image.asset('assets/icons/ic_credit_card.png'),
                     text: 'Phát hành thẻ phi vật lý',
                     onPress: (){},
                   ),
                   FunctionServiceItem(
-                    icon: const Icon(Icons.credit_card, color: Colors.green,),
+                    icon: Image.asset('assets/icons/ic_credit_card.png'),
                     text: 'Thanh toán thẻ tín dụng',
                     onPress: (){},
                   ),
                   FunctionServiceItem(
-                    icon: const Icon(Icons.credit_card, color: Colors.green,),
+                    icon: Image.asset('assets/icons/ic_credit_card.png'),
                     text: 'Kích hoạt thẻ',
                     onPress: (){},
                   ),
                   FunctionServiceItem(
-                    icon: const Icon(Icons.credit_card, color: Colors.green,),
+                    icon: Image.asset('assets/icons/ic_credit_card.png'),
                     text: 'Cấp/Đổi mã PIN',
                     onPress: (){},
                   ),
                   FunctionServiceItem(
-                    icon: const Icon(Icons.credit_card, color: Colors.green,),
+                    icon: Image.asset('assets/icons/ic_credit_card.png'),
                     text: 'Khóa thẻ',
                     onPress: (){},
                   ),

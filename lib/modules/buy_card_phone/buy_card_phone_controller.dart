@@ -61,7 +61,7 @@ class BuyCardPhoneController extends GetxController {
     accounts.addAll(listAcc);
   }
 
-  Future<void> buyCodePhone({required String pin}) async {
+  Future<void> buyCodePhone({String? pin, String? password}) async {
     try {
       await _transactionService.buyCodePhone(
           accountNumber: accounts[indexAccount.value].accountNumber,

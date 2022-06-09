@@ -1,4 +1,5 @@
 import 'package:agribank_banking/data/network/api_constants.dart';
+import 'package:agribank_banking/models/base_entity.dart';
 import 'package:agribank_banking/models/response_login_entity.dart';
 import 'package:agribank_banking/repositories/base_repository.dart';
 import 'package:agribank_banking/services/dio_service.dart';
@@ -21,6 +22,14 @@ class AuthService {
     final _authResponse = await _repo.queryByPath((e) => LoginResponse.fromJson(e), data: data);
     DioService.instance.updateDioWithToken(_authResponse!.data.token);
     return _authResponse;
+  }
+
+  Future<BaseEntity?> register(
+      {required String username, required String password, required String phone}) async {
+    _repo.url = APIConstants.baseURL + APIConstants.register;
+    final data = {"name": username, "password": password, 'phone': phone};
+    final res = await _repo.queryByPath((e) => BaseEntity.fromJson(e), data: data);
+    return res;
   }
 }
 

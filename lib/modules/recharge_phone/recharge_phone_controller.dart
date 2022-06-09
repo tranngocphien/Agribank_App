@@ -37,6 +37,7 @@ class RechargePhoneController extends GetxController {
     super.onInit();
   }
 
+
   Future<void> getListAccountInformation() async {
     final listAcc = await _userService.getListBankAccount();
     accounts.addAll(listAcc);
@@ -44,13 +45,26 @@ class RechargePhoneController extends GetxController {
 
   Future<void> sendMoney() async {}
 
-  Future<void> rechargePhone({required String pin}) async {
+  Future<void> rechargePhone({String? pin, String? password}) async {
     try {
       await _transactionService.rechargePhone(
           accountNumber: accounts[indexAccount.value].accountNumber,
           phone: controllerPhone.text,
           money: values[indexSelected.value].value,
+          password: password,
           pin: pin);
+      Get.dialog(CupertinoAlertDialog(
+        title: const Text('Thông báo'),
+        content: const Text('Thanh toán thành công'),
+        actions: [
+          CupertinoDialogAction(
+            onPressed: () {
+              Get.offAllNamed(AppRoutes.rechargePhone);
+            },
+            child: const Text('Đồng ý'),
+          )
+        ],
+      ));
     } on DioError catch (e) {
       final message = (e.response!.data as Map)['message'];
       Get.dialog(CupertinoAlertDialog(

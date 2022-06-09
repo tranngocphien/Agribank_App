@@ -1,6 +1,7 @@
 import 'package:agribank_banking/data/storage/store_global.dart';
 import 'package:agribank_banking/routes/app_routes.dart';
 import 'package:agribank_banking/services/auth_service.dart';
+import 'package:agribank_banking/services/user_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,7 @@ class LoginController extends GetxController {
   var passwordError = Rx<String?>(null);
 
   final _authService = AuthService.instance;
+  final _userService = UserService.instance;
 
 
   Future<void> login() async{
@@ -22,6 +24,7 @@ class LoginController extends GetxController {
         final _response = await _authService.login(username: controllerPhone.text, password: controllerPassword.text);
         StoreGlobal.user.value = _response!.data.user;
         StoreGlobal.isLogin.value = true;
+        await getAccounts();
         Get.offAllNamed(AppRoutes.home);
       }  on DioError catch (e) {
         final message = (e.response!.data as Map)['message'];
@@ -59,6 +62,12 @@ class LoginController extends GetxController {
       passwordError.value = null;
     }
     return flag;
+  }
+
+  Future<void> getAccounts() async {
+    final response = await _userService
+        .getListBankAccount()
+        .then((value) => StoreGlobal.accounts.addAll(value));
   }
 
 

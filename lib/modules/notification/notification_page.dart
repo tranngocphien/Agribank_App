@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../models/static_money.dart';
 import '../../utils/enums.dart';
 
 class NotificationPage extends GetWidget<NotificationController> {
@@ -34,10 +35,11 @@ class NotificationPage extends GetWidget<NotificationController> {
             child: Obx(
               () => ListNotificationType(
                 indexSelected: controller.indexSelected.value,
-                onPress: (index) {
+                onPress: (index) async {
                   controller.indexSelected.value = index;
+                  await controller.getNotifications(type: int.parse(controller.typeNotifications[index].value));
                 },
-                types: controller.types,
+                types: controller.typeNotifications,
               ),
             ),
           ),
@@ -112,7 +114,7 @@ class ListNotificationType extends StatelessWidget {
       : super(key: key);
   final int indexSelected;
   final Function(int index) onPress;
-  final List<String> types;
+  final List<Attribute> types;
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +134,7 @@ class ListNotificationType extends StatelessWidget {
                   onPress(types.indexOf(e));
                 },
                 child: TabItem(
-                    text: e, isSelected: types.indexOf(e) == indexSelected)))
+                    text: e.title, isSelected: types.indexOf(e) == indexSelected)))
             .toList(),
       ),
     );

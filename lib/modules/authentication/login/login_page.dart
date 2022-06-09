@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -141,6 +142,31 @@ class LoginPage extends GetWidget<LoginController> {
                   ],
                 ),
               ),
+              GestureDetector(
+                onTap: (){
+                  Get.dialog(CupertinoAlertDialog(
+                    title: const Text('Thông báo'),
+                    content: const Text('Quý khách vui lòng đến điểm giao dịch gần nhất để lấy lại mật khẩu.'),
+                    actions: [
+                      CupertinoDialogAction(
+                        onPressed: () {
+                          Get.offAndToNamed(AppRoutes.home);
+                        },
+                        child: const Text('Đồng ý'),
+                      )
+                    ],
+                  ));
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text("Quên mật khẩu", style: TextStyle(
+                        color: Color(0xFFe68840)
+                    ),),
+                    SizedBox(width: width24,)
+                  ],
+                ),
+              ),
               SizedBox(
                 height: height16,
               ),
@@ -164,12 +190,18 @@ class LoginPage extends GetWidget<LoginController> {
                   ),
                 ),
               ),
+
               SizedBox(
                 height: height12,
               ),
-              const Text("Quên mật khẩu", style: TextStyle(
-                color: Color(0xFFe68840)
-              ),)
+              GestureDetector(
+                onTap: (){
+                  Get.toNamed(AppRoutes.updateInformation);
+                },
+                child: const Text("Đăng ký tài khoản", style: TextStyle(
+                  color: Color(0xFFe68840)
+                ),),
+              )
 
             ],
           ),

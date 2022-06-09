@@ -1,23 +1,22 @@
-import 'package:agribank_banking/routes/app_routes.dart';
-import 'package:flutter/material.dart';
+import 'package:agribank_banking/modules/soft_otp/screens/turn_off_pin/turn_off_controller.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../app_theme.dart';
 import '../../../../components/button_border.dart';
 
-class OldPinPage extends StatelessWidget {
-  const OldPinPage({Key? key}) : super(key: key);
+class TurnOffPage extends GetWidget<TurnOffController> {
+  const TurnOffPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    String pin = '';
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFF67D10),
         centerTitle: true,
         title: Text(
-          'ĐỔI PIN',
+          'NHẬP MÃ PIN',
           style: Styles.baseNotoSansTS.copyWith(
               fontSize: 16, color: white, fontWeight: FontWeight.w600),
         ),
@@ -40,26 +39,12 @@ class OldPinPage extends StatelessWidget {
                     height: height16,
                   ),
                   Text(
-                    "Quý khách đang yêu cầu đổi Mã PIN khi xác thực Soft OTP, vui lòng nhập mã PIN hiện tại để xác nhận",
+                    "Quý khách vui lòng nhập mã PIN quý khách đã cài đặt khi kích hoạt Soft OTP",
                     style: Styles.baseNotoSansTS.copyWith(
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
                     ),
                     textAlign: TextAlign.center,
-                  ),
-                  SizedBox(
-                    height: height8,
-                  ),
-                  const Divider(
-                    thickness: 1,
-                    height: 1,
-                  ),
-                  SizedBox(
-                    height: height16,
-                  ),
-                  Text(
-                    'Nhập mã pin',
-                    style: Styles.baseNotoSansTS.copyWith(fontSize: 15),
                   ),
                   SizedBox(height: height8,),
                   PinCodeTextField(
@@ -67,7 +52,6 @@ class OldPinPage extends StatelessWidget {
                     keyboardType: TextInputType.number,
                     length: 6,
                     onChanged: (value) {
-                      pin = value;
                     },
                     obscureText: true,
                     obscuringCharacter: '*',
@@ -108,7 +92,6 @@ class OldPinPage extends StatelessWidget {
                   height: height48,
                   child: ButtonPrimaryText(
                     onTab: () async {
-                      Get.toNamed(AppRoutes.updatePin, arguments: pin);
                     },
                     margin: EdgeInsets.zero,
                     padding: EdgeInsets.all(width8),

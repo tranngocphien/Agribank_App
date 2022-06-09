@@ -4,6 +4,7 @@ import 'package:agribank_banking/utils/enums.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../../../../app_theme.dart';
 
@@ -86,106 +87,155 @@ class AccountContactsPage extends GetWidget<AccountContactsController> {
                   controller.indexSelected.value == 0
                       ? Column(
                           children: [
-                            ...controller.internalContacts.map((element) =>
-                                Container(
-                                  width: width,
-                                  decoration: const BoxDecoration(
-                                      border: Border(
-                                          bottom: BorderSide(color: black100))),
-                                  child: Row(
-                                    children: [
-                                      Image.asset(
-                                        'assets/images/logo.png',
-                                        width: width30,
-                                        fit: BoxFit.cover,
+                            ...controller.internalContacts
+                                .map((element) => InkWell(
+                                      onTap: () {
+                                        Get.toNamed(AppRoutes.detailContact,
+                                            arguments: element);
+                                      },
+                                      child: Slidable(
+                                        key: const ValueKey(0),
+                                        endActionPane: ActionPane(
+                                          motion: const ScrollMotion(),
+                                          children: [
+                                            SlidableAction(
+                                              flex: 1,
+                                              onPressed: (context){
+                                                Get.dialog(CupertinoAlertDialog(
+                                                  title: const Text('Thông báo'),
+                                                  content: const Text('Quý khách có muốn chắc chắn xóa tài khoản này khỏi danh bạ?'),
+                                                  actions: [
+                                                    CupertinoDialogAction(
+                                                      onPressed: () {
+                                                        Get.back();
+                                                      },
+                                                      child: const Text('Hủy'),
+                                                    ),
+                                                    CupertinoDialogAction(
+                                                      onPressed: () async {
+                                                        Get.back();
+                                                        await controller.deleteContact(element.id);
+                                                      },
+                                                      child: const Text('Đồng ý'),
+                                                    )
+                                                  ],
+                                                ));
+                                              },
+                                              backgroundColor: Colors.red,
+                                              foregroundColor: Colors.white,
+                                              label: 'Xóa',
+                                            ),
+                                          ],
+                                        ),
+                                        child: Container(
+                                          width: width,
+                                          decoration: const BoxDecoration(
+                                              border: Border(
+                                                  bottom: BorderSide(
+                                                      color: black100))),
+                                          child: Row(
+                                            children: [
+                                              Image.asset(
+                                                'assets/images/logo.png',
+                                                width: width30,
+                                                fit: BoxFit.cover,
+                                              ),
+                                              SizedBox(
+                                                width: width8,
+                                              ),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    element.nickName,
+                                                    style: Styles.baseNotoSansTS
+                                                        .copyWith(
+                                                            fontSize: 16,
+                                                            color: const Color(
+                                                                0xFFF67D10),
+                                                            fontWeight:
+                                                                FontWeight.w600),
+                                                  ),
+                                                  SizedBox(
+                                                    height: height4,
+                                                  ),
+                                                  Text(
+                                                    element.accountNumber,
+                                                    style: Styles.baseNotoSansTS
+                                                        .copyWith(
+                                                            fontSize: 14,
+                                                            color: black400),
+                                                  ),
+                                                  SizedBox(
+                                                    height: height2,
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ),
-                                      SizedBox(
-                                        width: width8,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            element.nickName,
-                                            style: Styles.baseNotoSansTS
-                                                .copyWith(
-                                                    fontSize: 16,
-                                                    color:
-                                                        const Color(0xFFF67D10),
-                                                    fontWeight:
-                                                        FontWeight.w600),
-                                          ),
-                                          SizedBox(
-                                            height: height4,
-                                          ),
-                                          Text(
-                                            element.accountNumber,
-                                            style: Styles.baseNotoSansTS
-                                                .copyWith(
-                                                    fontSize: 14,
-                                                    color: black400),
-                                          ),
-                                          SizedBox(
-                                            height: height2,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ))
+                                    ))
                           ],
                         )
                       : Column(
                           children: [
                             ...controller.externalContacts
-                                .map((element) => Container(
-                              width: width,
-                              decoration: const BoxDecoration(
-                                  border: Border(
-                                      bottom: BorderSide(color: black100))),
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    'assets/images/logo.png',
-                                    width: width30,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  SizedBox(
-                                    width: width8,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        element.nickName,
-                                        style: Styles.baseNotoSansTS
-                                            .copyWith(
-                                            fontSize: 16,
-                                            color:
-                                            const Color(0xFFF67D10),
-                                            fontWeight:
-                                            FontWeight.w600),
+                                .map((element) => InkWell(
+                                      onTap: () {
+                                        Get.toNamed(AppRoutes.detailContact,
+                                            arguments: element);
+                                      },
+                                      child: Container(
+                                        width: width,
+                                        decoration: const BoxDecoration(
+                                            border: Border(
+                                                bottom: BorderSide(
+                                                    color: black100))),
+                                        child: Row(
+                                          children: [
+                                            Image.asset(
+                                              'assets/images/logo.png',
+                                              width: width30,
+                                              fit: BoxFit.cover,
+                                            ),
+                                            SizedBox(
+                                              width: width8,
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  element.nickName,
+                                                  style: Styles.baseNotoSansTS
+                                                      .copyWith(
+                                                          fontSize: 16,
+                                                          color: const Color(
+                                                              0xFFF67D10),
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                ),
+                                                SizedBox(
+                                                  height: height4,
+                                                ),
+                                                Text(
+                                                  element.accountNumber,
+                                                  style: Styles.baseNotoSansTS
+                                                      .copyWith(
+                                                          fontSize: 14,
+                                                          color: black400),
+                                                ),
+                                                SizedBox(
+                                                  height: height2,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      SizedBox(
-                                        height: height4,
-                                      ),
-                                      Text(
-                                        element.accountNumber,
-                                        style: Styles.baseNotoSansTS
-                                            .copyWith(
-                                            fontSize: 14,
-                                            color: black400),
-                                      ),
-                                      SizedBox(
-                                        height: height2,
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ))
+                                    ))
                           ],
                         ),
                 ],

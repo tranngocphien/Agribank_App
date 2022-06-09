@@ -1,6 +1,7 @@
 import 'package:agribank_banking/components/button_border.dart';
 import 'package:agribank_banking/modules/transfer/screens/transfer_internal/transfer_internal_controller.dart';
 import 'package:agribank_banking/routes/app_routes.dart';
+import 'package:agribank_banking/utils/convert.dart';
 import 'package:agribank_banking/utils/enums.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +70,8 @@ class TransferInternalPage extends GetWidget<TransferInternalController> {
                               )
                             ],
                           ),
-                          WidgetInput(
+                          Obx(() => WidgetInput(
+                            errorText: controller.errorAccount.value,
                             controller: controller.controllerPhone,
                             text: 'Số điện thoại/số tài khoản',
                             onPress: () {},
@@ -84,8 +86,8 @@ class TransferInternalPage extends GetWidget<TransferInternalController> {
                                           decoration: BoxDecoration(
                                               color: Colors.white,
                                               borderRadius:
-                                                  BorderRadius.circular(
-                                                      width16)),
+                                              BorderRadius.circular(
+                                                  width16)),
                                           child: Column(
                                             children: [
                                               Container(
@@ -93,19 +95,60 @@ class TransferInternalPage extends GetWidget<TransferInternalController> {
                                                 height: height60,
                                                 decoration: BoxDecoration(
                                                     color:
-                                                        const Color(0xFFF67D10),
+                                                    const Color(0xFFF67D10),
                                                     borderRadius: BorderRadius
                                                         .only(
-                                                            topRight: Radius
-                                                                .circular(
-                                                                    width16),
-                                                            topLeft:
-                                                                Radius.circular(
-                                                                    width16))),
-                                                child: Row(
-                                                  children: [],
-                                                ),
+                                                        topRight: Radius
+                                                            .circular(
+                                                            width16),
+                                                        topLeft:
+                                                        Radius.circular(
+                                                            width16))),
+                                                child: Center(child: Text('Số tài khoản', style: Styles.baseNotoSansTS.copyWith(
+                                                    fontSize: 18,
+                                                    color: white,
+                                                    fontWeight: FontWeight.w600
+                                                ),)),
                                               ),
+                                              SizedBox(
+                                                height: height8,
+                                              ),
+                                              ...controller.internalContacts
+                                                  .map((e) => InkWell(
+                                                onTap: () {
+                                                  controller
+                                                      .indexContact
+                                                      .value =
+                                                      controller
+                                                          .internalContacts
+                                                          .indexOf(e);
+                                                  controller
+                                                      .controllerPhone
+                                                      .text =
+                                                      controller
+                                                          .internalContacts[
+                                                      controller
+                                                          .indexContact
+                                                          .value]
+                                                          .accountNumber;
+                                                  Get.back();
+                                                },
+                                                child: Container(
+                                                    padding:
+                                                    EdgeInsets.all(
+                                                        width8),
+                                                    child: Text(
+                                                      e.accountNumber,
+                                                      style: Styles
+                                                          .baseNotoSansTS
+                                                          .copyWith(
+                                                          fontSize:
+                                                          18,
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .w600),
+                                                    )),
+                                              ))
                                             ],
                                           ),
                                         ),
@@ -113,17 +156,20 @@ class TransferInternalPage extends GetWidget<TransferInternalController> {
                                       useSafeArea: true);
                                 },
                                 child: const Icon(Icons.keyboard_arrow_down)),
-                          ),
-                          WidgetInput(
+                          ),),
+                          Obx(() => WidgetInput(
+                            errorText: controller.errorMoney.value,
                             controller: controller.controllerAmount,
                             text: 'Số tiền',
                             onPress: () {},
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [ThousandsSeparatorInputFormatter()],
                             suffixIcon: Text(
                               'VND',
                               style: Styles.baseNotoSansTS
                                   .copyWith(fontSize: 16, color: black500),
                             ),
-                          ),
+                          ),),
                           SizedBox(
                             height: height16,
                           ),
@@ -134,11 +180,13 @@ class TransferInternalPage extends GetWidget<TransferInternalController> {
                               fontSize: 16,
                             ),
                           ),
-                          TextField(
+                          Obx(() => TextField(
                             controller: controller.controllerContent,
-                            decoration: const InputDecoration(),
+                            decoration: InputDecoration(
+                                errorText: controller.errorContent.value
+                            ),
                             style: Styles.baseNotoSansTS.copyWith(fontSize: 18),
-                          ),
+                          )),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -188,13 +236,15 @@ class TransferInternalPage extends GetWidget<TransferInternalController> {
                           height: height48,
                           child: ButtonPrimaryText(
                             onTab: () {
-                              Get.toNamed(AppRoutes.transferDetailInternal,
-                                  arguments: [
-                                    controller.accounts[controller.indexAccount.value].accountNumber,
-                                    controller.controllerPhone.text,
-                                    controller.controllerAmount.text,
-                                    controller.controllerContent.text
-                                  ]);
+                              if(controller.checkData()){
+                                Get.toNamed(AppRoutes.transferDetailInternal,
+                                    arguments: [
+                                      controller.accounts[controller.indexAccount.value].accountNumber,
+                                      controller.controllerPhone.text,
+                                      controller.controllerAmount.text,
+                                      controller.controllerContent.text
+                                    ]);
+                              }
                             },
                             margin: EdgeInsets.zero,
                             padding: EdgeInsets.all(width8),

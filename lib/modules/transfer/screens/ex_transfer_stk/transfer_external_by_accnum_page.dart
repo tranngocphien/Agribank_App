@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../app_theme.dart';
 import '../../../../components/button_border.dart';
+import '../../../../components/widget_input.dart';
+import '../../../../utils/convert.dart';
 
 class TransferExByAccNumberPage
     extends GetWidget<TransferExternalByAccNumberController> {
@@ -120,24 +122,109 @@ class TransferExByAccNumberPage
                             ),
                             style: Styles.baseNotoSansTS.copyWith(fontSize: 16),
                           ),
-                          TextField(
+                          WidgetInput(
                             controller: controller.controllerPhone,
-                            decoration: InputDecoration(
-                              suffixIcon: const Icon(Icons.keyboard_arrow_down),
-                              label: const Text('Số tài khoản thụ hưởng'),
-                              hoverColor: black700,
-                              fillColor: black700,
-                              labelStyle: Styles.baseNotoSansTS
-                                  .copyWith(fontSize: 16, color: black500),
-                              border: InputBorder.none,
-                              // focusedBorder: const OutlineInputBorder(
-                              //   borderSide: BorderSide(color: black500)
-                              // )
-                            ),
-                            style: Styles.baseNotoSansTS.copyWith(fontSize: 18),
+                            text: 'Số tài khoản thụ hưởng',
+                            suffixIcon: GestureDetector(
+                                onTap: () {
+                                  Get.dialog(
+                                      Dialog(
+                                        backgroundColor: Colors.transparent,
+                                        child: Container(
+                                          width: width * 0.8,
+                                          height: height * 0.5,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  width16)),
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                width: width * 0.8,
+                                                height: height60,
+                                                decoration: BoxDecoration(
+                                                    color:
+                                                    const Color(0xFFF67D10),
+                                                    borderRadius: BorderRadius
+                                                        .only(
+                                                        topRight: Radius
+                                                            .circular(
+                                                            width16),
+                                                        topLeft:
+                                                        Radius.circular(
+                                                            width16))),
+                                                child: Center(child: Text('Số tài khoản', style: Styles.baseNotoSansTS.copyWith(
+                                                    fontSize: 18,
+                                                    color: white,
+                                                    fontWeight: FontWeight.w600
+                                                ),)),
+                                              ),
+                                              SizedBox(
+                                                height: height8,
+                                              ),
+                                              ...controller.internalContacts
+                                                  .map((e) => InkWell(
+                                                onTap: () {
+                                                  controller
+                                                      .indexContact
+                                                      .value =
+                                                      controller
+                                                          .internalContacts
+                                                          .indexOf(e);
+                                                  controller
+                                                      .controllerPhone
+                                                      .text =
+                                                      e.accountNumber;
+                                                  controller.controllerBank.text =
+                                                      e.nameBankInterbank ?? '';
+                                                  Get.back();
+                                                },
+                                                child: Container(
+                                                    width: width * 0.7,
+                                                    padding:
+                                                    EdgeInsets.all(
+                                                        width8),
+                                                    child: Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          e.accountNumber,
+                                                          style: Styles
+                                                              .baseNotoSansTS
+                                                              .copyWith(
+                                                              fontSize:
+                                                              18,
+                                                              fontWeight:
+                                                              FontWeight
+                                                                  .w600),
+                                                        ),
+                                                        Text(
+                                                          e.nickName,
+                                                          style: Styles
+                                                              .baseNotoSansTS
+                                                              .copyWith(
+                                                              fontSize: 14,
+                                                              color: black500,
+                                                              fontWeight:
+                                                              FontWeight
+                                                                  .w600),
+                                                        ),
+                                                      ],
+                                                    )),
+                                              ))
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      useSafeArea: true);
+                                },
+                                child: const Icon(Icons.keyboard_arrow_down)),
+
                           ),
                           TextField(
                             controller: controller.controllerAmount,
+                            inputFormatters: [ThousandsSeparatorInputFormatter()],
                             decoration: InputDecoration(
                               suffixIcon: Text(
                                 'VND',

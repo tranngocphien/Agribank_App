@@ -5,12 +5,14 @@ import 'package:agribank_banking/utils/enums.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class AccountInformationPage extends GetWidget<AccountInformationController> {
   const AccountInformationPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var formatter = NumberFormat('###,###,###');
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFF67D10),
@@ -77,7 +79,7 @@ class AccountInformationPage extends GetWidget<AccountInformationController> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Số dư: ${controller.accounts.first.money} VND',
+                                'Số dư: ${formatter.format(controller.accounts.first.money)} VND',
                                 style: Styles.baseNotoSansTS
                                     .copyWith(fontSize: 16),
                               ),
