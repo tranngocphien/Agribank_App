@@ -1,5 +1,6 @@
 import 'package:agribank_banking/data/network/api_constants.dart';
 import 'package:agribank_banking/models/bank_account_entity.dart';
+import 'package:agribank_banking/models/limit_transaction_entity.dart';
 import 'package:agribank_banking/models/open_saving_account_entity.dart';
 import 'package:agribank_banking/repositories/base_repository.dart';
 import 'package:agribank_banking/services/dio_service.dart';
@@ -26,6 +27,16 @@ class UserService {
     _repo.keyData = 'data';
     final accounts = _repo.queryList((e) => AccountSaving.fromJson(e));
     return accounts;
+  }
+
+  Future<LimitTransactionEntity?> updateLimitTransaction({required int limitPerTrans, required int limitPerDay}) async {
+    _repo.url = APIConstants.baseURL + APIConstants.updateLimitTrans;
+    _repo.keyData = 'data';
+    final limit = _repo.queryByPath((e) => LimitTransactionEntity.fromJson(e), data: {
+      'limit_per_trans': limitPerTrans,
+      'limit_per_day': limitPerDay
+    });
+    return limit;
   }
 
 }

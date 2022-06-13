@@ -11,6 +11,7 @@ class APIConstants {
   /// user
   static const listBankAccount = '/user/get_list_bank_account';
   static const listSavingAccount = '/user/get_list_saving_account';
+  static const updateLimitTrans = '/user/update_trans_limit';
 
 
   /// transaction
@@ -21,6 +22,8 @@ class APIConstants {
   static const historyTransaction = '/transaction/get_history';
   static const openSavingAccount ='/transaction/open_saving_account';
   static const finishSavingAccount = '/transaction/finish_saving_money';
+  static const getUserNameTransactionInternal = '/transaction/get_user_transaction_internal';
+  static const getUserNameTransactionInterbank = '/transaction/get_user_transaction_interbank';
 
   /// contact
   static const getListContact = '/contact/get_list';

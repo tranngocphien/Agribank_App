@@ -563,7 +563,12 @@ class HomePage extends GetWidget<HomeController> {
                             text: const Text('Lịch sử GD',
                                 style: TextStyle(fontSize: 12)),
                             onClick: () {
-                              Get.toNamed(AppRoutes.historyTransaction);
+                              if(StoreGlobal.isLogin.value){
+                                Get.toNamed(AppRoutes.historyTransaction);
+                              }
+                              else {
+                                Get.toNamed(AppRoutes.login);
+                              }
                             },
                           ),
                         ],
@@ -646,7 +651,15 @@ class HomePage extends GetWidget<HomeController> {
                   color: Colors.deepOrangeAccent,
                 ),
                 title: 'Cài đặt hạn mức',
-                onClick: () {},
+                onClick: () {
+                  if(StoreGlobal.isLogin.value){
+                    Get.toNamed(AppRoutes.updateLimitTrans);
+                  }
+                  else {
+                    Get.toNamed(AppRoutes.login);
+                  }
+
+                },
               ),
               DrawerNavigationItem(
                 icons: const Icon(

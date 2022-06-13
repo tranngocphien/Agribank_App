@@ -11,13 +11,15 @@ import '../../../../services/contact_service.dart';
 import '../../../../services/transaction_service.dart';
 
 class TransferInternalController extends GetxController {
-  final TextEditingController controllerPhone = TextEditingController();
-  final TextEditingController controllerAmount = TextEditingController();
-  final TextEditingController controllerContent = TextEditingController();
-
+  final userName = Rx<String?>(null);
+  final controllerAccount = TextEditingController();
   var errorAccount = Rx<String?>(null);
   var errorMoney = Rx<String?>(null);
   var errorContent = Rx<String?>(null);
+
+  var account = Rx<String?>(null);
+  var money = Rx<String?>(null);
+  var content = Rx<String?>(null);
 
   final _userService = UserService.instance;
   final _transactionService = TransactionService.instance;
@@ -37,35 +39,43 @@ class TransferInternalController extends GetxController {
   Future<void> onInit() async {
     // TODO: implement onInit
     loadStatus(AppLoadStatus.loading);
-    // Future.wait([getListAccountInformation(), getListContacts()]);
     await getListAccountInformation();
     await getListContacts();
-    // await getListAccountInformation();
     loadStatus(AppLoadStatus.success);
     super.onInit();
   }
 
-  @override
-  Future<void> onClose() async {
-    // TODO: implement onInit
-    controllerContent.dispose();
-    controllerAmount.dispose();
-    controllerPhone.dispose();
-    super.onClose();
-  }
-
-  @override
-  Future<void> onReady() async {
-    // TODO: implement onInit
-    controllerContent.text = '';
-    controllerAmount.text = '';
-    controllerPhone.text = '';
-    super.onReady();
-  }
 
   Future<void> getListContacts() async {
     var temp = await _contactService.getListContact(typeContact: 1);
     internalContacts.addAll(temp!.rows);
+  }
+
+  Future<void> getUserName() async {
+    try {
+      loadStatus(AppLoadStatus.loading);
+      final response  = await _transactionService.getUserInternal(destination: account.value ?? '');
+      userName.value = response!.name;
+      loadStatus(AppLoadStatus.success);
+    }
+    on DioError catch (e) {
+      loadStatus(AppLoadStatus.failed);
+      final message = (e.response!.data as Map)['message'];
+      Get.dialog(CupertinoAlertDialog(
+        title: const Text('Thông báo'),
+        content: Text(message),
+        actions: [
+          CupertinoDialogAction(
+            onPressed: () {
+              Get.back();
+            },
+            child: const Text('Đồng ý'),
+          )
+        ],
+      ));
+
+    }
+
   }
 
 
@@ -79,9 +89,9 @@ class TransferInternalController extends GetxController {
       try {
         await _transactionService.sendMoney(
             accountSender: accounts[indexAccount.value].accountNumber,
-            accountReceiver: controllerPhone.text,
-            money: int.parse(controllerAmount.text.replaceAll(',', '')),
-            content: controllerContent.text,
+            accountReceiver: account.value ?? '',
+            money: int.parse(money.value == null ? '': money.value!.replaceAll(',', '')),
+            content: content.value ?? '',
             saveContact: isSaveAccount.value ? 1 : 0,
             password: password,
             pin: pin);
@@ -91,7 +101,7 @@ class TransferInternalController extends GetxController {
           actions: [
             CupertinoDialogAction(
               onPressed: () {
-                Get.offAndToNamed(AppRoutes.home);
+                Get.until((route) => Get.currentRoute == AppRoutes.transferInternal);
               },
               child: const Text('Đồng ý'),
             )
@@ -106,7 +116,7 @@ class TransferInternalController extends GetxController {
           actions: [
             CupertinoDialogAction(
               onPressed: () {
-                Get.offAndToNamed(AppRoutes.home);
+                Get.back();
               },
               child: const Text('Đồng ý'),
             )
@@ -120,21 +130,21 @@ class TransferInternalController extends GetxController {
 
   bool checkData() {
     bool flag = true;
-    if(controllerPhone.text.isEmpty){
+    if(account.value == null){
       errorAccount.value = 'Chưa nhập số tài khoản';
       flag =  false;
     }
     else {
       errorAccount.value = null;
     }
-    if(controllerAmount.text.isEmpty){
+    if(money.value == null){
       errorMoney.value = 'Chưa nhập số tiền';
       flag =  false;
     }
     else {
       errorMoney.value = null;
     }
-    if(controllerContent.text.isEmpty){
+    if(content.value == null){
       errorContent.value = 'Chưa nhập nội dung';
       flag =  false;
     }

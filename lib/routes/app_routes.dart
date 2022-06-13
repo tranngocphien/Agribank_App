@@ -25,6 +25,7 @@ class AppRoutes {
   static const transferExQr = '/transferQR';
   static const confirmTransaction = '/confirmTransaction';
   static const confirmTransactionPassword = '/confirmTransactionPassword';
+  static const updateLimitTrans = '/updateLimitTransaction';
 
   /// recharge phone money
   static const rechargePhone = '/rechargePhone';

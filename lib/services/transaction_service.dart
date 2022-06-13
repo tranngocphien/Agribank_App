@@ -2,6 +2,7 @@ import 'package:agribank_banking/data/network/api_constants.dart';
 import 'package:agribank_banking/models/history_transaction.dart';
 import 'package:agribank_banking/models/open_saving_account_entity.dart';
 import 'package:agribank_banking/models/response_message.dart';
+import 'package:agribank_banking/models/user_name_entity.dart';
 import 'package:agribank_banking/repositories/base_repository.dart';
 import 'package:agribank_banking/services/dio_service.dart';
 import 'package:agribank_banking/utils/enums.dart';
@@ -67,6 +68,7 @@ class TransactionService {
         String? password
       }) async {
     _repo.url = APIConstants.baseURL + APIConstants.sendMoney;
+    _repo.keyData = null;
     try {
       await _repo.queryByPath((e) => ResponseMessage.fromJson(e), data: {
         'account_number_sender': accountSender,
@@ -153,6 +155,22 @@ class TransactionService {
     return await _repo.queryByPath((e) => MoneySaving.fromJson(e), data: {
       'saving_account_number': savingAccountNumber,
       'reciver_account_number': receiveAccountNumber
+    });
+  }
+
+  Future<UserNameEntity?> getUserInternal({required String destination}) async {
+    _repo.url = APIConstants.baseURL + APIConstants.getUserNameTransactionInternal;
+    _repo.keyData = 'data';
+    return await _repo.queryByPath((e) => UserNameEntity.fromJson(e), data:  {
+      'destination': destination
+    });
+  }
+
+  Future<UserNameEntity?> getUserInterbank({required String destination}) async {
+    _repo.url = APIConstants.baseURL + APIConstants.getUserNameTransactionInterbank;
+    _repo.keyData = 'data';
+    return await _repo.queryByPath((e) => UserNameEntity.fromJson(e), data:  {
+      'destination': destination
     });
   }
 }

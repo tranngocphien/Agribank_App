@@ -52,6 +52,7 @@ class TurnOffPage extends GetWidget<TurnOffController> {
                     keyboardType: TextInputType.number,
                     length: 6,
                     onChanged: (value) {
+                      controller.pin.value = value;
                     },
                     obscureText: true,
                     obscuringCharacter: '*',
@@ -92,6 +93,7 @@ class TurnOffPage extends GetWidget<TurnOffController> {
                   height: height48,
                   child: ButtonPrimaryText(
                     onTab: () async {
+                      await controller.turnOffPin();
                     },
                     margin: EdgeInsets.zero,
                     padding: EdgeInsets.all(width8),

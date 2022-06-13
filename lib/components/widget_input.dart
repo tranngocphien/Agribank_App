@@ -12,9 +12,11 @@ class WidgetInput extends StatelessWidget {
         this.suffixIcon,
         this.errorText,
         this.onChanged,
+        this.onEditingComplete,
         this.keyboardType = TextInputType.text,
         this.obscureText = false,
         this.inputFormatters,
+        this.initialValue,
         this.textCapitalization = TextCapitalization.none
       })
       : super(key: key);
@@ -29,18 +31,21 @@ class WidgetInput extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final TextCapitalization textCapitalization;
   final List<TextInputFormatter>? inputFormatters;
-
+  final VoidCallback? onEditingComplete;
+  final String? initialValue;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: TextField(
+      child: TextFormField(
+        initialValue: initialValue,
         inputFormatters: inputFormatters,
         onTap: onPress,
         controller: controller,
         keyboardType: keyboardType,
         obscureText: obscureText,
         onChanged: onChanged,
+        onEditingComplete: onEditingComplete,
         decoration: InputDecoration(
             suffixIcon: suffixIcon,
             errorText: errorText,

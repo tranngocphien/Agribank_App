@@ -3,7 +3,10 @@ import 'package:agribank_banking/models/base_entity.dart';
 import 'package:agribank_banking/models/response_message.dart';
 import 'package:agribank_banking/repositories/base_repository.dart';
 import 'package:agribank_banking/services/dio_service.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 
+import '../routes/app_routes.dart';
 import '../utils/enums.dart';
 
 class SoftOtpService {
@@ -13,14 +16,15 @@ class SoftOtpService {
 
   final _repo = BaseRepository(url: APIConstants.baseURL, dio: DioService.instance.get(), method: HttpMethod.post);
 
-  Future<void> turnOn({required String password, required String pin, required String retypePin}) async {
+  Future<ResponseMessage?> turnOn({required String password, required String pin, required String retypePin}) async {
     _repo.url = APIConstants.baseURL + APIConstants.turnOn;
     try {
-      _repo.queryByPath((e) => BaseEntity(), data: {
+      final response = _repo.queryByPath((e) => ResponseMessage.fromJson(e), data: {
         'password': password,
         'pin': pin,
         'retype_pin': retypePin
       });
+      return response;
     }
     catch (e) {
       rethrow;
@@ -29,18 +33,13 @@ class SoftOtpService {
   }
 
 
-  Future<void> turnOff({required String password, required String pin, required String retypePin}) async {
+  Future<ResponseMessage?> turnOff({required String pin}) async {
     _repo.url = APIConstants.baseURL + APIConstants.turnOff;
-    try {
-      _repo.queryByPath((e) => BaseEntity(), data: {
-        'password': password,
-        'pin': pin,
-        'retype_pin': retypePin
-      });
-    }
-    catch (e) {
-      rethrow;
-    }
+    _repo.keyData = null;
+    final response = _repo.queryByPath((e) => ResponseMessage.fromJson(e), data: {
+      'pin': pin,
+    });
+    return response;
   }
 
   Future<ResponseMessage?> updatePin({required String pinOld, required String pinNew, required String retypePinNew}) async {

@@ -61,6 +61,8 @@ import 'package:agribank_banking/modules/history_transaction/history_transaction
 import 'package:agribank_banking/modules/transfer/screens/transfer_internal/transfer_internal_binding.dart';
 import 'package:agribank_banking/modules/transfer/transfer_binding.dart';
 import '../modules/transfer/screens/transfer_internal_detail/transfer_internal_detail_binding.dart';
+import '../modules/transfer/screens/update_limit_trans/update_limit_trans_binding.dart';
+import '../modules/transfer/screens/update_limit_trans/update_limit_trans_page.dart';
 import '../modules/transfer/transfer_page.dart';
 import 'package:get/get.dart';
 import '../modules/card_service/card_service_page.dart';
@@ -122,6 +124,11 @@ class AppPages {
       name: AppRoutes.transfer,
       page: () => const TransferPage(),
       binding: TransferBinding()
+    ),
+    GetPage(
+      name: AppRoutes.updateLimitTrans,
+      page: () => const UpdateLimitTransPage(),
+      binding: UpdateLimitTransBinding()
     ),
     GetPage(
       name: AppRoutes.transferInternal,

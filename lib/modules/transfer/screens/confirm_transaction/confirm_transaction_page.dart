@@ -53,27 +53,12 @@ class ConfirmTransactionPage extends GetWidget<ConfirmTransactionController> {
                       fontSize: 16,
                     ),
                   ),
-                  // RichText(
-                  //   textAlign: TextAlign.center,
-                  //   text: TextSpan(children: <TextSpan>[
-                  //     TextSpan(
-                  //         text: "0377016054",
-                  //         style: Styles.baseNotoSansTS.copyWith(
-                  //             fontSize: 16, fontWeight: FontWeight.w600)),
-                  //     TextSpan(
-                  //         text:
-                  //             ".Quý khách vui lòng nhập OTP để xác thực giao dịch",
-                  //         style: Styles.baseNotoSansTS.copyWith(fontSize: 16))
-                  //   ]),
-                  // ),
-                  // SizedBox(
-                  //   height: height16,
-                  // ),
                   PinCodeTextField(
-                    controller: controller.controllerPin,
                     appContext: context,
                     length: 6,
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      controller.pin.value = value;
+                    },
                     keyboardType: TextInputType.number,
                     cursorColor: Colors.red,
                   ),

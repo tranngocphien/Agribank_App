@@ -74,8 +74,10 @@ class SetPinPage extends GetWidget<SetPinController> {
                                 height: height8,
                               ),
                               TextField(
-                                controller: controller.controllerPassword,
                                 obscureText: true,
+                                onChanged: (value){
+                                  controller.password.value = value;
+                                },
                                 style: Styles.baseNotoSansTS.copyWith(
                                   fontSize: 16,
                                 ),
@@ -92,10 +94,10 @@ class SetPinPage extends GetWidget<SetPinController> {
                                 height: height8,
                               ),
                               PinCodeTextField(
-                                controller: controller.controllerPin,
                                 appContext: context,
                                 length: 6,
                                 onChanged: (value) {
+                                  controller.pin.value = value;
                                 },
                                 obscureText: true,
                                 obscuringCharacter: '*',
@@ -113,10 +115,11 @@ class SetPinPage extends GetWidget<SetPinController> {
                                     .copyWith(fontSize: 15),
                               ),
                               PinCodeTextField(
-                                controller: controller.controllerRetypePin,
                                 appContext: context,
                                 length: 6,
-                                onChanged: (value) {},
+                                onChanged: (value) {
+                                  controller.retypePin.value = value;
+                                },
                                 cursorColor: black,
                                 obscureText: true,
                                 obscuringCharacter: '*',

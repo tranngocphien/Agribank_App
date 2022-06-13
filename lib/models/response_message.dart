@@ -10,6 +10,6 @@ class ResponseMessage extends BaseEntity {
 
   factory ResponseMessage.fromJson(Map<String, dynamic> json) {
     return ResponseMessage(
-        success: json['success'], message: json['message'], code: json['code']);
+        success: json['success'] ?? false, message: json['message'], code: json['code']);
   }
 }

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../app_theme.dart';
+import '../../data/storage/store_global.dart';
 
 class SoftOPTPage extends GetWidget<SoftOTPController> {
   const SoftOPTPage({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class SoftOPTPage extends GetWidget<SoftOTPController> {
       appBar: AppBar(
         leading: GestureDetector(
           onTap: (){
+            print('a');
             Get.back();
           },
             child: const Icon(Icons.arrow_back)),
@@ -53,8 +55,8 @@ class SoftOPTPage extends GetWidget<SoftOTPController> {
                       'Bảo mật và thuận tiện hơn khi xác thực giao dịch qua Soft OTP',
                       style: Styles.baseNotoSansTS.copyWith(color: black500),
                     )),
-                    CupertinoSwitch(
-                        value: controller.turnOnOTP.value,
+                    Obx(() => CupertinoSwitch(
+                        value: StoreGlobal.user.value!.softOtp,
                         onChanged: (value) {
                           if (value) {
                             Get.toNamed(AppRoutes.turnOnPin);
@@ -80,7 +82,7 @@ class SoftOPTPage extends GetWidget<SoftOTPController> {
                               ],
                             ));
                           }
-                        })
+                        }))
                   ],
                 ),
                 const Divider(

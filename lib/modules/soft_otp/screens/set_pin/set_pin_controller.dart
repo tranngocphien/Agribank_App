@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:agribank_banking/data/storage/store_global.dart';
 import 'package:agribank_banking/services/soft_otp_service.dart';
 import 'package:agribank_banking/utils/enums.dart';
@@ -8,9 +10,9 @@ import 'package:get/get.dart';
 import '../../../../routes/app_routes.dart';
 
 class SetPinController extends GetxController {
-  final controllerPassword = TextEditingController();
-  final controllerPin = TextEditingController();
-  final controllerRetypePin = TextEditingController();
+  final password = Rx<String?>(null);
+  final pin = Rx<String?>(null);
+  final retypePin = Rx<String?>(null);
 
   final softOTPService = SoftOtpService.instance;
 
@@ -26,9 +28,9 @@ class SetPinController extends GetxController {
     loadStatus(AppLoadStatus.loading);
     try {
       await softOTPService.turnOn(
-          password: controllerPassword.text,
-          pin: controllerPin.text,
-          retypePin: controllerRetypePin.text);
+          password: password.value ?? '',
+          pin: pin.value ?? '',
+          retypePin: retypePin.value ?? '');
       loadStatus(AppLoadStatus.success);
       StoreGlobal.user.value!.softOtp = true;
       Get.dialog(CupertinoAlertDialog(
@@ -37,7 +39,8 @@ class SetPinController extends GetxController {
         actions: [
           CupertinoDialogAction(
             onPressed: () {
-              Get.offAllNamed(AppRoutes.softOTP);
+              Get.back();
+              Get.back();
             },
             child: const Text('Đồng ý'),
           )
@@ -53,8 +56,8 @@ class SetPinController extends GetxController {
           actions: [
             CupertinoDialogAction(
               onPressed: () {
-                Get.offAllNamed(AppRoutes.softOTP);
-              },
+                Get.back();
+                Get.back();              },
               child: const Text('Đồng ý'),
             )
           ],

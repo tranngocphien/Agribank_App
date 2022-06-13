@@ -70,106 +70,124 @@ class TransferInternalPage extends GetWidget<TransferInternalController> {
                               )
                             ],
                           ),
-                          Obx(() => WidgetInput(
-                            errorText: controller.errorAccount.value,
-                            controller: controller.controllerPhone,
-                            text: 'Số điện thoại/số tài khoản',
-                            onPress: () {},
-                            suffixIcon: GestureDetector(
-                                onTap: () {
-                                  Get.dialog(
-                                      Dialog(
-                                        backgroundColor: Colors.transparent,
-                                        child: Container(
-                                          width: width * 0.8,
-                                          height: height * 0.5,
-                                          decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                              BorderRadius.circular(
-                                                  width16)),
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                width: width * 0.8,
-                                                height: height60,
-                                                decoration: BoxDecoration(
-                                                    color:
-                                                    const Color(0xFFF67D10),
-                                                    borderRadius: BorderRadius
-                                                        .only(
-                                                        topRight: Radius
-                                                            .circular(
-                                                            width16),
-                                                        topLeft:
-                                                        Radius.circular(
-                                                            width16))),
-                                                child: Center(child: Text('Số tài khoản', style: Styles.baseNotoSansTS.copyWith(
-                                                    fontSize: 18,
-                                                    color: white,
-                                                    fontWeight: FontWeight.w600
-                                                ),)),
-                                              ),
-                                              SizedBox(
-                                                height: height8,
-                                              ),
-                                              ...controller.internalContacts
-                                                  .map((e) => InkWell(
-                                                onTap: () {
-                                                  controller
-                                                      .indexContact
-                                                      .value =
-                                                      controller
-                                                          .internalContacts
-                                                          .indexOf(e);
-                                                  controller
-                                                      .controllerPhone
-                                                      .text =
-                                                      controller
-                                                          .internalContacts[
-                                                      controller
-                                                          .indexContact
-                                                          .value]
-                                                          .accountNumber;
-                                                  Get.back();
-                                                },
-                                                child: Container(
-                                                    padding:
-                                                    EdgeInsets.all(
-                                                        width8),
-                                                    child: Text(
-                                                      e.accountNumber,
-                                                      style: Styles
-                                                          .baseNotoSansTS
-                                                          .copyWith(
-                                                          fontSize:
-                                                          18,
-                                                          fontWeight:
-                                                          FontWeight
-                                                              .w600),
-                                                    )),
-                                              ))
-                                            ],
+                          Obx(
+                            () => WidgetInput(
+                              errorText: controller.errorAccount.value,
+                              onChanged: (value) {
+                                controller.account.value = value;
+                              },
+                              text: 'Số điện thoại/số tài khoản',
+                              onPress: () {},
+                              controller: controller.controllerAccount,
+                              onEditingComplete: () async {
+                                await controller.getUserName();
+                              },
+                              suffixIcon: GestureDetector(
+                                  onTap: () {
+                                    Get.dialog(
+                                        Dialog(
+                                          backgroundColor: Colors.transparent,
+                                          child: Container(
+                                            width: width * 0.8,
+                                            height: height * 0.5,
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        width16)),
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  width: width * 0.8,
+                                                  height: height60,
+                                                  decoration: BoxDecoration(
+                                                      color: const Color(
+                                                          0xFFF67D10),
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      width16),
+                                                              topLeft: Radius
+                                                                  .circular(
+                                                                      width16))),
+                                                  child: Center(
+                                                      child: Text(
+                                                    'Số tài khoản',
+                                                    style: Styles.baseNotoSansTS
+                                                        .copyWith(
+                                                            fontSize: 18,
+                                                            color: white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
+                                                  )),
+                                                ),
+                                                SizedBox(
+                                                  height: height8,
+                                                ),
+                                                ...controller.internalContacts
+                                                    .map((e) => InkWell(
+                                                          onTap: () {
+                                                            controller.indexContact.value = controller.internalContacts.indexOf(e);
+                                                            controller.account.value = e.accountNumber;
+                                                            controller.controllerAccount.text = e.accountNumber;
+
+                                                            Get.back();
+                                                          },
+                                                          child: Container(
+                                                              padding:
+                                                                  EdgeInsets.all(
+                                                                      width8),
+                                                              child: Text(
+                                                                e.accountNumber,
+                                                                style: Styles
+                                                                    .baseNotoSansTS
+                                                                    .copyWith(
+                                                                        fontSize:
+                                                                            18,
+                                                                        fontWeight:
+                                                                            FontWeight.w600),
+                                                              )),
+                                                        ))
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      useSafeArea: true);
-                                },
-                                child: const Icon(Icons.keyboard_arrow_down)),
-                          ),),
-                          Obx(() => WidgetInput(
-                            errorText: controller.errorMoney.value,
-                            controller: controller.controllerAmount,
-                            text: 'Số tiền',
-                            onPress: () {},
-                            keyboardType: TextInputType.number,
-                            inputFormatters: [ThousandsSeparatorInputFormatter()],
-                            suffixIcon: Text(
-                              'VND',
-                              style: Styles.baseNotoSansTS
-                                  .copyWith(fontSize: 16, color: black500),
+                                        useSafeArea: true);
+                                  },
+                                  child: const Icon(Icons.keyboard_arrow_down)),
                             ),
-                          ),),
+                          ),
+                          Obx(
+                            () => controller.userName.value == null
+                                ? Container()
+                                : Text(
+                                    controller.userName.value!.toUpperCase(),
+                                    style: Styles.baseNotoSansTS.copyWith(
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                          ),
+                          Obx(
+                            () => WidgetInput(
+                              errorText: controller.errorMoney.value,
+                              onChanged: (value) {
+                                controller.money.value = value;
+                              },
+                              text: 'Số tiền',
+                              onPress: () {},
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                ThousandsSeparatorInputFormatter()
+                              ],
+                              suffixIcon: Text(
+                                'VND',
+                                style: Styles.baseNotoSansTS
+                                    .copyWith(fontSize: 16, color: black500),
+                              ),
+                            ),
+                          ),
                           SizedBox(
                             height: height16,
                           ),
@@ -181,12 +199,14 @@ class TransferInternalPage extends GetWidget<TransferInternalController> {
                             ),
                           ),
                           Obx(() => TextField(
-                            controller: controller.controllerContent,
-                            decoration: InputDecoration(
-                                errorText: controller.errorContent.value
-                            ),
-                            style: Styles.baseNotoSansTS.copyWith(fontSize: 18),
-                          )),
+                                onChanged: (value) {
+                                  controller.content.value = value;
+                                },
+                                decoration: InputDecoration(
+                                    errorText: controller.errorContent.value),
+                                style: Styles.baseNotoSansTS
+                                    .copyWith(fontSize: 18),
+                              )),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -236,13 +256,16 @@ class TransferInternalPage extends GetWidget<TransferInternalController> {
                           height: height48,
                           child: ButtonPrimaryText(
                             onTab: () {
-                              if(controller.checkData()){
+                              if (controller.checkData()) {
                                 Get.toNamed(AppRoutes.transferDetailInternal,
                                     arguments: [
-                                      controller.accounts[controller.indexAccount.value].accountNumber,
-                                      controller.controllerPhone.text,
-                                      controller.controllerAmount.text,
-                                      controller.controllerContent.text
+                                      controller
+                                          .accounts[
+                                              controller.indexAccount.value]
+                                          .accountNumber,
+                                      controller.account.value,
+                                      controller.money.value,
+                                      controller.content.value
                                     ]);
                               }
                             },
