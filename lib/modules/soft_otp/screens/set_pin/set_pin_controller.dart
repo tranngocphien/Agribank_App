@@ -32,7 +32,7 @@ class SetPinController extends GetxController {
           pin: pin.value ?? '',
           retypePin: retypePin.value ?? '');
       loadStatus(AppLoadStatus.success);
-      StoreGlobal.user.value!.softOtp = true;
+      StoreGlobal.soft.value = true;
       Get.dialog(CupertinoAlertDialog(
         title: const Text('Thông báo'),
         content: const Text('Quý khách đã kích hoạt xác thực giao dịch bằng Soft OTP thành công.'),

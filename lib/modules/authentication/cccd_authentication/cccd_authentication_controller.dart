@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:agribank_banking/routes/app_routes.dart';
 import 'package:agribank_banking/utils/compare.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
@@ -13,7 +14,6 @@ import '../../../utils/enums.dart';
 
 class CccdAuthenticationController extends GetxController {
   String inputName = '';
-  String inputCCCD = '';
 
   CameraController? controllerCamera;
 
@@ -28,8 +28,6 @@ class CccdAuthenticationController extends GetxController {
     loadStatus(AppLoadStatus.loading);
     await _initializeCamera();
     inputName = Get.arguments[0];
-    inputCCCD = Get.arguments[1];
-    print(inputName);
     loadStatus(AppLoadStatus.success);
     super.onInit();
   }
@@ -37,6 +35,7 @@ class CccdAuthenticationController extends GetxController {
   @override
   void onClose() async {
     await controllerCamera!.dispose();
+    super.onClose();
   }
 
   Future<CameraDescription> _getCamera(CameraLensDirection dir) async {
@@ -55,7 +54,6 @@ class CccdAuthenticationController extends GetxController {
   }
 
   Future<void> pickImage() async {
-    print('hihihihi');
     final ImagePicker _picker = ImagePicker();
     image = await _picker.pickImage(source: ImageSource.gallery);
     await extractData();
@@ -69,7 +67,6 @@ class CccdAuthenticationController extends GetxController {
     final inputImage = InputImage.fromFilePath(image!.path);
     final RecognisedText recognisedText =
         await textDetector.processImage(inputImage);
-    print('+++++++++++++++++++');
     print(recognisedText.text);
     for (TextBlock block in recognisedText.blocks) {
       for (TextLine line in block.lines) {
@@ -85,9 +82,11 @@ class CccdAuthenticationController extends GetxController {
     }
 
 
-    bool check = checkData(inputName, name, inputCCCD, numberIdentify);
+    bool check = checkData(inputName, name);
     if(check){
         showMessage('Đăng ký tài khoản thành công');
+        Get.back();
+        Get.toNamed(AppRoutes.faceAuthentication, arguments: image);
     }
     else {
       if(await getBrightNess() < 40){
@@ -116,9 +115,8 @@ class CccdAuthenticationController extends GetxController {
     await controllerCamera?.initialize();
   }
 
-  bool checkData(String inputName, String recogName, String inputCCCD, String recogCCCD){
-    return LongestCommonSubString.getSimilarity(inputName, recogName) > 0.9 &&
-        LongestCommonSubString.getSimilarity(inputCCCD, recogCCCD) > 0.9;
+  bool checkData(String inputName, String recogName){
+    return LongestCommonSubString.getSimilarity(inputName, recogName) > 0.9;
   }
 
   void showMessage(String message){

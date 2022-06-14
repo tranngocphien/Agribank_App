@@ -9,6 +9,7 @@ import '../../../../components/account_information.dart';
 import '../../../../components/button_border.dart';
 import '../../../../components/widget_input.dart';
 import '../../../../routes/app_routes.dart';
+import '../../../../utils/convert.dart';
 
 class OpenSavingAccountPage extends GetWidget<OpenSavingAccountController> {
   const OpenSavingAccountPage({Key? key}) : super(key: key);
@@ -177,6 +178,9 @@ class OpenSavingAccountPage extends GetWidget<OpenSavingAccountController> {
                                   controller: controller.controllerMoney,
                                   text: 'Số tiền',
                                   onPress: () {},
+                                  inputFormatters: [
+                                    ThousandsSeparatorInputFormatter()
+                                  ],
                                   keyboardType: TextInputType.number,
                                   suffixIcon: Text(
                                     'VND',
@@ -305,7 +309,9 @@ class OpenSavingAccountPage extends GetWidget<OpenSavingAccountController> {
                         ),
                         Row(
                           children: [
-                            Checkbox(value: false, onChanged: (value) {}),
+                            Obx(() => Checkbox(value: controller.isAcceptPolicy.value, onChanged: (value) {
+                              controller.isAcceptPolicy.value = value!;
+                            }),),
                             SizedBox(
                               width: width16,
                             ),
@@ -347,22 +353,39 @@ class OpenSavingAccountPage extends GetWidget<OpenSavingAccountController> {
                               height: height48,
                               child: ButtonPrimaryText(
                                 onTab: () {
-                                  Get.toNamed(AppRoutes.openSavingAccountDetail,
-                                      arguments: {
-                                        'sourceAccount': controller
-                                            .accounts[
-                                                controller.indexAccount.value]
-                                            .accountNumber,
-                                        'type': controller.controllerType.text,
-                                        'money':
-                                            controller.controllerMoney.text,
-                                        'cycle': controller.cycles[
-                                            controller.indexCycles.value],
-                                        'typeRenew': controller
-                                            .typeRenews[controller
-                                                .indexTypeRenews.value]
-                                            .title
-                                      });
+                                  if(controller.isAcceptPolicy.value){
+                                    Get.toNamed(AppRoutes.openSavingAccountDetail,
+                                        arguments: {
+                                          'sourceAccount': controller
+                                              .accounts[
+                                          controller.indexAccount.value]
+                                              .accountNumber,
+                                          'type': controller.controllerType.text,
+                                          'money':
+                                          controller.controllerMoney.text,
+                                          'cycle': controller.cycles[
+                                          controller.indexCycles.value],
+                                          'typeRenew': controller
+                                              .typeRenews[controller
+                                              .indexTypeRenews.value]
+                                              .title
+                                        });
+
+                                  }
+                                  else {
+                                    Get.dialog(CupertinoAlertDialog(
+                                      title: const Text('Thông báo'),
+                                      content: const Text('Quý khách vui lòng đồng ý với điều khoản mở tiền gửi'),
+                                      actions: [
+                                        CupertinoDialogAction(
+                                          onPressed: () {
+                                            Get.back();
+                                          },
+                                          child: const Text('Đồng ý'),
+                                        )
+                                      ],
+                                    ));
+                                  }
                                 },
                                 margin: EdgeInsets.zero,
                                 padding: EdgeInsets.all(width8),

@@ -2,6 +2,8 @@ import 'package:agribank_banking/data/network/api_constants.dart';
 import 'package:agribank_banking/models/history_transaction.dart';
 import 'package:agribank_banking/models/open_saving_account_entity.dart';
 import 'package:agribank_banking/models/response_message.dart';
+import 'package:agribank_banking/models/response_phone_money.dart';
+import 'package:agribank_banking/models/response_send_money.dart';
 import 'package:agribank_banking/models/user_name_entity.dart';
 import 'package:agribank_banking/repositories/base_repository.dart';
 import 'package:agribank_banking/services/dio_service.dart';
@@ -17,27 +19,26 @@ class TransactionService {
       dio: DioService.instance.get(),
       method: HttpMethod.post);
 
-  Future<void> rechargePhone(
+  Future<ResponsePhoneMoney?> rechargePhone(
       {required String accountNumber,
       required String phone,
       required int money,
       String? pin,
       String? password}) async {
     _repo.url = APIConstants.baseURL + APIConstants.rechargePhone;
-    try {
-      await _repo.queryByPath((e) => ResponseMessage.fromJson(e), data: {
-        'account_number': accountNumber,
-        'phone_number': phone,
-        'money': money,
-        'pin': pin,
-        'password': password
-      });
-    } catch (e) {
-      rethrow;
-    }
+    _repo.keyData = 'data';
+
+    final res = await _repo.queryByPath((e) => ResponsePhoneMoney.fromJson(e), data: {
+      'account_number': accountNumber,
+      'phone_number': phone,
+      'money': money,
+      'pin': pin,
+      'password': password
+    });
+    return res;
   }
 
-  Future<void> buyCodePhone(
+  Future<ResponsePhoneMoney?> buyCodePhone(
       {required String accountNumber,
       required String homeNetword,
       required int money,
@@ -45,20 +46,18 @@ class TransactionService {
         String? password
       }) async {
     _repo.url = APIConstants.baseURL + APIConstants.buyCodePhone;
-    try {
-      await _repo.queryByPath((e) => ResponseMessage.fromJson(e), data: {
-        'account_number': accountNumber,
-        'home_network': homeNetword,
-        'money': money,
-        'pin': pin,
-        'password': password
-      });
-    } catch (e) {
-      rethrow;
-    }
+    _repo.keyData = 'data';
+    final res = await _repo.queryByPath((e) => ResponsePhoneMoney.fromJson(e), data: {
+      'account_number': accountNumber,
+      'home_network': homeNetword,
+      'money': money,
+      'pin': pin,
+      'password': password
+    });
+    return res;
   }
 
-  Future<void> sendMoney(
+  Future<ResponseSendMoney?> sendMoney(
       {required String accountSender,
       required String accountReceiver,
       required int money,
@@ -68,23 +67,20 @@ class TransactionService {
         String? password
       }) async {
     _repo.url = APIConstants.baseURL + APIConstants.sendMoney;
-    _repo.keyData = null;
-    try {
-      await _repo.queryByPath((e) => ResponseMessage.fromJson(e), data: {
-        'account_number_sender': accountSender,
-        'account_number_receiver': accountReceiver,
-        'money': money,
-        'content': content,
-        'save_contact': saveContact,
-        'pin': pin,
-        'password': password
-      });
-    } catch (e) {
-      rethrow;
-    }
+    _repo.keyData = 'data';
+    final response = await _repo.queryByPath((e) => ResponseSendMoney.fromJson(e), data: {
+      'account_number_sender': accountSender,
+      'account_number_receiver': accountReceiver,
+      'money': money,
+      'content': content,
+      'save_contact': saveContact,
+      'pin': pin,
+      'password': password
+    });
+    return response;
   }
 
-  Future<void> sendMoneyInterbank(
+  Future<ResponseSendMoney?> sendMoneyInterbank(
       {required String accountSender,
       required String accountReceiver,
       required int money,
@@ -95,23 +91,21 @@ class TransactionService {
       String? pin,
         String? password
       }) async {
-    _repo.url = APIConstants.baseURL + APIConstants.sendMoney;
-    try {
-      await _repo.queryByPath((e) => ResponseMessage.fromJson(e), data: {
-        'account_number_sender': accountSender,
-        'account_number_receiver': accountReceiver,
-        'money': money,
-        'content': content,
-        'save_contact': saveContact,
-        'pin': pin,
-        'password': password,
-        'otp': pin,
-        'name_receiver': nameReceiver,
-        'name_interbank': nameInterbank
-      });
-    } catch (e) {
-      rethrow;
-    }
+    _repo.url = APIConstants.baseURL + APIConstants.sendMoneyInterbank;
+    _repo.keyData = 'data';
+    final response = await _repo.queryByPath((e) => ResponseSendMoney.fromJson(e), data: {
+      'account_number_sender': accountSender,
+      'account_number_receiver': accountReceiver,
+      'money': money,
+      'content': content,
+      'save_contact': saveContact,
+      'pin': pin,
+      'password': password,
+      'otp': pin,
+      'name_receiver': nameReceiver,
+      'name_interbank': nameInterbank
+    });
+    return response;
   }
 
   Future<List<HistoryTransactionEntity>> getHistory(

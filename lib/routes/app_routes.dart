@@ -5,6 +5,7 @@ class AppRoutes {
   static const faceAuthentication = '/faceAuthentication';
   static const login = '/login';
   static const cccdAuthentication = '/cccdAuthentication';
+  static const changePassword = '/changePassword';
 
   static const updateInformation = '/updateInformation';
   static const detailSavingAccount = '/detailSavingAccount';
@@ -32,6 +33,10 @@ class AppRoutes {
   static const updateLimitTrans = '/updateLimitTransaction';
   static const historyTransaction = '/historyTransaction';
   static const detailHistoryTransaction = '/detailHistoryTransaction';
+  static const resultTransaction = '/resultTransaction';
+  static const resultPhoneMoney = '/resultPhoneMoney';
+  static const resultOpenSaving = '/resultOpenSavingMoney';
+  static const finishSavingAccount = '/finishSavingAccount';
 
 
   /// recharge phone money
@@ -64,6 +69,7 @@ class AppRoutes {
   static const updatePin = '/updatePin';
   static const enterOldPin = '/enterOldPin';
   static const turnOffPin = '/turnOffPin';
+  static const forgotPin = '/forgotPin';
 
   /// info app
   static const infoApp = '/infoApp';

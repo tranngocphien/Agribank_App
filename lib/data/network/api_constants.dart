@@ -6,6 +6,7 @@ class APIConstants {
   /// auth
   static const login = '/auth/login';
   static const register = '/auth/register';
+  static const changePassword = '/auth/changePassword';
 
 
   /// user
@@ -41,6 +42,7 @@ class APIConstants {
   static const turnOn = '/soft_otp/turn_on';
   static const turnOff = '/soft_otp/turn_off';
   static const updatePin = '/soft_otp/update';
+  static const forgotOTP = '/soft_otp/forget';
 
   /// info app
   static const infoApp = '/get_info_app';

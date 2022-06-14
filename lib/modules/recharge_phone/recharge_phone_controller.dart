@@ -47,24 +47,25 @@ class RechargePhoneController extends GetxController {
 
   Future<void> rechargePhone({String? pin, String? password}) async {
     try {
-      await _transactionService.rechargePhone(
+      final res = await _transactionService.rechargePhone(
           accountNumber: accounts[indexAccount.value].accountNumber,
           phone: controllerPhone.text,
           money: values[indexSelected.value].value,
           password: password,
           pin: pin);
-      Get.dialog(CupertinoAlertDialog(
-        title: const Text('Thông báo'),
-        content: const Text('Thanh toán thành công'),
-        actions: [
-          CupertinoDialogAction(
-            onPressed: () {
-              Get.offAllNamed(AppRoutes.rechargePhone);
-            },
-            child: const Text('Đồng ý'),
-          )
-        ],
-      ));
+      Get.toNamed(AppRoutes.resultPhoneMoney, arguments: res);
+      // Get.dialog(CupertinoAlertDialog(
+      //   title: const Text('Thông báo'),
+      //   content: const Text('Thanh toán thành công'),
+      //   actions: [
+      //     CupertinoDialogAction(
+      //       onPressed: () {
+      //         Get.offAllNamed(AppRoutes.rechargePhone);
+      //       },
+      //       child: const Text('Đồng ý'),
+      //     )
+      //   ],
+      // ));
     } on DioError catch (e) {
       final message = (e.response!.data as Map)['message'];
       Get.dialog(CupertinoAlertDialog(

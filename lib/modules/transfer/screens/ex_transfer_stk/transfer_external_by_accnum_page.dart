@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import '../../../../app_theme.dart';
 import '../../../../components/button_border.dart';
 import '../../../../components/widget_input.dart';
+import '../../../../utils/constants.dart';
 import '../../../../utils/convert.dart';
 
 class TransferExByAccNumberPage
@@ -75,41 +76,85 @@ class TransferExByAccNumberPage
                             decoration: InputDecoration(
                               suffixIcon: GestureDetector(
                                   onTap: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) => Dialog(
-                                              insetPadding: EdgeInsets.zero,
-                                              alignment: Alignment.center,
-                                              child: SizedBox(
-                                                height: height * 0.5,
-                                                width: width * 0.9,
-                                                child: Column(
-                                                  children: [
-                                                    Container(
-                                                      width: width * 0.9,
-                                                      height: height48,
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                              color: Color(
-                                                                  0xFFF67D10)),
-                                                      child: Center(
+                                    Get.dialog(
+                                        Dialog(
+                                          insetPadding: EdgeInsets.zero,
+                                          backgroundColor: Colors.transparent,
+                                          child: Container(
+                                            width: width * 0.9,
+                                            height: height * 0.7,
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    width16)),
+                                            child: SingleChildScrollView(
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    width: width * 0.9,
+                                                    height: height60,
+                                                    decoration: BoxDecoration(
+                                                        color:
+                                                        const Color(0xFFF67D10),
+                                                        borderRadius: BorderRadius
+                                                            .only(
+                                                            topRight: Radius
+                                                                .circular(
+                                                                width16),
+                                                            topLeft:
+                                                            Radius.circular(
+                                                                width16))),
+                                                    child: Center(
                                                         child: Text(
-                                                          "Ngân hàng thụ hưởng",
-                                                          style: Styles
-                                                              .baseNotoSansTS
+                                                          "Ngân hàng",
+                                                          style: Styles.baseNotoSansTS
                                                               .copyWith(
-                                                                  fontSize: 16,
-                                                                  color: white,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600),
-                                                        ),
+                                                              fontSize: 18,
+                                                              color: white,
+                                                              fontWeight:
+                                                              FontWeight.w600),
+                                                        )),
+                                                  ),
+                                                  SizedBox(
+                                                    height: height8,
+                                                  ),
+                                                  ...bank
+                                                      .map((e) => InkWell(
+                                                    onTap: () {
+                                                      controller.indexBank
+                                                          .value =
+                                                          bank.indexOf(e);
+                                                      controller
+                                                          .controllerBank
+                                                          .text = e.title;
+                                                      Get.back();
+                                                    },
+                                                    child: Container(
+                                                      padding:
+                                                      EdgeInsets.all(
+                                                          width8),
+                                                      child: Text(
+                                                        '${e.value} - ${e.title}',
+                                                        style: Styles
+                                                            .baseNotoSansTS
+                                                            .copyWith(
+                                                            fontSize:
+                                                            16,
+                                                            fontWeight:
+                                                            FontWeight
+                                                                .w600),
                                                       ),
                                                     ),
-                                                  ],
-                                                ),
+                                                  ))
+                                                ],
                                               ),
-                                            ));
+                                            ),
+                                          ),
+                                        ),
+                                        useSafeArea: true);
+
                                   },
                                   child: const Icon(Icons.keyboard_arrow_down)),
                               label: const Text('Ngân hàng thụ hưởng'),
@@ -124,6 +169,9 @@ class TransferExByAccNumberPage
                           ),
                           WidgetInput(
                             controller: controller.controllerPhone,
+                            onEditingComplete: () async {
+                              await controller.getUserName();
+                            },
                             text: 'Số tài khoản thụ hưởng',
                             suffixIcon: GestureDetector(
                                 onTap: () {
@@ -189,7 +237,7 @@ class TransferExByAccNumberPage
                                                       crossAxisAlignment: CrossAxisAlignment.start,
                                                       children: [
                                                         Text(
-                                                          e.accountNumber,
+                                                          e.nickName,
                                                           style: Styles
                                                               .baseNotoSansTS
                                                               .copyWith(
@@ -199,16 +247,29 @@ class TransferExByAccNumberPage
                                                               FontWeight
                                                                   .w600),
                                                         ),
-                                                        Text(
-                                                          e.nickName,
-                                                          style: Styles
-                                                              .baseNotoSansTS
-                                                              .copyWith(
-                                                              fontSize: 14,
-                                                              color: black500,
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .w600),
+                                                        Row(
+                                                          children: [
+                                                            Text(e.nameBankInterbank!, style: Styles
+                                                                .baseNotoSansTS
+                                                                .copyWith(
+                                                                fontSize: 14,
+                                                                color: black500,
+                                                                fontWeight:
+                                                                FontWeight
+                                                                    .w600)),
+                                                            const Text('-'),
+                                                            Text(
+                                                              e.accountNumber,
+                                                              style: Styles
+                                                                  .baseNotoSansTS
+                                                                  .copyWith(
+                                                                  fontSize: 14,
+                                                                  color: black500,
+                                                                  fontWeight:
+                                                                  FontWeight
+                                                                      .w600),
+                                                            ),
+                                                          ],
                                                         ),
                                                       ],
                                                     )),
@@ -222,6 +283,16 @@ class TransferExByAccNumberPage
                                 child: const Icon(Icons.keyboard_arrow_down)),
 
                           ),
+                          Obx(
+                                () => controller.userName.value == null
+                                ? Container()
+                                : Text(
+                              controller.userName.value!.toUpperCase(),
+                              style: Styles.baseNotoSansTS.copyWith(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
                           TextField(
                             controller: controller.controllerAmount,
                             inputFormatters: [ThousandsSeparatorInputFormatter()],
@@ -232,20 +303,6 @@ class TransferExByAccNumberPage
                                     .copyWith(color: black700, fontSize: 16),
                               ),
                               label: const Text('Số tiền'),
-                              focusColor: black700,
-                              hoverColor: black700,
-                              fillColor: black700,
-                              labelStyle: Styles.baseNotoSansTS
-                                  .copyWith(fontSize: 16, color: black500),
-                              border: InputBorder.none,
-                            ),
-                            style: Styles.baseNotoSansTS.copyWith(fontSize: 18),
-                            keyboardType: TextInputType.number,
-                          ),
-                          TextField(
-                            controller: controller.controllerName,
-                            decoration: InputDecoration(
-                              label: const Text('Tên tài khoản thụ hưởng'),
                               focusColor: black700,
                               hoverColor: black700,
                               fillColor: black700,
@@ -319,7 +376,10 @@ class TransferExByAccNumberPage
                           width: width * 0.4,
                           height: height48,
                           child: ButtonPrimaryText(
-                            onTab: () {
+                            onTab: () async {
+                              if(controller.userName.value == null) {
+                                await controller.getUserName();
+                              }
                               Get.toNamed(AppRoutes.transferExAccNumberDetail,
                                   arguments: {
                                     'sender_account': controller
@@ -329,7 +389,7 @@ class TransferExByAccNumberPage
                                     'receiver_account':
                                         controller.controllerPhone.text,
                                     'amount': controller.controllerAmount.text,
-                                    'name': controller.controllerName.text,
+                                    'name': controller.userName.value,
                                     'content':
                                         controller.controllerContent.text,
                                     'isSaveAccount':

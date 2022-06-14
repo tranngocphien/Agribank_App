@@ -1,4 +1,5 @@
 import 'package:agribank_banking/modules/online_saving_money/screens/online_deposit_settlement/online_deposit_settlement_controller.dart';
+import 'package:agribank_banking/utils/convert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -89,54 +90,63 @@ class OnlineDepositSettlementPage
                                         color: Colors.white,
                                         borderRadius:
                                         BorderRadius.circular(width16)),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          width: width * 0.9,
-                                          height: height60,
-                                          decoration: BoxDecoration(
-                                              color: const Color(0xFFF67D10),
-                                              borderRadius: BorderRadius.only(
-                                                  topRight:
-                                                  Radius.circular(width16),
-                                                  topLeft:
-                                                  Radius.circular(width16))),
-                                          child: Center(
-                                              child: Text(
-                                                "Loại giao dịch",
-                                                style: Styles.baseNotoSansTS.copyWith(
-                                                    fontSize: 18,
-                                                    color: white,
-                                                    fontWeight: FontWeight.w600),
-                                              )),
-                                        ),
-                                        SizedBox(
-                                          height: height8,
-                                        ),
-                                        ...controller.savingAccounts.map((e) =>
-                                            InkWell(
-                                              onTap: () {
-                                                controller.indexSavingAccount
-                                                    .value =
-                                                    controller.savingAccounts
-                                                        .indexOf(e);
-                                                controller.controllerSourceAccount
-                                                    .text = e.accountNumber;
-                                                Get.back();
-                                              },
-                                              child: Container(
-                                                padding: EdgeInsets.all(width8),
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            width: width * 0.9,
+                                            height: height60,
+                                            decoration: BoxDecoration(
+                                                color: const Color(0xFFF67D10),
+                                                borderRadius: BorderRadius.only(
+                                                    topRight:
+                                                    Radius.circular(width16),
+                                                    topLeft:
+                                                    Radius.circular(width16))),
+                                            child: Center(
                                                 child: Text(
-                                                  e.accountNumber,
-                                                  style: Styles.baseNotoSansTS
-                                                      .copyWith(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                      FontWeight.w600),
+                                                  "Chọn tài khoản tiền gửi",
+                                                  style: Styles.baseNotoSansTS.copyWith(
+                                                      fontSize: 18,
+                                                      color: white,
+                                                      fontWeight: FontWeight.w600),
+                                                )),
+                                          ),
+                                          SizedBox(
+                                            height: height8,
+                                          ),
+                                          ...controller.savingAccounts.map((e) =>
+                                              InkWell(
+                                                onTap: () {
+                                                  controller.indexSavingAccount
+                                                      .value =
+                                                      controller.savingAccounts
+                                                          .indexOf(e);
+                                                  controller.controllerSourceAccount
+                                                      .text = e.accountNumber;
+                                                  Get.back();
+                                                },
+                                                child: Container(
+                                                  padding: EdgeInsets.all(width8),
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        e.accountNumber,
+                                                        style: Styles.baseNotoSansTS
+                                                            .copyWith(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                            FontWeight.w600),
+                                                      ),
+                                                      Text(MoneyFormat.formatMoneyInteger(e.money) + ' VNĐ'),
+                                                      const Divider(thickness: 1,),
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                            ))
-                                      ],
+                                              ))
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -184,53 +194,65 @@ class OnlineDepositSettlementPage
                                       color: Colors.white,
                                       borderRadius:
                                           BorderRadius.circular(width16)),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        width: width * 0.9,
-                                        height: height60,
-                                        decoration: BoxDecoration(
-                                            color: const Color(0xFFF67D10),
-                                            borderRadius: BorderRadius.only(
-                                                topRight:
-                                                    Radius.circular(width16),
-                                                topLeft:
-                                                    Radius.circular(width16))),
-                                        child: Center(
-                                            child: Text(
-                                          "Loại giao dịch",
-                                          style: Styles.baseNotoSansTS.copyWith(
-                                              fontSize: 18,
-                                              color: white,
-                                              fontWeight: FontWeight.w600),
-                                        )),
-                                      ),
-                                      SizedBox(
-                                        height: height8,
-                                      ),
-                                      ...controller.bankAccounts.map((e) =>
-                                          InkWell(
-                                            onTap: () {
-                                              controller.indexAccount.value =
-                                                  controller.bankAccounts
-                                                      .indexOf(e);
-                                              controller.controllerSourceAccount
-                                                  .text = e.accountNumber;
-                                              Get.back();
-                                            },
-                                            child: Container(
-                                              padding: EdgeInsets.all(width8),
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          width: width * 0.9,
+                                          height: height60,
+                                          decoration: BoxDecoration(
+                                              color: const Color(0xFFF67D10),
+                                              borderRadius: BorderRadius.only(
+                                                  topRight:
+                                                      Radius.circular(width16),
+                                                  topLeft:
+                                                      Radius.circular(width16))),
+                                          child: Center(
                                               child: Text(
-                                                e.accountNumber,
-                                                style: Styles.baseNotoSansTS
-                                                    .copyWith(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w600),
+                                            "Chọn tài khoản nhận",
+                                            style: Styles.baseNotoSansTS.copyWith(
+                                                fontSize: 18,
+                                                color: white,
+                                                fontWeight: FontWeight.w600),
+                                          )),
+                                        ),
+                                        SizedBox(
+                                          height: height8,
+                                        ),
+                                        ...controller.bankAccounts.map((e) =>
+                                            InkWell(
+                                              onTap: () {
+                                                controller.indexAccount.value =
+                                                    controller.bankAccounts
+                                                        .indexOf(e);
+                                                controller.controllerSourceAccount
+                                                    .text = e.accountNumber;
+                                                Get.back();
+                                              },
+                                              child: Container(
+                                                padding: EdgeInsets.all(width8),
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      e.accountNumber,
+                                                      style: Styles.baseNotoSansTS
+                                                          .copyWith(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight.w600),
+                                                    ),
+                                                    Text(MoneyFormat.formatMoneyInteger(e.money) + 'VND', style: Styles.baseNotoSansTS.copyWith(
+                                                      fontSize: 14,
+                                                      color: black500
+                                                    ),),
+                                                    const Divider(thickness: 1,)
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                          ))
-                                    ],
+                                            ))
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -271,7 +293,8 @@ class OnlineDepositSettlementPage
                     height: height48,
                     child: ButtonPrimaryText(
                       onTab: () async {
-                        await controller.finishSavingAccount();
+                        Get.toNamed(AppRoutes.finishSavingAccount, arguments:  [controller.savingAccounts[controller.indexSavingAccount.value], controller.bankAccounts[controller.indexAccount.value]]);
+                        // await controller.finishSavingAccount();
                       },
                       margin: EdgeInsets.zero,
                       padding: EdgeInsets.all(width8),

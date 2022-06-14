@@ -1,4 +1,5 @@
 import 'package:agribank_banking/data/storage/store_global.dart';
+import 'package:agribank_banking/utils/convert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -69,7 +70,7 @@ class DetailInformationPage extends GetWidget<DetailInformationController> {
                       height: height16,
                     ),
                     Text(
-                      'Số dư: ${controller.account.money} VND',
+                      'Số dư: ${MoneyFormat.formatMoneyInteger(controller.account.money)} VND',
                       style: Styles.baseNotoSansTS.copyWith(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -356,43 +357,41 @@ class DetailInformationPage extends GetWidget<DetailInformationController> {
                             SizedBox(
                               height: height4,
                             ),
-                            ...controller.histories.map((element) => Container(
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            element.createdAt.toString(),
-                                            style: Styles.baseNotoSansTS
-                                                .copyWith(
-                                                    fontSize: 15,
-                                                    color: black500),
-                                          ),
-                                          Text(
-                                              element.transactionMoney
-                                                  .toString(),
-                                              style: Styles.baseNotoSansTS
-                                                  .copyWith(
-                                                      fontSize: 15,
-                                                      color:
-                                                          Colors.greenAccent))
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: height4,
-                                      ),
-                                      Text(
-                                        element.contentTransaction,
-                                        style: Styles.baseNotoSansTS.copyWith(
-                                          fontSize: 15,
-                                        ),
-                                      ),
-                                      const Divider()
-                                    ],
+                            ...controller.histories.map((element) => Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      ConvertDateTime.convertDateTime(element.createdAt!),
+                                      style: Styles.baseNotoSansTS
+                                          .copyWith(
+                                              fontSize: 15,
+                                              color: black500),
+                                    ),
+                                    Text(
+                                        (element.transactionMoney > 0 ? '+' : '') +  MoneyFormat.formatMoneyInteger(element.transactionMoney),
+                                        style: Styles.baseNotoSansTS
+                                            .copyWith(
+                                                fontSize: 15,
+                                                color:
+                                                    element.transactionMoney > 0 ? Colors.greenAccent: Colors.redAccent))
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: height4,
+                                ),
+                                Text(
+                                  element.contentTransaction,
+                                  style: Styles.baseNotoSansTS.copyWith(
+                                    fontSize: 15,
                                   ),
-                                ))
+                                ),
+                                const Divider()
+                              ],
+                            ))
                           ],
                         ),
                       )

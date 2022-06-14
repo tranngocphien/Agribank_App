@@ -87,7 +87,7 @@ class TransferInternalController extends GetxController {
   Future<void> sendMoney({String? pin, String? password}) async {
     if(checkData()){
       try {
-        await _transactionService.sendMoney(
+        final res = await _transactionService.sendMoney(
             accountSender: accounts[indexAccount.value].accountNumber,
             accountReceiver: account.value ?? '',
             money: int.parse(money.value == null ? '': money.value!.replaceAll(',', '')),
@@ -95,18 +95,19 @@ class TransferInternalController extends GetxController {
             saveContact: isSaveAccount.value ? 1 : 0,
             password: password,
             pin: pin);
-        Get.dialog(CupertinoAlertDialog(
-          title: const Text('Thông báo'),
-          content: const Text('Giao dịch thành công'),
-          actions: [
-            CupertinoDialogAction(
-              onPressed: () {
-                Get.until((route) => Get.currentRoute == AppRoutes.transferInternal);
-              },
-              child: const Text('Đồng ý'),
-            )
-          ],
-        ));
+        Get.toNamed(AppRoutes.resultTransaction, arguments: res);
+        // Get.dialog(CupertinoAlertDialog(
+        //   title: const Text('Thông báo'),
+        //   content: const Text('Giao dịch thành công'),
+        //   actions: [
+        //     CupertinoDialogAction(
+        //       onPressed: () {
+        //         Get.until((route) => Get.currentRoute == AppRoutes.transferInternal);
+        //       },
+        //       child: const Text('Đồng ý'),
+        //     )
+        //   ],
+        // ));
 
       } on DioError catch (e) {
         final message = (e.response!.data as Map)['message'];

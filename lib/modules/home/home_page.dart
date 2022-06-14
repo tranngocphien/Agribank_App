@@ -405,11 +405,11 @@ class HomePage extends GetWidget<HomeController> {
                                           ),
                                           FunctionItem(
                                             icon: Image.asset(
-                                              'assets/icons/ic_money_bag.png',
+                                              'assets/icons/ic_search.png',
                                               height: height40,
                                               width: width40,
                                             ),
-                                            text: 'Trả nợ',
+                                            text: 'Tra cứu thông tin',
                                             onClick: () {},
                                           ),
                                         ]),
@@ -675,7 +675,15 @@ class HomePage extends GetWidget<HomeController> {
                   color: Colors.deepOrangeAccent,
                 ),
                 title: 'Đổi mật khẩu',
-                onClick: () {},
+                onClick: () {
+                  if(StoreGlobal.isLogin.value){
+                    Get.toNamed(AppRoutes.changePassword);
+                  }
+                  else {
+                    Get.toNamed(AppRoutes.login);
+                  }
+
+                },
               ),
               DrawerNavigationItem(
                 icons: const Icon(
@@ -693,7 +701,7 @@ class HomePage extends GetWidget<HomeController> {
                 title: 'Quản lý danh bạ',
                 onClick: () {
                   if(StoreGlobal.isLogin.value){
-                    Get.toNamed(AppRoutes.manageContact);
+                    Get.toNamed(AppRoutes.manageContactAccount);
                   }
                   else {
                     Get.toNamed(AppRoutes.login);

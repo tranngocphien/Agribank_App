@@ -46,7 +46,7 @@ class TransferInternalDetailPage extends GetWidget<TransferInternalDetailControl
                     ),
                     InformationTile(
                       label: 'Tên người thụ hưởng',
-                      content: StoreGlobal.user.value!.name,
+                      content: controller.name.toUpperCase(),
                       isHighLight: true,
                     ),
 

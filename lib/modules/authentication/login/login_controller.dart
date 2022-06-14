@@ -17,16 +17,24 @@ class LoginController extends GetxController {
   final _authService = AuthService.instance;
   final _userService = UserService.instance;
 
-
-  Future<void> login() async{
-    if(checkData()){
+  Future<void> login() async {
+    if (checkData()) {
       try {
-        final _response = await _authService.login(username: controllerPhone.text, password: controllerPassword.text);
+        final _response = await _authService.login(
+            username: controllerPhone.text, password: controllerPassword.text);
         StoreGlobal.user.value = _response!.data.user;
         StoreGlobal.isLogin.value = true;
+        StoreGlobal.soft.value = _response.data.user.softOtp;
         await getAccounts();
-        Get.offAllNamed(AppRoutes.home);
-      }  on DioError catch (e) {
+        if(_response.data.user.verified){
+          Get.offAllNamed(AppRoutes.home);
+        }
+        else {
+          Get.toNamed(AppRoutes.cccdAuthentication, arguments: [
+            _response.data.user.name.toUpperCase()
+          ]);
+        }
+      } on DioError catch (e) {
         final message = (e.response!.data as Map)['message'];
         Get.dialog(CupertinoAlertDialog(
           title: const Text('Thông báo'),
@@ -41,24 +49,21 @@ class LoginController extends GetxController {
           ],
         ));
       }
-
     }
   }
 
   bool checkData() {
     bool flag = true;
-    if(controllerPhone.text == ''){
+    if (controllerPhone.text == '') {
       flag = false;
       phoneError.value = 'Chưa nhập số điện thoại';
-    }
-    else {
+    } else {
       phoneError.value = null;
     }
-    if(controllerPassword.text == ''){
+    if (controllerPassword.text == '') {
       flag = false;
       passwordError.value = 'Chưa nhập mật khẩu';
-    }
-    else {
+    } else {
       passwordError.value = null;
     }
     return flag;
@@ -69,7 +74,4 @@ class LoginController extends GetxController {
         .getListBankAccount()
         .then((value) => StoreGlobal.accounts.addAll(value));
   }
-
-
-
 }

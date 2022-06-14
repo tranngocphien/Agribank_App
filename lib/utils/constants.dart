@@ -7,6 +7,9 @@ class TypeRenewSavingAccount {
   static const String autoFinishSaving = 'auto_finish_saving';
 }
 
+const String buyCodePhone = 'buy_code_phone';
+const String rechargePhone = 'recharge_phone';
+
 final List<Attribute> bank = [
   Attribute(title: 'Ngân hàng TMCP Á Châu', value: 'ACB'),
   Attribute(title: 'Ngân hàng TMCP Ngoại thương Việt Nam', value: 'VietcomBank'),

@@ -96,6 +96,7 @@ class TransferInternalPage extends GetWidget<TransferInternalController> {
                                                     BorderRadius.circular(
                                                         width16)),
                                             child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Container(
                                                   width: width * 0.8,
@@ -139,15 +140,28 @@ class TransferInternalPage extends GetWidget<TransferInternalController> {
                                                               padding:
                                                                   EdgeInsets.all(
                                                                       width8),
-                                                              child: Text(
-                                                                e.accountNumber,
-                                                                style: Styles
-                                                                    .baseNotoSansTS
-                                                                    .copyWith(
-                                                                        fontSize:
-                                                                            18,
-                                                                        fontWeight:
-                                                                            FontWeight.w600),
+                                                              child: Column(
+                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                children: [
+                                                                  Text(
+                                                                    e.nickName,
+                                                                    style: Styles
+                                                                        .baseNotoSansTS
+                                                                        .copyWith(
+                                                                            fontSize:
+                                                                                18,
+                                                                            fontWeight:
+                                                                                FontWeight.w600),
+                                                                  ),
+                                                                  Text(
+                                                                    e.accountNumber,
+                                                                    style: Styles.baseNotoSansTS.copyWith(
+                                                                      fontSize: 14
+                                                                    ),
+                                                                  ),
+                                                                  SizedBox(height: height4,),
+                                                                  const Divider(height: 1,)
+                                                                ],
                                                               )),
                                                         ))
                                               ],
@@ -255,18 +269,24 @@ class TransferInternalPage extends GetWidget<TransferInternalController> {
                           width: width * 0.4,
                           height: height48,
                           child: ButtonPrimaryText(
-                            onTab: () {
+                            onTab: () async {
                               if (controller.checkData()) {
+                                if(controller.userName.value == null) {
+                                  await controller.getUserName();
+                                }
+
                                 Get.toNamed(AppRoutes.transferDetailInternal,
                                     arguments: [
                                       controller
                                           .accounts[
-                                              controller.indexAccount.value]
+                                      controller.indexAccount.value]
                                           .accountNumber,
                                       controller.account.value,
                                       controller.money.value,
-                                      controller.content.value
+                                      controller.content.value,
+                                      controller.userName.value
                                     ]);
+
                               }
                             },
                             margin: EdgeInsets.zero,

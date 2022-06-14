@@ -1,4 +1,5 @@
 import 'package:agribank_banking/data/storage/store_global.dart';
+import 'package:agribank_banking/routes/app_routes.dart';
 import 'package:agribank_banking/services/transaction_service.dart';
 import 'package:agribank_banking/services/user_service.dart';
 import 'package:dio/dio.dart';
@@ -56,7 +57,7 @@ class OnlineDepositSettlementController extends GetxController {
           actions: [
             CupertinoDialogAction(
               onPressed: () {
-                Get.back();
+                Get.until((route) => Get.currentRoute == AppRoutes.onlineSavingMoney);
               },
               child: const Text('Đồng ý'),
             )

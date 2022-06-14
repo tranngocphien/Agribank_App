@@ -25,6 +25,8 @@ class NotificationEntity extends BaseEntity {
     required this.overbalance,
     required this.createdAt,
     required this.updatedAt,
+    this.title,
+    this.image
   });
 
   int type;
@@ -36,6 +38,8 @@ class NotificationEntity extends BaseEntity {
   int overbalance;
   DateTime? createdAt;
   DateTime? updatedAt;
+  String? title;
+  String? image;
 
   factory NotificationEntity.fromJson(Map<String, dynamic> json) =>
       NotificationEntity(
@@ -52,5 +56,7 @@ class NotificationEntity extends BaseEntity {
         updatedAt: json["updatedAt"] == null
             ? null
             : DateTime.parse(json["updatedAt"]),
+        title: json['title'],
+        image: json['image']
       );
 }

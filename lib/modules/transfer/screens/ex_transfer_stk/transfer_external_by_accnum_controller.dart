@@ -17,6 +17,8 @@ class TransferExternalByAccNumberController extends GetxController {
   final _transactionService = TransactionService.instance;
   final _contactService = ContactService.instance;
 
+  final userName = Rx<String?>(null);
+
   final accounts = List<BankAccountEntity>.empty(growable: true);
   final indexAccount = 0.obs;
 
@@ -29,6 +31,8 @@ class TransferExternalByAccNumberController extends GetxController {
   final TextEditingController controllerContent = TextEditingController();
   final TextEditingController controllerBank = TextEditingController();
   final TextEditingController controllerName = TextEditingController();
+
+  final indexBank = 0.obs;
 
   final indexContact = 0.obs;
   final internalContacts = List<ContactEntity>.empty(growable: true).obs;
@@ -43,6 +47,34 @@ class TransferExternalByAccNumberController extends GetxController {
     super.onInit();
   }
 
+  Future<void> getUserName() async {
+    try {
+      loadStatus(AppLoadStatus.loading);
+      final response  = await _transactionService.getUserInterbank(destination: controllerPhone.text);
+      userName.value = response!.name;
+      loadStatus(AppLoadStatus.success);
+    }
+    on DioError catch (e) {
+      loadStatus(AppLoadStatus.failed);
+      final message = (e.response!.data as Map)['message'];
+      Get.dialog(CupertinoAlertDialog(
+        title: const Text('Thông báo'),
+        content: Text(message),
+        actions: [
+          CupertinoDialogAction(
+            onPressed: () {
+              Get.back();
+            },
+            child: const Text('Đồng ý'),
+          )
+        ],
+      ));
+
+    }
+
+  }
+
+
   Future<void> getListAccountInformation() async {
     final listAcc = await _userService.getListBankAccount();
     accounts.addAll(listAcc);
@@ -55,28 +87,18 @@ class TransferExternalByAccNumberController extends GetxController {
 
   Future<void> sendMoneyInterbank({String? pin, String? password}) async {
     try {
-      await _transactionService.sendMoneyInterbank(
+      final res = await _transactionService.sendMoneyInterbank(
           accountSender: accounts[indexAccount.value].accountNumber,
           accountReceiver: controllerPhone.text,
-          money: int.parse(controllerAmount.text),
+          money: int.parse(controllerAmount.text.replaceAll(',', '')),
           content: controllerContent.text,
           saveContact: isSaveAccount.value ? 1 : 0,
           pin: pin,
           password: password,
           nameInterbank: controllerBank.text,
-          nameReceiver: controllerName.text);
-      Get.dialog(CupertinoAlertDialog(
-        title: const Text('Thông báo'),
-        content: const Text('Giao dịch thành công'),
-        actions: [
-          CupertinoDialogAction(
-            onPressed: () {
-              Get.offAndToNamed(AppRoutes.home);
-            },
-            child: const Text('Đồng ý'),
-          )
-        ],
-      ));
+          nameReceiver: userName.value ?? 'TRẦN QUANG HIẾU');
+      Get.toNamed(AppRoutes.resultTransaction, arguments: res);
+
     } on DioError catch (e) {
       final message = (e.response!.data as Map)['message'];
       Get.dialog(CupertinoAlertDialog(
@@ -85,7 +107,7 @@ class TransferExternalByAccNumberController extends GetxController {
         actions: [
           CupertinoDialogAction(
             onPressed: () {
-              Get.offAndToNamed(AppRoutes.home);
+              Get.back();
             },
             child: const Text('Đồng ý'),
           )

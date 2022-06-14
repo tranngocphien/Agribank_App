@@ -11,17 +11,63 @@ class OpenSavingAccountEntity extends BaseEntity{
   });
 
   AccountSaving? accountSaving;
-  HistoryTransactionEntity? transactionHistory;
+  OpenSavingHistoryTransaction? transactionHistory;
   BankAccountSource? bankAccountSource;
   CycleEntity? cycle;
 
   factory OpenSavingAccountEntity.fromJson(Map<String, dynamic> json) => OpenSavingAccountEntity(
     accountSaving: json["accountSaving"] == null ? null : AccountSaving.fromJson(json["accountSaving"]),
-    transactionHistory: json["transactionHistory"] == null ? null : HistoryTransactionEntity.fromJson(json["transactionHistory"]),
+    transactionHistory: json["transactionHistory"] == null ? null : OpenSavingHistoryTransaction.fromJson(json["transactionHistory"]),
     bankAccountSource: json["bankAccountSource"] == null ? null : BankAccountSource.fromJson(json["bankAccountSource"]),
     cycle: json["cycle"] == null ? null : CycleEntity.fromJson(json["cycle"]),
   );
 }
+
+class OpenSavingHistoryTransaction extends BaseEntity {
+  OpenSavingHistoryTransaction({
+    required this.id,
+    required this.userId,
+    required this.transactionMoney,
+    required this.type,
+    required this.overbalance,
+    required this.bankBranch,
+    required this.contentTransaction,
+    required this.accountNumberTransaction,
+    required this.accountNumberDestination,
+    required this.transactionFee,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  String id;
+  String userId;
+  int transactionMoney;
+  String type;
+  int overbalance;
+  String bankBranch;
+  String contentTransaction;
+  String accountNumberTransaction;
+  String accountNumberDestination;
+  int transactionFee;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+
+  factory OpenSavingHistoryTransaction.fromJson(Map<String, dynamic> json) => OpenSavingHistoryTransaction(
+    id: json["id"],
+    userId: json["user_id"],
+    transactionMoney: json["transaction_money"],
+    type: json["type"],
+    overbalance: json["overbalance"],
+    bankBranch: json["bank_branch"],
+    contentTransaction: json["content_transaction"],
+    accountNumberTransaction: json["account_number_transaction"] ?? '',
+    accountNumberDestination: json["account_number_destination"] ?? '',
+    transactionFee: json["transaction_fee"],
+    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
+  );
+}
+
 
 class AccountSaving extends BaseEntity{
   AccountSaving({

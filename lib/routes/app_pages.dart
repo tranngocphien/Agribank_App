@@ -1,4 +1,6 @@
 import 'package:agribank_banking/modules/account_information/screens/detail_saving_account/detail_saving_account_binding.dart';
+import 'package:agribank_banking/modules/authentication/change_password/change_password_binding.dart';
+import 'package:agribank_banking/modules/authentication/change_password/change_password_page.dart';
 import 'package:agribank_banking/modules/authentication/update_information/update_information_binding.dart';
 import 'package:agribank_banking/modules/authentication/update_information/update_information_page.dart';
 import 'package:agribank_banking/modules/buy_card_phone/buy_card_phone_binding.dart';
@@ -23,6 +25,8 @@ import 'package:agribank_banking/modules/manage_contacts/screens/detail_contact/
 import 'package:agribank_banking/modules/manage_contacts/screens/detail_contact/detail_contact_page.dart';
 import 'package:agribank_banking/modules/online_saving_money/online_saving_money_binding.dart';
 import 'package:agribank_banking/modules/online_saving_money/online_saving_money_page.dart';
+import 'package:agribank_banking/modules/online_saving_money/screens/finish_saving_account/finish_saving_account_binding.dart';
+import 'package:agribank_banking/modules/online_saving_money/screens/finish_saving_account/finish_saving_account_page.dart';
 import 'package:agribank_banking/modules/online_saving_money/screens/online_deposit_settlement/online_deposit_settlement_binding.dart';
 import 'package:agribank_banking/modules/online_saving_money/screens/online_deposit_settlement/online_deposit_settlement_page.dart';
 import 'package:agribank_banking/modules/online_saving_money/screens/open_saving_account/open_saving_account_binding.dart';
@@ -35,6 +39,8 @@ import 'package:agribank_banking/modules/question_answer/screens/detail_faq_cate
 import 'package:agribank_banking/modules/question_answer/screens/detail_faq_category/detail_faq_category_page.dart';
 import 'package:agribank_banking/modules/recharge_phone/recharge_phone_binding.dart';
 import 'package:agribank_banking/modules/recharge_phone/recharge_phone_page.dart';
+import 'package:agribank_banking/modules/soft_otp/screens/forgot_pin/forgot_pin_binding.dart';
+import 'package:agribank_banking/modules/soft_otp/screens/forgot_pin/forgot_pin_page.dart';
 import 'package:agribank_banking/modules/soft_otp/screens/set_pin/set_pin_binding.dart';
 import 'package:agribank_banking/modules/soft_otp/screens/set_pin/set_pin_page.dart';
 import 'package:agribank_banking/modules/soft_otp/screens/turn_off_pin/turn_off_binding.dart';
@@ -54,6 +60,11 @@ import 'package:agribank_banking/modules/transfer/screens/ex_transfer_stk/transf
 import 'package:agribank_banking/modules/transfer/screens/ex_transfer_stk/transfer_external_by_accnum_page.dart';
 import 'package:agribank_banking/modules/transfer/screens/ex_transfer_stk_detail/transfer_external_by_accnum_detail_binding.dart';
 import 'package:agribank_banking/modules/transfer/screens/ex_transfer_stk_detail/transfer_external_by_accnum_detail_page.dart';
+import 'package:agribank_banking/modules/transfer/screens/result_open_saving/result_open_saving_binding.dart';
+import 'package:agribank_banking/modules/transfer/screens/result_phone/result_phone_binding.dart';
+import 'package:agribank_banking/modules/transfer/screens/result_phone/result_phone_page.dart';
+import 'package:agribank_banking/modules/transfer/screens/result_transaction/result_transaction_binding.dart';
+import 'package:agribank_banking/modules/transfer/screens/result_transaction/result_transaction_page.dart';
 import 'package:agribank_banking/modules/transfer/screens/transfer_internal_detail/transfer_internal_detail_page.dart';
 import 'package:agribank_banking/modules/transfer/screens/transfer_qr/transfer_by_qr_binding.dart';
 import 'package:agribank_banking/modules/transfer/screens/transfer_qr/transfer_by_qr_page.dart';
@@ -74,6 +85,7 @@ import 'package:agribank_banking/modules/history_transaction/history_transaction
 import 'package:agribank_banking/modules/history_transaction/history_transaction_page.dart';
 import 'package:agribank_banking/modules/transfer/screens/transfer_internal/transfer_internal_binding.dart';
 import 'package:agribank_banking/modules/transfer/transfer_binding.dart';
+import '../modules/transfer/screens/result_open_saving/result_open_saving_page.dart';
 import '../modules/transfer/screens/transfer_internal_detail/transfer_internal_detail_binding.dart';
 import '../modules/transfer/screens/update_limit_trans/update_limit_trans_binding.dart';
 import '../modules/transfer/screens/update_limit_trans/update_limit_trans_page.dart';
@@ -302,7 +314,36 @@ class AppPages {
       name: AppRoutes.lockCard,
       page: () => const LockCardPage(),
       binding: LockCardBinding()
-
+    ),
+    GetPage(
+      name: AppRoutes.resultTransaction,
+      page: () => const ResultTransactionPage(),
+      binding: ResultTransactionBinding()
+    ),
+    GetPage(
+      name: AppRoutes.resultPhoneMoney,
+      page: () => const ResultPhonePage(),
+      binding: ResultPhoneBinding()
+    ),
+    GetPage(
+      name: AppRoutes.resultOpenSaving,
+      page: () => const ResultOpenSavingPage(),
+      binding: ResultOpenSavingBinding()
+    ),
+    GetPage(
+      name: AppRoutes.finishSavingAccount,
+      page: () => const FinishSavingAccountPage(),
+      binding: FinishSavingAccountBinding()
+    ),
+    GetPage(
+      name: AppRoutes.forgotPin,
+      page: () => const ForgotPinPage(),
+      binding: ForgotPinBinding()
+    ),
+    GetPage(
+      name: AppRoutes.changePassword,
+      page: () => const ChangePasswordPage(),
+      binding: ChangePasswordBinding()
     )
 
   ];

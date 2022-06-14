@@ -58,5 +58,15 @@ class SoftOtpService {
     }
   }
 
+  Future<BaseEntity?> forgotOTP({required String password, required String newPin}) async {
+    _repo.url = APIConstants.baseURL + APIConstants.forgotOTP;
+    _repo.dio = DioService.instance.get();
+    return  await _repo.queryByPath((e) => BaseEntity.fromJson(e), data: {
+      'pin_new': newPin,
+      'password': password,
+    });
+
+  }
+
 
 }

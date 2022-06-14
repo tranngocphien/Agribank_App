@@ -31,5 +31,16 @@ class AuthService {
     final res = await _repo.queryByPath((e) => BaseEntity.fromJson(e), data: data);
     return res;
   }
+
+  Future<BaseEntity?> changePassword({required String oldPassword, required String newPassword, required String retypeNewPassword}) async {
+    _repo.url = APIConstants.baseURL + APIConstants.changePassword;
+    _repo.dio = DioService.instance.get();
+    return  await _repo.queryByPath((e) => BaseEntity.fromJson(e), data: {
+      'old_password': oldPassword,
+      'new_password': newPassword,
+      'retype_password': retypeNewPassword
+    });
+
+  }
 }
 

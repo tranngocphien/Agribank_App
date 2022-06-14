@@ -64,15 +64,23 @@ class FaceAuthenticationPage extends GetWidget<FaceAuthenticationController> {
                       ),
                     ),
                     SizedBox(
-                      height: height8,
+                      height: height16,
                     ),
-                    SizedBox(
-                        width: width * 0.8,
-                        child: Obx(() => Text(
-                              controller.instructions[controller.step.value],
-                              style: const TextStyle(color: white),
-                              textAlign: TextAlign.center,
-                            ))),
+                    GestureDetector(
+                      onTap: () async {
+                        await controller.takePicture();
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(bottom: height40),
+                        padding: EdgeInsets.all(width16),
+                        child: Icon(Icons.camera_alt_rounded, size: width32,),
+                        decoration: const BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                            boxShadow: [BoxShadow(color: white, spreadRadius: 6, blurRadius: 15)]
+                        ),
+                      ),
+                    )
                   ],
                 ),
               )));

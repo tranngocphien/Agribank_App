@@ -30,6 +30,8 @@ class OpenSavingAccountController extends GetxController {
   final cycles = List<CycleEntity>.empty(growable: true).obs;
   final indexCycles = (-1).obs;
 
+  final isAcceptPolicy = false.obs;
+
   final typeRenews = [
     Attribute(
         title: 'Tự động gia hạn gốc',
@@ -65,23 +67,12 @@ class OpenSavingAccountController extends GetxController {
 
   Future<void> openSavingAccount() async {
     try {
-      await _transactionService.openSavingAccount(
+      final res = await _transactionService.openSavingAccount(
           typeRenew: typeRenews[indexTypeRenews.value].value,
-          money: int.parse(controllerMoney.text),
+          money: int.parse(controllerMoney.text.replaceAll(',', '')),
           sourceAccountNumber: accounts[indexAccount.value].accountNumber,
           cycleId: cycles[indexCycles.value].id);
-      Get.dialog(CupertinoAlertDialog(
-        title: const Text('Thông báo'),
-        content: const Text('Thành công'),
-        actions: [
-          CupertinoDialogAction(
-            onPressed: () {
-              Get.toNamed(AppRoutes.home);
-            },
-            child: const Text('Đồng ý'),
-          )
-        ],
-      ));
+      Get.toNamed(AppRoutes.resultOpenSaving, arguments: res);
     } on DioError catch (e) {
       final message = (e.response!.data as Map)['message'];
       Get.dialog(CupertinoAlertDialog(

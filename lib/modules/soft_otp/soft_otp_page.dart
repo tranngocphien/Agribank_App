@@ -3,8 +3,6 @@ import 'package:agribank_banking/routes/app_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
-
 import '../../app_theme.dart';
 import '../../data/storage/store_global.dart';
 
@@ -17,7 +15,6 @@ class SoftOPTPage extends GetWidget<SoftOTPController> {
       appBar: AppBar(
         leading: GestureDetector(
           onTap: (){
-            print('a');
             Get.back();
           },
             child: const Icon(Icons.arrow_back)),
@@ -56,7 +53,7 @@ class SoftOPTPage extends GetWidget<SoftOTPController> {
                       style: Styles.baseNotoSansTS.copyWith(color: black500),
                     )),
                     Obx(() => CupertinoSwitch(
-                        value: StoreGlobal.user.value!.softOtp,
+                        value: StoreGlobal.soft.value,
                         onChanged: (value) {
                           if (value) {
                             Get.toNamed(AppRoutes.turnOnPin);
@@ -119,7 +116,7 @@ class SoftOPTPage extends GetWidget<SoftOTPController> {
               ],
             ),
           ),
-          GestureDetector(
+          StoreGlobal.soft.value ? GestureDetector(
             onTap: () {
               Get.toNamed(AppRoutes.enterOldPin);
             },
@@ -146,13 +143,13 @@ class SoftOPTPage extends GetWidget<SoftOTPController> {
                 ],
               ),
             ),
-          ),
+          ): Container(),
           SizedBox(
             height: height8,
           ),
-          GestureDetector(
+          StoreGlobal.soft.value ? GestureDetector(
             onTap: () {
-              Get.toNamed(AppRoutes.turnOnPin);
+              Get.toNamed(AppRoutes.forgotPin);
             },
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: width16),
@@ -189,7 +186,7 @@ class SoftOPTPage extends GetWidget<SoftOTPController> {
                 ],
               ),
             ),
-          )
+          ): Container()
         ],
       )),
     );

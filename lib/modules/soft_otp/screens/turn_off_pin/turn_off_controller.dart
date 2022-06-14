@@ -13,7 +13,7 @@ class TurnOffController extends GetxController {
   Future<void> turnOffPin() async {
     try {
       await softOTPService.turnOff(pin: pin.value ?? '');
-      StoreGlobal.user.value!.softOtp = false;
+      StoreGlobal.soft.value = false;
       Get.dialog(CupertinoAlertDialog(
         title: const Text('Thông báo'),
         content: const Text('Quý khách đã hủy xác thực bằng Soft OTP thành công.'),

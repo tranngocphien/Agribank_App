@@ -63,23 +63,24 @@ class BuyCardPhoneController extends GetxController {
 
   Future<void> buyCodePhone({String? pin, String? password}) async {
     try {
-      await _transactionService.buyCodePhone(
+      final res = await _transactionService.buyCodePhone(
           accountNumber: accounts[indexAccount.value].accountNumber,
           homeNetword: homeNetworks[indexHomeNetword.value].value,
           money: int.parse(moneys[indexMoney.value].value),
           pin: pin);
-      Get.dialog(CupertinoAlertDialog(
-        title: const Text('Thông báo'),
-        content: const Text('Thanh toán thành công'),
-        actions: [
-          CupertinoDialogAction(
-            onPressed: () {
-              Get.toNamed(AppRoutes.home);
-            },
-            child: const Text('Đồng ý'),
-          )
-        ],
-      ));
+      Get.toNamed(AppRoutes.resultPhoneMoney, arguments: res);
+      // Get.dialog(CupertinoAlertDialog(
+      //   title: const Text('Thông báo'),
+      //   content: const Text('Thanh toán thành công'),
+      //   actions: [
+      //     CupertinoDialogAction(
+      //       onPressed: () {
+      //         Get.toNamed(AppRoutes.home);
+      //       },
+      //       child: const Text('Đồng ý'),
+      //     )
+      //   ],
+      // ));
 
     } on DioError catch (e) {
       final message = (e.response!.data as Map)['message'];

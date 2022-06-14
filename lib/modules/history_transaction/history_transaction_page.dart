@@ -255,7 +255,7 @@ class HistoryTransactionPage extends GetWidget<HistoryTransactionController> {
                                                 );
                                               });
                                         },
-                                        child: Icon(Icons.arrow_drop_down))
+                                        child: const Icon(Icons.arrow_drop_down))
                                   ],
                                 ))
                           ],
@@ -411,12 +411,12 @@ class HistoryTransactionPage extends GetWidget<HistoryTransactionController> {
                                     color: black500),
                               ),
                               Text(
-                                MoneyFormat.formatMoneyInteger(element.transactionMoney),
+                                  (element.transactionMoney > 0 ? '+' : '') +  MoneyFormat.formatMoneyInteger(element.transactionMoney),
                                   style: Styles.baseNotoSansTS
                                       .copyWith(
                                       fontSize: 15,
                                       color:
-                                      element.transactionMoney < 0 ? Colors.red : Colors.greenAccent))
+                                      element.transactionMoney > 0 ? Colors.greenAccent: Colors.redAccent))
                             ],
                           ),
                           SizedBox(

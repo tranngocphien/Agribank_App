@@ -1,10 +1,12 @@
 import 'package:agribank_banking/app_theme.dart';
+import 'package:agribank_banking/data/network/api_constants.dart';
 import 'package:agribank_banking/models/notification_entity.dart';
 import 'package:agribank_banking/modules/notification/notification_controller.dart';
 import 'package:agribank_banking/utils/convert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 import '../../models/static_money.dart';
 import '../../utils/enums.dart';
@@ -54,17 +56,62 @@ class NotificationPage extends GetWidget<NotificationController> {
                 )
               : ListView(
                   children: controller.notifications
-                      .map((e) => NotificationItem(
+                      .map((e) =>
+                      e.type == 2 ? NotificationItemType2(
                             notification: e,
-                          ))
+                          ) : Container(
+                        padding: EdgeInsets.all(width16),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: height36,
+                              width: width36,
+                              decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                      image: AssetImage('assets/images/logo.png'),
+                                      fit: BoxFit.contain)),
+                            ),
+                            SizedBox(
+                              width: width8,
+                            ),
+                            Container(
+                              width: width - width120,
+                              // height: height120,
+                              padding: EdgeInsets.all(width8),
+                              decoration: BoxDecoration(
+                                  color: white, borderRadius: BorderRadius.circular(width8)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // Image.asset('assets/images/home/banner_1.jpg'),
+                                  Image.network(APIConstants.baseURL +'/' + e.image!),
+                                  Text(
+                                    e.title!,
+                                    style: Styles.baseNotoSansTS.copyWith(
+                                      fontWeight: FontWeight.w600
+                                    ),
+                                  ),
+                                  Html(data: e.content,),
+                                  SizedBox(
+                                    height: height2,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                  )
                       .toList(),
                 ),
         ));
   }
 }
 
-class NotificationItem extends StatelessWidget {
-  const NotificationItem({
+class NotificationItemType2 extends StatelessWidget {
+  const NotificationItemType2({
     required this.notification,
     Key? key,
   }) : super(key: key);
