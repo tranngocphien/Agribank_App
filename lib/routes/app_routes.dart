@@ -7,13 +7,17 @@ class AppRoutes {
   static const cccdAuthentication = '/cccdAuthentication';
 
   static const updateInformation = '/updateInformation';
+  static const detailSavingAccount = '/detailSavingAccount';
 
   /// notification
   static const notification = '/notification';
+
   static const accountInformation = '/accountInformation';
   static const cardService = '/cardService';
-  static const historyTransaction = '/historyTransaction';
   static const detailInformation = '/detailInformation';
+  static const cardInfo = '/cardInfo';
+  static const cardInfoDetail = '/cardInfoDetail';
+  static const lockCard = '/lockCard';
 
   /// transfer money
   static const transfer = '/transfer';
@@ -26,6 +30,9 @@ class AppRoutes {
   static const confirmTransaction = '/confirmTransaction';
   static const confirmTransactionPassword = '/confirmTransactionPassword';
   static const updateLimitTrans = '/updateLimitTransaction';
+  static const historyTransaction = '/historyTransaction';
+  static const detailHistoryTransaction = '/detailHistoryTransaction';
+
 
   /// recharge phone money
   static const rechargePhone = '/rechargePhone';
@@ -49,6 +56,7 @@ class AppRoutes {
 
   /// question and answer
   static const questionAnswer = '/questionAnswer';
+  static const detailFAQCategory = '/detailFAQCategory';
 
   /// otp
   static const softOTP = '/softOTP';
@@ -56,5 +64,8 @@ class AppRoutes {
   static const updatePin = '/updatePin';
   static const enterOldPin = '/enterOldPin';
   static const turnOffPin = '/turnOffPin';
+
+  /// info app
+  static const infoApp = '/infoApp';
 
 }

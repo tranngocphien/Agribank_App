@@ -51,7 +51,9 @@ class CardServicePage extends GetWidget<CardServiceController> {
                   FunctionServiceItem(
                     icon: Image.asset('assets/icons/ic_credit_card.png'),
                     text: 'Truy vấn thông tin thẻ',
-                    onPress: (){},
+                    onPress: (){
+                      Get.toNamed(AppRoutes.cardInfo);
+                    },
                   ),
                   FunctionServiceItem(
                     icon: Image.asset('assets/icons/ic_credit_card.png'),
@@ -90,7 +92,9 @@ class CardServicePage extends GetWidget<CardServiceController> {
                   FunctionServiceItem(
                     icon: Image.asset('assets/icons/ic_credit_card.png'),
                     text: 'Khóa thẻ',
-                    onPress: (){},
+                    onPress: (){
+                      Get.toNamed(AppRoutes.lockCard);
+                    },
                   ),
 
                 ],

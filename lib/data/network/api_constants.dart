@@ -42,4 +42,15 @@ class APIConstants {
   static const turnOff = '/soft_otp/turn_off';
   static const updatePin = '/soft_otp/update';
 
+  /// info app
+  static const infoApp = '/get_info_app';
+
+  /// faq
+  static const getListCategory = '/faq/get_list_category';
+  static const getListFaq = '/faq/get_list';
+
+  /// card
+  static const getListCard = '/physical_card/get_list';
+  static const updateCard = '/physical_card/update';
+
 }

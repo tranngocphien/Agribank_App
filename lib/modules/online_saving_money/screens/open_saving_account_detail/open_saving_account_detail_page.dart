@@ -61,7 +61,7 @@ class OpenSavingAccountDetailPage
                         content: '${controller.cycle!.month.toString()} tháng'),
                     InformationTile(
                       label: 'Ngày mở tài khoản',
-                      content: ConvertDateTime.convertDateTime(DateTime.now()),
+                      content: ConvertDateTime.convertDate(DateTime.now()),
                     ),
                     InformationTile(
                       label: 'Lãi suất',

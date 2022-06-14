@@ -1,6 +1,7 @@
 import 'package:agribank_banking/app_theme.dart';
 import 'package:agribank_banking/models/notification_entity.dart';
 import 'package:agribank_banking/modules/notification/notification_controller.dart';
+import 'package:agribank_banking/utils/convert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,7 +38,9 @@ class NotificationPage extends GetWidget<NotificationController> {
                 indexSelected: controller.indexSelected.value,
                 onPress: (index) async {
                   controller.indexSelected.value = index;
-                  await controller.getNotifications(type: int.parse(controller.typeNotifications[index].value));
+                  await controller.getNotifications(
+                      type:
+                          int.parse(controller.typeNotifications[index].value));
                 },
                 types: controller.typeNotifications,
               ),
@@ -51,7 +54,9 @@ class NotificationPage extends GetWidget<NotificationController> {
                 )
               : ListView(
                   children: controller.notifications
-                      .map((e) => NotificationItem(notification: e,))
+                      .map((e) => NotificationItem(
+                            notification: e,
+                          ))
                       .toList(),
                 ),
         ));
@@ -67,19 +72,20 @@ class NotificationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int money = int.parse(notification.transactionMoney);
     return Container(
       padding: EdgeInsets.all(width16),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: height48,
-            width: width48,
-            decoration:
-                const BoxDecoration(shape: BoxShape.circle, image: DecorationImage(
-                  image: AssetImage('assets/images/logo.png'), fit: BoxFit.contain
-                )),
-
+            height: height36,
+            width: width36,
+            decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                    image: AssetImage('assets/images/logo.png'),
+                    fit: BoxFit.contain)),
           ),
           SizedBox(
             width: width8,
@@ -91,11 +97,65 @@ class NotificationItem extends StatelessWidget {
             decoration: BoxDecoration(
                 color: white, borderRadius: BorderRadius.circular(width8)),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Image.asset('assets/images/home/banner_1.jpg'),
-                Text(notification.content, style: Styles.baseNotoSansTS.copyWith(
-                  fontSize: 15
-                ),)
+                Text(
+                  'BKBank :' + ConvertDateTime.convertDateTime(notification.createdAt!),
+                ),
+                SizedBox(
+                  height: height2,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'TK: ',
+                      style: Styles.baseNotoSansTS
+                          .copyWith(fontWeight: FontWeight.w500),
+                    ),
+                    Text(
+                      notification.accountNumber,
+                      style: Styles.baseNotoSansTS
+                          .copyWith(fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Số tiền GD: ',
+                      style: Styles.baseNotoSansTS
+                          .copyWith(fontWeight: FontWeight.w500),
+                    ),
+                    Text(
+                      '${money > 0 ? '+${MoneyFormat.formatMoneyString(notification.transactionMoney)}' : '-' + MoneyFormat.formatMoneyInteger(-money)} VNĐ ',
+                      style: Styles.baseNotoSansTS.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: int.parse(notification.transactionMoney) > 0
+                              ? Colors.greenAccent
+                              : Colors.redAccent),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Số dư cuối: ',
+                      style: Styles.baseNotoSansTS
+                          .copyWith(fontWeight: FontWeight.w500),
+                    ),
+                    Text(
+                      MoneyFormat.formatMoneyInteger(notification.overbalance) + ' VNĐ',
+                      style: Styles.baseNotoSansTS.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.blueAccent),
+                    )
+                  ],
+                ),
+                Text(
+                  notification.content,
+                  style: Styles.baseNotoSansTS.copyWith(fontSize: 13),
+                ),
               ],
             ),
           ),
@@ -134,7 +194,8 @@ class ListNotificationType extends StatelessWidget {
                   onPress(types.indexOf(e));
                 },
                 child: TabItem(
-                    text: e.title, isSelected: types.indexOf(e) == indexSelected)))
+                    text: e.title,
+                    isSelected: types.indexOf(e) == indexSelected)))
             .toList(),
       ),
     );

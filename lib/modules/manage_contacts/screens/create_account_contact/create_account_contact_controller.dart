@@ -1,6 +1,7 @@
 import 'package:agribank_banking/models/static_money.dart';
 import 'package:agribank_banking/modules/manage_contacts/screens/account_contacts/account_contacts_controller.dart';
 import 'package:agribank_banking/services/contact_service.dart';
+import 'package:agribank_banking/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -9,13 +10,12 @@ class CreateAccountContactController extends GetxController {
     Attribute(title: 'Chuyển khoản nội bộ', value: '1'),
     Attribute(title: 'Chuyển khoản liên ngân hàng', value: '2')
   ];
-  final banks = [
-
-  ];
   final indexType = 0.obs;
+  final indexBank = 0.obs;
 
   final controllerType = TextEditingController();
   final controllerName = TextEditingController();
+  final controllerBank = TextEditingController();
   final controllerAccount = TextEditingController();
 
   final _contactService = ContactService.instance;
@@ -32,7 +32,7 @@ class CreateAccountContactController extends GetxController {
         typeContact: types[indexType.value].value,
         nickName: controllerName.text,
         accountNumber: controllerAccount.text,
-        nameBankInterbank: 'viettin bank');
+        nameBankInterbank: bank[indexBank.value].value);
     final accsController = Get.find<AccountContactsController>();
     if(indexType.value == 0){
       accsController.internalContacts.add(newContact!);

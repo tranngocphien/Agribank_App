@@ -39,7 +39,7 @@ class HistoryTransactionEntity extends BaseEntity {
     overbalance: json["overbalance"],
     bankBranch: json["bank_branch"],
     contentTransaction: json["content_transaction"],
-    accountNumberTransaction: json["account_number_transaction"],
+    accountNumberTransaction: json["account_number_transaction"] ?? '',
     accountNumberDestination: json["account_number_destination"] ?? '',
     transactionFee: json["transaction_fee"],
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),

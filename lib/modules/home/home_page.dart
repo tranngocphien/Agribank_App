@@ -714,7 +714,9 @@ class HomePage extends GetWidget<HomeController> {
                   color: Colors.deepOrangeAccent,
                 ),
                 title: 'Thông tin ứng dụng',
-                onClick: () {},
+                onClick: () {
+                  Get.toNamed(AppRoutes.infoApp);
+                },
               ),
               DrawerNavigationItem(
                 icons: const Icon(

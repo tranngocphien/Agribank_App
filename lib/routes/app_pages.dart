@@ -1,7 +1,18 @@
+import 'package:agribank_banking/modules/account_information/screens/detail_saving_account/detail_saving_account_binding.dart';
 import 'package:agribank_banking/modules/authentication/update_information/update_information_binding.dart';
 import 'package:agribank_banking/modules/authentication/update_information/update_information_page.dart';
 import 'package:agribank_banking/modules/buy_card_phone/buy_card_phone_binding.dart';
 import 'package:agribank_banking/modules/buy_card_phone/buy_card_phone_page.dart';
+import 'package:agribank_banking/modules/card_service/screens/card_info/card_info_binding.dart';
+import 'package:agribank_banking/modules/card_service/screens/card_info/card_info_page.dart';
+import 'package:agribank_banking/modules/card_service/screens/detail_card_info/detail_card_info_binding.dart';
+import 'package:agribank_banking/modules/card_service/screens/detail_card_info/detail_card_info_page.dart';
+import 'package:agribank_banking/modules/card_service/screens/lock_card/lock_card_binding.dart';
+import 'package:agribank_banking/modules/card_service/screens/lock_card/lock_card_page.dart';
+import 'package:agribank_banking/modules/history_transaction/screens/detail_history_transaction/detail_history_transaction_binding.dart';
+import 'package:agribank_banking/modules/history_transaction/screens/detail_history_transaction/detail_history_transaction_page.dart';
+import 'package:agribank_banking/modules/info_app/info_app_binding.dart';
+import 'package:agribank_banking/modules/info_app/info_app_page.dart';
 import 'package:agribank_banking/modules/manage_contacts/manage_contact_binding.dart';
 import 'package:agribank_banking/modules/manage_contacts/manage_contact_page.dart';
 import 'package:agribank_banking/modules/manage_contacts/screens/account_contacts/account_contacts_binding.dart';
@@ -20,6 +31,8 @@ import 'package:agribank_banking/modules/online_saving_money/screens/open_saving
 import 'package:agribank_banking/modules/online_saving_money/screens/open_saving_account_detail/open_saving_account_detail_page.dart';
 import 'package:agribank_banking/modules/question_answer/question_answer_binding.dart';
 import 'package:agribank_banking/modules/question_answer/question_answer_page.dart';
+import 'package:agribank_banking/modules/question_answer/screens/detail_faq_category/detail_faq_category_binding.dart';
+import 'package:agribank_banking/modules/question_answer/screens/detail_faq_category/detail_faq_category_page.dart';
 import 'package:agribank_banking/modules/recharge_phone/recharge_phone_binding.dart';
 import 'package:agribank_banking/modules/recharge_phone/recharge_phone_page.dart';
 import 'package:agribank_banking/modules/soft_otp/screens/set_pin/set_pin_binding.dart';
@@ -47,6 +60,7 @@ import 'package:agribank_banking/modules/transfer/screens/transfer_qr/transfer_b
 
 import '../modules/account_information/account_information_binding.dart';
 import '../modules/account_information/account_information_page.dart';
+import '../modules/account_information/screens/detail_saving_account/detail_saving_account_page.dart';
 import '../modules/authentication/cccd_authentication/cccd_authentication_binding.dart';
 import '../modules/authentication/cccd_authentication/cccd_authentication_page.dart';
 import '../modules/authentication/login/login_binding.dart';
@@ -106,6 +120,11 @@ class AppPages {
       binding: AccountInformationBinding()
     ),
     GetPage(
+      name: AppRoutes.detailSavingAccount,
+      page: () => const DetailSavingAccountPage(),
+      binding: DetailSavingAccountBinding()
+    ),
+    GetPage(
       name: AppRoutes.cardService,
       page: () => const CardServicePage(),
       binding: CardServiceBinding()
@@ -114,6 +133,11 @@ class AppPages {
       name: AppRoutes.historyTransaction,
       page: () => const HistoryTransactionPage(),
       binding: HistoryTransactionBinding()
+    ),
+    GetPage(
+      name: AppRoutes.detailHistoryTransaction,
+      page: () => const DetailHistoryTransactionPage(),
+      binding: DetailHistoryTransactionBinding()
     ),
     GetPage(
       name: AppRoutes.detailInformation,
@@ -206,6 +230,11 @@ class AppPages {
       binding: QuestionAnswerBinding()
     ),
     GetPage(
+      name: AppRoutes.detailFAQCategory,
+      page: () => const DetailFaqCategoryPage(),
+      binding: DetailFaqCategoryBinding()
+    ),
+    GetPage(
       name: AppRoutes.confirmTransaction,
       page: () => const ConfirmTransactionPage(),
       binding: ConfirmTransactionBinding()
@@ -253,6 +282,27 @@ class AppPages {
       name: AppRoutes.detailContact,
       page: () => const DetailContactPage(),
       binding: DetailContactBinding()
+    ),
+    GetPage(
+      name: AppRoutes.infoApp,
+      page: () => const InfoAppPage(),
+      binding: InfoAppBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.cardInfo,
+      page: () => const CardInfoPage(),
+      binding: CardInfoBinding()
+    ),
+    GetPage(
+      name: AppRoutes.cardInfoDetail,
+      page: () => const DetailCardInfoPage(),
+      binding: DetailCardInfoBinding()
+    ),
+    GetPage(
+      name: AppRoutes.lockCard,
+      page: () => const LockCardPage(),
+      binding: LockCardBinding()
+
     )
 
   ];

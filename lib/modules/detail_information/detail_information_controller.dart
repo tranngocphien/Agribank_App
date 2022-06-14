@@ -28,8 +28,8 @@ class DetailInformationController extends GetxController {
       final resHistory = await _transactionService.getHistory(
           type: 'all',
           accountNumber: account.accountNumber,
-          startDate: ConvertDateTime.convertDateTime(startDate.value),
-          endDate: ConvertDateTime.convertDateTime(endDate.value));
+          startDate: ConvertDateTime.convertDate(startDate.value),
+          endDate: ConvertDateTime.convertDate(endDate.value));
       histories.addAll(resHistory);
       if(histories.isEmpty){
         Get.dialog(CupertinoAlertDialog(

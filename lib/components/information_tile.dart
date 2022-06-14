@@ -25,7 +25,7 @@ class InformationTile extends StatelessWidget {
           ),),
           SizedBox(height: height4,),
           Text(content, style: Styles.baseNotoSansTS.copyWith(
-              fontSize: 17,
+              fontSize: 16,
               color: isHighLight! ? const Color(0xFFF67D10) : black,
               fontWeight: isHighLight! ? FontWeight.w600:  FontWeight.w400
           ),),

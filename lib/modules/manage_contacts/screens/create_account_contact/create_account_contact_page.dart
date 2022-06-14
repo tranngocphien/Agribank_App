@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../app_theme.dart';
+import '../../../../utils/constants.dart';
 
 class CreateAccountContactPage
     extends GetWidget<CreateAccountContactController> {
@@ -111,7 +112,7 @@ class CreateAccountContactPage
                     () => controller.indexType.value == 1
                         ? WidgetInput(
                             text: 'Ngân hàng',
-                            // controller: controller.controllerType,
+                            controller: controller.controllerBank,
                             // enable: false,
                             suffixIcon: GestureDetector(
                                 onTap: () {
@@ -121,72 +122,74 @@ class CreateAccountContactPage
                                         backgroundColor: Colors.transparent,
                                         child: Container(
                                           width: width * 0.9,
-                                          height: height * 0.3,
+                                          height: height * 0.7,
                                           decoration: BoxDecoration(
                                               color: Colors.white,
                                               borderRadius:
                                                   BorderRadius.circular(
                                                       width16)),
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                width: width * 0.9,
-                                                height: height60,
-                                                decoration: BoxDecoration(
-                                                    color:
-                                                        const Color(0xFFF67D10),
-                                                    borderRadius: BorderRadius
-                                                        .only(
-                                                            topRight: Radius
-                                                                .circular(
-                                                                    width16),
-                                                            topLeft:
-                                                                Radius.circular(
-                                                                    width16))),
-                                                child: Center(
-                                                    child: Text(
-                                                  "Ngân hàng",
-                                                  style: Styles.baseNotoSansTS
-                                                      .copyWith(
-                                                          fontSize: 18,
-                                                          color: white,
-                                                          fontWeight:
-                                                              FontWeight.w600),
-                                                )),
-                                              ),
-                                              SizedBox(
-                                                height: height8,
-                                              ),
-                                              ...controller.types
-                                                  .map((e) => InkWell(
-                                                        onTap: () {
-                                                          controller.indexType
-                                                                  .value =
-                                                              controller.types
-                                                                  .indexOf(e);
-                                                          controller
-                                                              .controllerType
-                                                              .text = e.title;
-                                                          Get.back();
-                                                        },
-                                                        child: Container(
-                                                          padding:
-                                                              EdgeInsets.all(
-                                                                  width8),
-                                                          child: Text(
-                                                            e.title,
-                                                            style: Styles
-                                                                .baseNotoSansTS
-                                                                .copyWith(
-                                                                    fontSize:
-                                                                        16,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600),
+                                          child: SingleChildScrollView(
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                  width: width * 0.9,
+                                                  height: height60,
+                                                  decoration: BoxDecoration(
+                                                      color:
+                                                          const Color(0xFFF67D10),
+                                                      borderRadius: BorderRadius
+                                                          .only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      width16),
+                                                              topLeft:
+                                                                  Radius.circular(
+                                                                      width16))),
+                                                  child: Center(
+                                                      child: Text(
+                                                    "Ngân hàng",
+                                                    style: Styles.baseNotoSansTS
+                                                        .copyWith(
+                                                            fontSize: 18,
+                                                            color: white,
+                                                            fontWeight:
+                                                                FontWeight.w600),
+                                                  )),
+                                                ),
+                                                SizedBox(
+                                                  height: height8,
+                                                ),
+                                                ...bank
+                                                    .map((e) => InkWell(
+                                                          onTap: () {
+                                                            controller.indexBank
+                                                                    .value =
+                                                                    bank.indexOf(e);
+                                                            controller
+                                                                .controllerBank
+                                                                .text = e.title;
+                                                            Get.back();
+                                                          },
+                                                          child: Container(
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    width8),
+                                                            child: Text(
+                                                              '${e.value} - ${e.title}',
+                                                              style: Styles
+                                                                  .baseNotoSansTS
+                                                                  .copyWith(
+                                                                      fontSize:
+                                                                          16,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600),
+                                                            ),
                                                           ),
-                                                        ),
-                                                      ))
-                                            ],
+                                                        ))
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),

@@ -155,7 +155,6 @@ class InformationTile extends StatelessWidget {
           ),),
           SizedBox(height: height4,),
           isFinal! ? Container() : const Divider(thickness: 1,)
-
         ],
       ),
     );

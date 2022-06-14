@@ -8,7 +8,7 @@ import '../../utils/enums.dart';
 class NotificationController extends GetxController {
   final indexSelected = 0.obs;
   final types = ['Tất cả', 'Biến động số dự', 'Tin khác'];
-  final typeNotifications = [Attribute(title: 'Tất cả', value: '0'), Attribute(title: 'Hệ thống', value: '1'), Attribute(title: 'Người dùng khác', value: '2')];
+  final typeNotifications = [Attribute(title: 'Tất cả', value: '0'), Attribute(title: 'Biến động số dư', value: '2'), Attribute(title: 'Tin khác', value: '1')];
 
   final _notificationService = NotificationService.instance;
   final notifications = List<NotificationEntity>.empty(growable: true).obs;

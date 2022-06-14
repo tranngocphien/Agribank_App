@@ -1,4 +1,5 @@
 import 'package:agribank_banking/modules/history_transaction/history_transaction_controller.dart';
+import 'package:agribank_banking/routes/app_routes.dart';
 import 'package:agribank_banking/utils/convert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -221,7 +222,7 @@ class HistoryTransactionPage extends GetWidget<HistoryTransactionController> {
                             Obx(() => Row(
                                   children: [
                                     Text(
-                                      ConvertDateTime.convertDateTime(
+                                      ConvertDateTime.convertDate(
                                           controller.startDate.value),
                                       style: Styles.baseNotoSansTS
                                           .copyWith(fontSize: 16, color: black),
@@ -274,7 +275,7 @@ class HistoryTransactionPage extends GetWidget<HistoryTransactionController> {
                               () => Row(
                                 children: [
                                   Text(
-                                    ConvertDateTime.convertDateTime(
+                                    ConvertDateTime.convertDate(
                                         controller.endDate.value),
                                     style: Styles.baseNotoSansTS
                                         .copyWith(fontSize: 16, color: black),
@@ -391,40 +392,45 @@ class HistoryTransactionPage extends GetWidget<HistoryTransactionController> {
                     SizedBox(
                       height: height4,
                     ),
-                    ...controller.histories.map((element) => Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              element.createdAt.toString(),
-                              style: Styles.baseNotoSansTS
-                                  .copyWith(
-                                  fontSize: 15,
-                                  color: black500),
-                            ),
-                            Text(
-                              MoneyFormat.formatMoneyInteger(element.transactionMoney),
+                    ...controller.histories.map((element) => InkWell(
+                      onTap: () {
+                        Get.toNamed(AppRoutes.detailHistoryTransaction, arguments: element);
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                ConvertDateTime.convertDateTime(element.createdAt!),
                                 style: Styles.baseNotoSansTS
                                     .copyWith(
                                     fontSize: 15,
-                                    color:
-                                    Colors.greenAccent))
-                          ],
-                        ),
-                        SizedBox(
-                          height: height4,
-                        ),
-                        Text(
-                          element.contentTransaction,
-                          style: Styles.baseNotoSansTS.copyWith(
-                            fontSize: 15,
+                                    color: black500),
+                              ),
+                              Text(
+                                MoneyFormat.formatMoneyInteger(element.transactionMoney),
+                                  style: Styles.baseNotoSansTS
+                                      .copyWith(
+                                      fontSize: 15,
+                                      color:
+                                      element.transactionMoney < 0 ? Colors.red : Colors.greenAccent))
+                            ],
                           ),
-                        ),
-                        const Divider()
-                      ],
+                          SizedBox(
+                            height: height4,
+                          ),
+                          Text(
+                            element.contentTransaction,
+                            style: Styles.baseNotoSansTS.copyWith(
+                              fontSize: 15,
+                            ),
+                          ),
+                          const Divider()
+                        ],
+                      ),
                     ))
                   ],
                 ),

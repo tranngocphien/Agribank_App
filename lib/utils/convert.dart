@@ -2,9 +2,19 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 class ConvertDateTime {
-  static String convertDateTime(DateTime dateTime) {
+  static String convertDate(DateTime dateTime) {
     return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
   }
+
+  static String convertDateTime(DateTime dateTime) {
+    return '${dateTime.day}/${dateTime.month}/${dateTime.year} ${dateTime.hour}:${dateTime.minute}';
+  }
+
+  static String convertTime(DateTime dateTime) {
+    return '${dateTime.hour}:${dateTime.minute}';
+  }
+
+
 }
 
 class MoneyFormat {
