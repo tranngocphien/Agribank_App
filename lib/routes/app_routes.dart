@@ -37,6 +37,7 @@ class AppRoutes {
   static const resultPhoneMoney = '/resultPhoneMoney';
   static const resultOpenSaving = '/resultOpenSavingMoney';
   static const finishSavingAccount = '/finishSavingAccount';
+  static const resultFinishSaving = '/resultFinishSavingAccount';
 
 
   /// recharge phone money
@@ -73,5 +74,11 @@ class AppRoutes {
 
   /// info app
   static const infoApp = '/infoApp';
+
+  /// lookup information
+  static const lookupInformation = '/lookupInformation';
+  static const lookupCurrency = '/lookupCurrency';
+  static const lookupRate = '/lookupRate';
+  static const lookupAddress = '/lookupAddress';
 
 }

@@ -15,6 +15,10 @@ import 'package:agribank_banking/modules/history_transaction/screens/detail_hist
 import 'package:agribank_banking/modules/history_transaction/screens/detail_history_transaction/detail_history_transaction_page.dart';
 import 'package:agribank_banking/modules/info_app/info_app_binding.dart';
 import 'package:agribank_banking/modules/info_app/info_app_page.dart';
+import 'package:agribank_banking/modules/information_lookup/information_lookup_page.dart';
+import 'package:agribank_banking/modules/information_lookup/screens/lookup_address/lookup_address_binding.dart';
+import 'package:agribank_banking/modules/information_lookup/screens/lookup_rate/lookup_rate_binding.dart';
+import 'package:agribank_banking/modules/information_lookup/screens/lookup_rate/lookup_rate_page.dart';
 import 'package:agribank_banking/modules/manage_contacts/manage_contact_binding.dart';
 import 'package:agribank_banking/modules/manage_contacts/manage_contact_page.dart';
 import 'package:agribank_banking/modules/manage_contacts/screens/account_contacts/account_contacts_binding.dart';
@@ -26,6 +30,7 @@ import 'package:agribank_banking/modules/manage_contacts/screens/detail_contact/
 import 'package:agribank_banking/modules/online_saving_money/online_saving_money_binding.dart';
 import 'package:agribank_banking/modules/online_saving_money/online_saving_money_page.dart';
 import 'package:agribank_banking/modules/online_saving_money/screens/finish_saving_account/finish_saving_account_binding.dart';
+import 'package:agribank_banking/modules/online_saving_money/screens/finish_saving_account/finish_saving_account_controller.dart';
 import 'package:agribank_banking/modules/online_saving_money/screens/finish_saving_account/finish_saving_account_page.dart';
 import 'package:agribank_banking/modules/online_saving_money/screens/online_deposit_settlement/online_deposit_settlement_binding.dart';
 import 'package:agribank_banking/modules/online_saving_money/screens/online_deposit_settlement/online_deposit_settlement_page.dart';
@@ -60,6 +65,7 @@ import 'package:agribank_banking/modules/transfer/screens/ex_transfer_stk/transf
 import 'package:agribank_banking/modules/transfer/screens/ex_transfer_stk/transfer_external_by_accnum_page.dart';
 import 'package:agribank_banking/modules/transfer/screens/ex_transfer_stk_detail/transfer_external_by_accnum_detail_binding.dart';
 import 'package:agribank_banking/modules/transfer/screens/ex_transfer_stk_detail/transfer_external_by_accnum_detail_page.dart';
+import 'package:agribank_banking/modules/transfer/screens/result_finish_saving/result_finish_saving_page.dart';
 import 'package:agribank_banking/modules/transfer/screens/result_open_saving/result_open_saving_binding.dart';
 import 'package:agribank_banking/modules/transfer/screens/result_phone/result_phone_binding.dart';
 import 'package:agribank_banking/modules/transfer/screens/result_phone/result_phone_page.dart';
@@ -85,6 +91,10 @@ import 'package:agribank_banking/modules/history_transaction/history_transaction
 import 'package:agribank_banking/modules/history_transaction/history_transaction_page.dart';
 import 'package:agribank_banking/modules/transfer/screens/transfer_internal/transfer_internal_binding.dart';
 import 'package:agribank_banking/modules/transfer/transfer_binding.dart';
+import '../modules/information_lookup/screens/lookup_address/lookup_address_page.dart';
+import '../modules/information_lookup/screens/lookup_currency/lookup_currency_binding.dart';
+import '../modules/information_lookup/screens/lookup_currency/lookup_currency_page.dart';
+import '../modules/transfer/screens/result_finish_saving/result_finish_saving_binding.dart';
 import '../modules/transfer/screens/result_open_saving/result_open_saving_page.dart';
 import '../modules/transfer/screens/transfer_internal_detail/transfer_internal_detail_binding.dart';
 import '../modules/transfer/screens/update_limit_trans/update_limit_trans_binding.dart';
@@ -336,6 +346,11 @@ class AppPages {
       binding: FinishSavingAccountBinding()
     ),
     GetPage(
+      name: AppRoutes.resultFinishSaving,
+      page: () => const ResultFinishSavingPage(),
+      binding: ResultFinishSavingBinding()
+    ),
+    GetPage(
       name: AppRoutes.forgotPin,
       page: () => const ForgotPinPage(),
       binding: ForgotPinBinding()
@@ -344,7 +359,28 @@ class AppPages {
       name: AppRoutes.changePassword,
       page: () => const ChangePasswordPage(),
       binding: ChangePasswordBinding()
-    )
+    ),
+    GetPage(
+      name: AppRoutes.lookupInformation,
+      page: () => const InformationLookUpPage(),
+      binding: LookupRateBinding()
+    ),
+    GetPage(
+      name: AppRoutes.lookupRate,
+      page: () => const LookupRatePage(),
+      binding: LookupRateBinding()
+    ),
+    GetPage(
+        name: AppRoutes.lookupCurrency,
+        page: () => const LookupCurrencyPage(),
+        binding: LookupCurrencyBinding()
+    ),
+    GetPage(
+        name: AppRoutes.lookupRate,
+        page: () => const LookupAddressPage(),
+        binding: LookupAddressBinding()
+    ),
+
 
   ];
 }

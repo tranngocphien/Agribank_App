@@ -410,7 +410,9 @@ class HomePage extends GetWidget<HomeController> {
                                               width: width40,
                                             ),
                                             text: 'Tra cứu thông tin',
-                                            onClick: () {},
+                                            onClick: () {
+                                              Get.toNamed(AppRoutes.lookupInformation);
+                                            },
                                           ),
                                         ]),
                                   ),

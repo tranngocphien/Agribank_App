@@ -1,7 +1,8 @@
 /// APIConstants
 class APIConstants {
   ///Base URL
-  static const baseURL = 'https://demo1451999.software';
+  // static const baseURL = 'https://demo1451999.software';
+  static const baseURL = 'https://api.manhyellow.online';
 
   /// auth
   static const login = '/auth/login';
@@ -34,6 +35,7 @@ class APIConstants {
 
   /// cycle
   static const getCycles = '/cycle/get_list';
+  static const getCurrency = '/currency_price/get_list';
 
   /// notification
   static const getNotifications = '/notification/get_list_notification';
