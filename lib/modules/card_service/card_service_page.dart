@@ -57,18 +57,18 @@ class CardServicePage extends GetWidget<CardServiceController> {
                   ),
                   FunctionServiceItem(
                     icon: Image.asset('assets/icons/ic_credit_card.png'),
-                    text: 'CK liên NH qua số tài khoản',
+                    text: 'Chuyển khoản',
                     onPress: (){
-                      Get.toNamed(AppRoutes.transferExAccNumber);
+                      Get.toNamed(AppRoutes.transfer);
                     },
                   ),
-                  FunctionServiceItem(
-                    icon: Image.asset('assets/icons/ic_credit_card.png'),
-                    text: 'CK liên NH qua số thẻ',
-                    onPress: (){
-                      Get.toNamed(AppRoutes.transferExCardNumber);
-                    },
-                  ),
+                  // FunctionServiceItem(
+                  //   icon: Image.asset('assets/icons/ic_credit_card.png'),
+                  //   text: 'CK liên NH qua số thẻ',
+                  //   onPress: (){
+                  //     // Get.toNamed(AppRoutes.transferExCardNumber);
+                  //   },
+                  // ),
                   FunctionServiceItem(
                     icon: Image.asset('assets/icons/ic_credit_card.png'),
                     text: 'Phát hành thẻ phi vật lý',

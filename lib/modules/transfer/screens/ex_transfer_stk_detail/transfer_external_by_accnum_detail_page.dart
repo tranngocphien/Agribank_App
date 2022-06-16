@@ -97,7 +97,7 @@ class TransferExternalByAccNumDetailPage extends GetWidget<TransferExternalByAcc
                     height: height48,
                     child: ButtonPrimaryText(
                       onTab: () {
-                        if(StoreGlobal.user.value!.softOtp){
+                        if(StoreGlobal.soft.value){
                           Get.toNamed(AppRoutes.confirmTransaction, arguments: TransactionType.sendMoneyInterbank);
                         }
                         else {

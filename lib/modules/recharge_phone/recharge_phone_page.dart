@@ -176,7 +176,7 @@ class RechargePhonePage extends GetWidget<RechargePhoneController> {
                               height: height48,
                               child: ButtonPrimaryText(
                                 onTab: () {
-                                  if (StoreGlobal.user.value!.softOtp) {
+                                  if (StoreGlobal.soft.value) {
                                     Get.toNamed(AppRoutes.confirmTransaction,
                                         arguments:
                                             TransactionType.rechargePhone);

@@ -631,22 +631,22 @@ class HomePage extends GetWidget<HomeController> {
                   }
                 },
               ),
-              DrawerNavigationItem(
-                icons: const Icon(
-                  Icons.message,
-                  color: Colors.deepOrangeAccent,
-                ),
-                title: 'Nhận tin biến động số dư',
-                onClick: () {},
-              ),
-              DrawerNavigationItem(
-                icons: const Icon(
-                  Icons.fingerprint,
-                  color: Colors.deepOrangeAccent,
-                ),
-                title: 'Cài đặt vân tay',
-                onClick: () {},
-              ),
+              // DrawerNavigationItem(
+              //   icons: const Icon(
+              //     Icons.message,
+              //     color: Colors.deepOrangeAccent,
+              //   ),
+              //   title: 'Nhận tin biến động số dư',
+              //   onClick: () {},
+              // ),
+              // DrawerNavigationItem(
+              //   icons: const Icon(
+              //     Icons.fingerprint,
+              //     color: Colors.deepOrangeAccent,
+              //   ),
+              //   title: 'Cài đặt vân tay',
+              //   onClick: () {},
+              // ),
               DrawerNavigationItem(
                 icons: const Icon(
                   Icons.calculate_outlined,
@@ -663,14 +663,14 @@ class HomePage extends GetWidget<HomeController> {
 
                 },
               ),
-              DrawerNavigationItem(
-                icons: const Icon(
-                  Icons.language,
-                  color: Colors.deepOrangeAccent,
-                ),
-                title: 'Cài đặt ngôn ngữ',
-                onClick: () {},
-              ),
+              // DrawerNavigationItem(
+              //   icons: const Icon(
+              //     Icons.language,
+              //     color: Colors.deepOrangeAccent,
+              //   ),
+              //   title: 'Cài đặt ngôn ngữ',
+              //   onClick: () {},
+              // ),
               DrawerNavigationItem(
                 icons: const Icon(
                   Icons.lock,
@@ -687,14 +687,14 @@ class HomePage extends GetWidget<HomeController> {
 
                 },
               ),
-              DrawerNavigationItem(
-                icons: const Icon(
-                  Icons.vpn_key_outlined,
-                  color: Colors.deepOrangeAccent,
-                ),
-                title: 'Cấp/Đổi mã PIN',
-                onClick: () {},
-              ),
+              // DrawerNavigationItem(
+              //   icons: const Icon(
+              //     Icons.vpn_key_outlined,
+              //     color: Colors.deepOrangeAccent,
+              //   ),
+              //   title: 'Cấp/Đổi mã PIN',
+              //   onClick: () {},
+              // ),
               DrawerNavigationItem(
                 icons: const Icon(
                   Icons.wallet_membership_sharp,
@@ -710,14 +710,14 @@ class HomePage extends GetWidget<HomeController> {
                   }
                 },
               ),
-              DrawerNavigationItem(
-                icons: const Icon(
-                  Icons.shopping_bag,
-                  color: Colors.deepOrangeAccent,
-                ),
-                title: 'Quản lý đầu tư',
-                onClick: () {},
-              ),
+              // DrawerNavigationItem(
+              //   icons: const Icon(
+              //     Icons.shopping_bag,
+              //     color: Colors.deepOrangeAccent,
+              //   ),
+              //   title: 'Quản lý đầu tư',
+              //   onClick: () {},
+              // ),
               DrawerNavigationItem(
                 icons: const Icon(
                   Icons.info,
@@ -725,7 +725,13 @@ class HomePage extends GetWidget<HomeController> {
                 ),
                 title: 'Thông tin ứng dụng',
                 onClick: () {
-                  Get.toNamed(AppRoutes.infoApp);
+                  if(StoreGlobal.isLogin.value){
+                    Get.toNamed(AppRoutes.infoApp);
+                  }
+                  else {
+                    Get.toNamed(AppRoutes.login);
+                  }
+                  // Get.toNamed(AppRoutes.infoApp);
                 },
               ),
               DrawerNavigationItem(
@@ -735,7 +741,13 @@ class HomePage extends GetWidget<HomeController> {
                 ),
                 title: 'Hỏi và đáp',
                 onClick: () {
-                  Get.toNamed(AppRoutes.questionAnswer);
+                  if(StoreGlobal.isLogin.value){
+                    Get.toNamed(AppRoutes.questionAnswer);
+                  }
+                  else {
+                    Get.toNamed(AppRoutes.login);
+                  }
+                  // Get.toNamed(AppRoutes.questionAnswer);
                 },
               )
             ],

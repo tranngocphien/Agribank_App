@@ -11,11 +11,12 @@ import '../transfer_internal/transfer_internal_controller.dart';
 
 class ConfirmTransactionPasswordController extends GetxController{
   TransactionType type = Get.arguments;
-  final controllerPassword = TextEditingController();
+  // final controllerPassword = TextEditingController();
+  final password = Rx<String?>(null);
+
   @override
   void onInit() {
     // TODO: implement onInit
-    controllerPassword.text = '';
     super.onInit();
   }
 
@@ -25,7 +26,7 @@ class ConfirmTransactionPasswordController extends GetxController{
         {
           try {
             final controller = Get.find<RechargePhoneController>();
-            await controller.rechargePhone(password: controllerPassword.text);
+            await controller.rechargePhone(password: password.value);
           } on DioError catch (e) {}
           break;
         }
@@ -33,20 +34,20 @@ class ConfirmTransactionPasswordController extends GetxController{
         {
           try {
             final controller = Get.find<TransferInternalController>();
-            await controller.sendMoney(password: controllerPassword.text);
+            await controller.sendMoney(password: password.value);
           } on DioError catch (e) {}
           break;
         }
       case (TransactionType.buyCodePhone):
         {
           final controller = Get.find<BuyCardPhoneController>();
-          controller.buyCodePhone(password: controllerPassword.text);
+          controller.buyCodePhone(password: password.value);
           break;
         }
       case (TransactionType.sendMoneyInterbank):
         {
           final controller = Get.find<TransferExternalByAccNumberController>();
-          await controller.sendMoneyInterbank(password: controllerPassword.text);
+          await controller.sendMoneyInterbank(password: password.value);
           break;
         }
       case (TransactionType.openSavingAccount):

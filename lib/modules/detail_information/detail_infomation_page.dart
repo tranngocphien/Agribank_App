@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../app_theme.dart';
+import '../../routes/app_routes.dart';
 import 'detail_information_controller.dart';
 
 class DetailInformationPage extends GetWidget<DetailInformationController> {
@@ -357,40 +358,46 @@ class DetailInformationPage extends GetWidget<DetailInformationController> {
                             SizedBox(
                               height: height4,
                             ),
-                            ...controller.histories.map((element) => Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      ConvertDateTime.convertDateTime(element.createdAt!),
-                                      style: Styles.baseNotoSansTS
-                                          .copyWith(
-                                              fontSize: 15,
-                                              color: black500),
-                                    ),
-                                    Text(
-                                        (element.transactionMoney > 0 ? '+' : '') +  MoneyFormat.formatMoneyInteger(element.transactionMoney),
+                            ...controller.histories.map((element) => GestureDetector(
+                              onTap: (){
+                                Get.toNamed(AppRoutes.detailHistoryTransaction, arguments: element);
+
+                              },
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        ConvertDateTime.convertDateTime(element.createdAt!),
                                         style: Styles.baseNotoSansTS
                                             .copyWith(
                                                 fontSize: 15,
-                                                color:
-                                                    element.transactionMoney > 0 ? Colors.greenAccent: Colors.redAccent))
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: height4,
-                                ),
-                                Text(
-                                  element.contentTransaction,
-                                  style: Styles.baseNotoSansTS.copyWith(
-                                    fontSize: 15,
+                                                color: black500),
+                                      ),
+                                      Text(
+                                          (element.transactionMoney > 0 ? '+' : '') +  MoneyFormat.formatMoneyInteger(element.transactionMoney),
+                                          style: Styles.baseNotoSansTS
+                                              .copyWith(
+                                                  fontSize: 15,
+                                                  color:
+                                                      element.transactionMoney > 0 ? Colors.greenAccent: Colors.redAccent))
+                                    ],
                                   ),
-                                ),
-                                const Divider()
-                              ],
+                                  SizedBox(
+                                    height: height4,
+                                  ),
+                                  Text(
+                                    element.contentTransaction,
+                                    style: Styles.baseNotoSansTS.copyWith(
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                  const Divider()
+                                ],
+                              ),
                             ))
                           ],
                         ),

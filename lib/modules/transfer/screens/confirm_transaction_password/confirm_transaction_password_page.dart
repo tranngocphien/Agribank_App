@@ -48,7 +48,10 @@ class ConfirmTransactionPasswordPage extends GetWidget<ConfirmTransactionPasswor
                   WidgetInput(
                     text: 'Nhập mật khẩu',
                     obscureText: true,
-                    controller: controller.controllerPassword,
+                    onChanged: (value) {
+                      controller.password.value = value;
+                    },
+                    // controller: controller.controllerPassword,
                   ),
                   SizedBox(
                     height: height16,

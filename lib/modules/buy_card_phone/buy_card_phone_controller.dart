@@ -67,6 +67,7 @@ class BuyCardPhoneController extends GetxController {
           accountNumber: accounts[indexAccount.value].accountNumber,
           homeNetword: homeNetworks[indexHomeNetword.value].value,
           money: int.parse(moneys[indexMoney.value].value),
+          password: password,
           pin: pin);
       Get.toNamed(AppRoutes.resultPhoneMoney, arguments: res);
       // Get.dialog(CupertinoAlertDialog(
@@ -90,7 +91,7 @@ class BuyCardPhoneController extends GetxController {
         actions: [
           CupertinoDialogAction(
             onPressed: () {
-              Get.offAndToNamed(AppRoutes.home);
+              Get.back();
             },
             child: const Text('Đồng ý'),
           )

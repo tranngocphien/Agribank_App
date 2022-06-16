@@ -31,7 +31,7 @@ class DetailFaqCategoryPage extends GetWidget<DetailFaqCategoryController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Câu 1: ${controller.faqs[index].question}', style: Styles.baseNotoSansTS.copyWith(
+                    Text('Câu ${index + 1}: ${controller.faqs[index].question}', style: Styles.baseNotoSansTS.copyWith(
                       fontWeight: FontWeight.w600,
                       color: black
                     ),),
