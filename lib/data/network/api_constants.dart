@@ -9,6 +9,9 @@ class APIConstants {
   static const register = '/auth/register';
   static const changePassword = '/auth/changePassword';
 
+  /// verify
+  static const verifyOCR = '/verify/ocr_facematch';
+
 
   /// user
   static const listBankAccount = '/user/get_list_bank_account';
@@ -48,6 +51,7 @@ class APIConstants {
 
   /// info app
   static const infoApp = '/get_info_app';
+  static const getListAddress = '/address/get_list';
 
   /// faq
   static const getListCategory = '/faq/get_list_category';

@@ -196,7 +196,7 @@ class LoginPage extends GetWidget<LoginController> {
               ),
               GestureDetector(
                 onTap: (){
-                  Get.toNamed(AppRoutes.updateInformation);
+                  Get.toNamed(AppRoutes.register);
                 },
                 child: const Text("Đăng ký tài khoản", style: TextStyle(
                   color: Color(0xFFe68840)

@@ -1,9 +1,12 @@
 import 'package:agribank_banking/data/network/api_constants.dart';
 import 'package:agribank_banking/models/base_entity.dart';
 import 'package:agribank_banking/models/response_login_entity.dart';
+import 'package:agribank_banking/models/response_message.dart';
 import 'package:agribank_banking/repositories/base_repository.dart';
 import 'package:agribank_banking/services/dio_service.dart';
 import 'package:agribank_banking/utils/enums.dart';
+import 'package:dio/dio.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AuthService {
   AuthService._();
@@ -41,6 +44,18 @@ class AuthService {
       'retype_password': retypeNewPassword
     });
 
+  }
+
+  Future<ResponseMessage?> verifyFace({required XFile idImage, required XFile faceImage}) async {
+    _repo.url = APIConstants.baseURL + APIConstants.verifyOCR;
+    _repo.keyData = null;
+    _repo.dio = DioService.instance.get();
+    FormData formData = FormData.fromMap({
+      "id_image":
+      await MultipartFile.fromFile(idImage.path),
+      "person_image": await MultipartFile.fromFile(faceImage.path)
+    });
+    return await _repo.queryByPath((e) => ResponseMessage.fromJson(e), data: formData);
   }
 }
 

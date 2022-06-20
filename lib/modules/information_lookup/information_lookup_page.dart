@@ -48,7 +48,9 @@ class InformationLookUpPage extends StatelessWidget {
                   FunctionServiceItem(
                       icon: Image.asset('assets/icons/ic_credit_card.png'),
                       text: 'Địa điểm Agribank',
-                      onPress: () {})
+                      onPress: () {
+                        Get.toNamed(AppRoutes.lookupAddress);
+                      })
                 ],
               ),
             ),

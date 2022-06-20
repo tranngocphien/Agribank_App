@@ -30,7 +30,7 @@ class LoginController extends GetxController {
           Get.offAllNamed(AppRoutes.home);
         }
         else {
-          Get.toNamed(AppRoutes.cccdAuthentication, arguments: [
+          Get.toNamed(AppRoutes.updateInformation, arguments: [
             _response.data.user.name.toUpperCase()
           ]);
         }

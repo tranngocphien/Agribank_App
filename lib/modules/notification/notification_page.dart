@@ -119,6 +119,7 @@ class NotificationItemType2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isNegative = notification.transactionMoney.contains('-');
     int money = int.parse(notification.transactionMoney);
     return Container(
       padding: EdgeInsets.all(width16),
@@ -175,10 +176,10 @@ class NotificationItemType2 extends StatelessWidget {
                           .copyWith(fontWeight: FontWeight.w500),
                     ),
                     Text(
-                      '${money > 0 ? '+${MoneyFormat.formatMoneyString(notification.transactionMoney)}' : '-' + MoneyFormat.formatMoneyInteger(-money)} VNĐ ',
+                      '${!isNegative ? '+' + MoneyFormat.formatMoneyInteger(money) : '-' + MoneyFormat.formatMoneyInteger(-money)} VNĐ ',
                       style: Styles.baseNotoSansTS.copyWith(
                           fontWeight: FontWeight.w600,
-                          color: int.parse(notification.transactionMoney) > 0
+                          color:  !isNegative
                               ? Colors.greenAccent
                               : Colors.redAccent),
                     ),

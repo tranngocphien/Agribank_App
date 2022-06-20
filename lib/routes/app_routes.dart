@@ -8,6 +8,7 @@ class AppRoutes {
   static const changePassword = '/changePassword';
 
   static const updateInformation = '/updateInformation';
+  static const register = '/register';
   static const detailSavingAccount = '/detailSavingAccount';
 
   /// notification

@@ -82,6 +82,8 @@ import '../modules/authentication/cccd_authentication/cccd_authentication_bindin
 import '../modules/authentication/cccd_authentication/cccd_authentication_page.dart';
 import '../modules/authentication/login/login_binding.dart';
 import '../modules/authentication/login/login_page.dart';
+import '../modules/authentication/register/register_binding.dart';
+import '../modules/authentication/register/register_page.dart';
 import '../modules/card_service/card_service_binding.dart';
 import 'package:agribank_banking/modules/detail_information/detail_infomation_page.dart';
 import 'package:agribank_banking/modules/detail_information/detail_information_binding.dart';
@@ -200,6 +202,11 @@ class AppPages {
         name: AppRoutes.transferExAccNumber,
         page: () => const TransferExByAccNumberPage(),
         binding: TransferExternalByAccNumberBinding()
+    ),
+    GetPage(
+      name: AppRoutes.register,
+      page: () => const RegisterPage(),
+      binding: RegisterBinding()
     ),
     GetPage(
       name: AppRoutes.updateInformation,
@@ -376,7 +383,7 @@ class AppPages {
         binding: LookupCurrencyBinding()
     ),
     GetPage(
-        name: AppRoutes.lookupRate,
+        name: AppRoutes.lookupAddress,
         page: () => const LookupAddressPage(),
         binding: LookupAddressBinding()
     ),

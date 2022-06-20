@@ -74,6 +74,7 @@ flutter:
     - assets/images/home/
     - assets/images/
     - assets/icons/
+    - assets/address.json
     - assets/
 
 

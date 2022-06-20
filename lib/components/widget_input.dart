@@ -45,6 +45,7 @@ class WidgetInput extends StatelessWidget {
         keyboardType: keyboardType,
         obscureText: obscureText,
         onChanged: onChanged,
+        textCapitalization: textCapitalization,
         onEditingComplete: onEditingComplete,
         decoration: InputDecoration(
             suffixIcon: suffixIcon,

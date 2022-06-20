@@ -14,6 +14,7 @@ import '../../../utils/enums.dart';
 
 class CccdAuthenticationController extends GetxController {
   String inputName = '';
+  String inputIdentity = '';
 
   CameraController? controllerCamera;
 
@@ -28,6 +29,7 @@ class CccdAuthenticationController extends GetxController {
     loadStatus(AppLoadStatus.loading);
     await _initializeCamera();
     inputName = Get.arguments[0];
+    inputIdentity = Get.arguments[1];
     loadStatus(AppLoadStatus.success);
     super.onInit();
   }
@@ -82,7 +84,7 @@ class CccdAuthenticationController extends GetxController {
     }
 
 
-    bool check = checkData(inputName, name);
+    bool check = checkData(inputName, name, inputIdentity, numberIdentify);
     if(check){
         showMessage('Đăng ký tài khoản thành công');
         Get.back();
@@ -115,8 +117,8 @@ class CccdAuthenticationController extends GetxController {
     await controllerCamera?.initialize();
   }
 
-  bool checkData(String inputName, String recogName){
-    return LongestCommonSubString.getSimilarity(inputName, recogName) > 0.9;
+  bool checkData(String inputName, String recogName, String inputCCCD, String recogCCCd){
+    return LongestCommonSubString.getSimilarity(inputName, recogName) > 0.9 && LongestCommonSubString.getSimilarity(inputCCCD, recogCCCd) > 0.9;
   }
 
   void showMessage(String message){
