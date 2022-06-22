@@ -37,8 +37,8 @@ class AccountInformationPage extends GetWidget<AccountInformationController> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Get.toNamed(AppRoutes.detailInformation,
-                          arguments: [controller.accounts.first]);
+                      // Get.toNamed(AppRoutes.detailInformation,
+                      //     arguments: [controller.accounts.first]);
                     },
                     child: Container(
                       height: height160,
@@ -86,16 +86,32 @@ class AccountInformationPage extends GetWidget<AccountInformationController> {
                               ),
                               Row(
                                 children: [
-                                  const Icon(
-                                    Icons.qr_code_scanner_rounded,
-                                    color: Colors.deepOrangeAccent,
+                                  GestureDetector(
+                                    onTap: () {
+                                      Get.toNamed(AppRoutes.qrCode, arguments: [
+                                        controller.accounts.first
+                                      ]);
+                                    },
+                                    child: const Icon(
+                                      Icons.qr_code_scanner_rounded,
+                                      color: Colors.deepOrangeAccent,
+                                    ),
                                   ),
                                   SizedBox(
                                     width: width16,
                                   ),
-                                  const Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: Colors.deepOrangeAccent,
+                                  GestureDetector(
+                                    onTap: () {
+                                      Get.toNamed(AppRoutes.detailInformation,
+                                          arguments: [
+                                            controller.accounts.first
+                                          ]);
+                                    },
+                                    child: const Icon(
+                                      Icons.arrow_forward_ios,
+                                      size: 14,
+                                      color: Colors.deepOrangeAccent,
+                                    ),
                                   )
                                 ],
                               )
@@ -154,14 +170,17 @@ class AccountInformationPage extends GetWidget<AccountInformationController> {
                           height: height8,
                         ),
                         ...controller.savingAccounts.map((element) => InkWell(
-                          onTap: () {
-                            Get.toNamed(AppRoutes.detailSavingAccount, arguments: element);
-                          },
-                          child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              onTap: () {
+                                Get.toNamed(AppRoutes.detailSavingAccount,
+                                    arguments: element);
+                              },
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         element.accountNumber,
@@ -188,7 +207,9 @@ class AccountInformationPage extends GetWidget<AccountInformationController> {
                                   ),
                                   GestureDetector(
                                       onTap: () {
-                                        Get.toNamed(AppRoutes.detailSavingAccount, arguments: element);
+                                        Get.toNamed(
+                                            AppRoutes.detailSavingAccount,
+                                            arguments: element);
                                       },
                                       child: const Icon(
                                         Icons.arrow_forward_ios,
@@ -197,7 +218,7 @@ class AccountInformationPage extends GetWidget<AccountInformationController> {
                                       ))
                                 ],
                               ),
-                        ))
+                            ))
                       ],
                     ),
                   )

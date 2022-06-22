@@ -186,34 +186,44 @@ class HomePage extends GetWidget<HomeController> {
                                     ],
                                   ),
                                 ),
-                                Column(
-                                  children: [
-                                    Container(
-                                      height: height60,
-                                      width: width60,
-                                      padding: EdgeInsets.all(width16),
-                                      decoration: BoxDecoration(
-                                          color: const Color(0xFFf2f2f2),
-                                          borderRadius:
-                                              BorderRadius.circular(width25)),
-                                      child: Image.asset(
-                                          'assets/icons/ic_qr_scan.png'),
-                                    ),
-                                    SizedBox(
-                                      height: height4,
-                                    ),
-                                    const Text(
-                                      "QR Pay",
-                                      style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                          color: black),
-                                    )
-                                  ],
+                                GestureDetector(
+                                  onTap: (){
+                                    if(StoreGlobal.isLogin.value) {
+                                      Get.toNamed(AppRoutes.scanQrCode);
+                                    }
+                                    else {
+                                      Get.toNamed(AppRoutes.login);
+                                    }
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: height60,
+                                        width: width60,
+                                        padding: EdgeInsets.all(width16),
+                                        decoration: BoxDecoration(
+                                            color: const Color(0xFFf2f2f2),
+                                            borderRadius:
+                                                BorderRadius.circular(width25)),
+                                        child: Image.asset(
+                                            'assets/icons/ic_qr_scan.png'),
+                                      ),
+                                      SizedBox(
+                                        height: height4,
+                                      ),
+                                      const Text(
+                                        "QR Pay",
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                            color: black),
+                                      )
+                                    ],
+                                  ),
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    Get.toNamed(AppRoutes.cardService);
+                                    StoreGlobal.isLogin.value ? Get.toNamed(AppRoutes.cardService): Get.toNamed(AppRoutes.login);
                                   },
                                   child: Column(
                                     children: [

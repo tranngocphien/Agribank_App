@@ -1,4 +1,6 @@
 import 'package:agribank_banking/modules/account_information/screens/detail_saving_account/detail_saving_account_binding.dart';
+import 'package:agribank_banking/modules/account_information/screens/qr_code/qr_code_binding.dart';
+import 'package:agribank_banking/modules/account_information/screens/qr_code/qr_code_page.dart';
 import 'package:agribank_banking/modules/authentication/change_password/change_password_binding.dart';
 import 'package:agribank_banking/modules/authentication/change_password/change_password_page.dart';
 import 'package:agribank_banking/modules/authentication/update_information/update_information_binding.dart';
@@ -65,6 +67,8 @@ import 'package:agribank_banking/modules/transfer/screens/ex_transfer_stk/transf
 import 'package:agribank_banking/modules/transfer/screens/ex_transfer_stk/transfer_external_by_accnum_page.dart';
 import 'package:agribank_banking/modules/transfer/screens/ex_transfer_stk_detail/transfer_external_by_accnum_detail_binding.dart';
 import 'package:agribank_banking/modules/transfer/screens/ex_transfer_stk_detail/transfer_external_by_accnum_detail_page.dart';
+import 'package:agribank_banking/modules/transfer/screens/qr_code_scan/qr_code_scan_binding.dart';
+import 'package:agribank_banking/modules/transfer/screens/qr_code_scan/qr_code_scan_page.dart';
 import 'package:agribank_banking/modules/transfer/screens/result_finish_saving/result_finish_saving_page.dart';
 import 'package:agribank_banking/modules/transfer/screens/result_open_saving/result_open_saving_binding.dart';
 import 'package:agribank_banking/modules/transfer/screens/result_phone/result_phone_binding.dart';
@@ -387,6 +391,16 @@ class AppPages {
         page: () => const LookupAddressPage(),
         binding: LookupAddressBinding()
     ),
+    GetPage(
+      name: AppRoutes.qrCode,
+      page: () => const QrCodePage(),
+      binding: QrCodeBinding()
+    ),
+    GetPage(
+      name: AppRoutes.scanQrCode,
+      page: () => const QrCodeScanPage(),
+      binding: QrCodeScanBindings()
+    )
 
 
   ];

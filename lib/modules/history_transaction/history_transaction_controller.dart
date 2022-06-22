@@ -32,7 +32,7 @@ class HistoryTransactionController extends GetxController {
           accountNumber: bankAccounts[indexAccount.value].accountNumber,
           startDate: ConvertDateTime.convertDate(startDate.value),
           endDate: ConvertDateTime.convertDate(endDate.value));
-      histories.addAll(resHistory);
+      histories..clear()..addAll(resHistory);
       if(histories.isEmpty){
         Get.dialog(CupertinoAlertDialog(
           title: const Text('Thông báo'),

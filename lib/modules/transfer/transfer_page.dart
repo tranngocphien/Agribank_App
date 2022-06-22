@@ -71,18 +71,18 @@ class TransferPage extends GetWidget<TransferController> {
                   //   },
                   //   background: white,
                   // ),
-                  // FunctionItem(
-                  //   icon: Image.asset(
-                  //     'assets/icons/ic_qr_scan.png',
-                  //     height: height40,
-                  //     width: width40,
-                  //   ),
-                  //   text: 'Chuyển khoản 24/7 mã QR',
-                  //   onClick: () {
-                  //     Get.toNamed(AppRoutes.transferExQr);
-                  //   },
-                  //   background: white,
-                  // ),
+                  FunctionItem(
+                    icon: Image.asset(
+                      'assets/icons/ic_qr_scan.png',
+                      height: height40,
+                      width: width40,
+                    ),
+                    text: 'Chuyển khoản 24/7 mã QR',
+                    onClick: () {
+                      Get.toNamed(AppRoutes.scanQrCode);
+                    },
+                    background: white,
+                  ),
                 ]),
           ),
 

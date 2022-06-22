@@ -14,8 +14,8 @@ class InfoAppEntity extends BaseEntity {
   factory InfoAppEntity.fromJson(Map<String, dynamic> json) {
     return InfoAppEntity(
         developers: json['developers'],
-        capacity: json['category'],
-        category: json['version'],
-        version: json['capacity']);
+        capacity: json['capacity'],
+        category: json['category'],
+        version: json['version']);
   }
 }

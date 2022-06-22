@@ -3,14 +3,17 @@ import 'package:intl/intl.dart';
 
 class ConvertDateTime {
   static String convertDate(DateTime dateTime) {
+    dateTime = dateTime.add(const Duration(hours: 7));
     return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
   }
 
   static String convertDateTime(DateTime dateTime) {
+    dateTime = dateTime.add(const Duration(hours: 7));
     return '${dateTime.day}/${dateTime.month}/${dateTime.year} ${dateTime.hour}:${dateTime.minute}';
   }
 
   static String convertTime(DateTime dateTime) {
+    dateTime = dateTime.add(const Duration(hours: 7));
     return '${dateTime.hour}:${dateTime.minute}';
   }
 

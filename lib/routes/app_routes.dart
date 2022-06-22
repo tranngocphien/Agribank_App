@@ -82,4 +82,8 @@ class AppRoutes {
   static const lookupRate = '/lookupRate';
   static const lookupAddress = '/lookupAddress';
 
+  /// qr code
+  static const qrCode = '/qrCode';
+  static const scanQrCode = '/scanQrCode';
+
 }

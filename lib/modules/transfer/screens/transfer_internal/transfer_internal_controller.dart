@@ -41,8 +41,17 @@ class TransferInternalController extends GetxController {
     loadStatus(AppLoadStatus.loading);
     await getListAccountInformation();
     await getListContacts();
+    await initData();
     loadStatus(AppLoadStatus.success);
     super.onInit();
+  }
+
+  Future<void> initData() async{
+    if(Get.arguments != null){
+      controllerAccount.text = Get.arguments;
+      account.value = Get.arguments;
+      await getUserName();
+    }
   }
 
 

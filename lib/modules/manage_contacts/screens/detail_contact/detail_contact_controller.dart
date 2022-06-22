@@ -48,7 +48,7 @@ class DetailContactController extends GetxController {
         actions: [
           CupertinoDialogAction(
             onPressed: () {
-              Get.offAllNamed(AppRoutes.softOTP);
+              Get.back();
             },
             child: const Text('Đồng ý'),
           )
@@ -63,7 +63,7 @@ class DetailContactController extends GetxController {
         actions: [
           CupertinoDialogAction(
             onPressed: () {
-              Get.offAllNamed(AppRoutes.softOTP);
+              Get.back();
             },
             child: const Text('Đồng ý'),
           )
