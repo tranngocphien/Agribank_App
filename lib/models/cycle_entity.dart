@@ -21,7 +21,7 @@ class CycleEntity extends BaseEntity{
     id: json["id"] ?? '',
     title: json["title"] ?? '',
     month: json["month"] ?? '',
-    interestRate: json["interest_rate"] ?? 0,
+    interestRate: double.parse(json["interest_rate"].toString()),
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
   );

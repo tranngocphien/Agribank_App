@@ -12,11 +12,13 @@ class NotificationService {
 
   final _repo = BaseRepository(url: APIConstants.baseURL, dio: DioService.instance.get(), method: HttpMethod.post);
 
-  Future<ResponseListNotification?> getNotifications({required int typeNotification}) async {
+  Future<ResponseListNotification?> getNotifications({required int typeNotification, int? index, int limit = 5}) async {
     _repo.url = APIConstants.baseURL + APIConstants.getNotifications;
     _repo.keyData = 'data';
     return await _repo.queryByPath((e) => ResponseListNotification.fromJson(e),data: {
-      'type_notification': typeNotification
+      'type_notification': typeNotification,
+      'limit': limit,
+      'index': index ?? 0
     });
   }
 }

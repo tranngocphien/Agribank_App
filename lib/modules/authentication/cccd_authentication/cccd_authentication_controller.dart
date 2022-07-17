@@ -72,7 +72,7 @@ class CccdAuthenticationController extends GetxController {
     print(recognisedText.text);
     for (TextBlock block in recognisedText.blocks) {
       for (TextLine line in block.lines) {
-        if (line.text.toUpperCase() == line.text) {
+        if (line.text.toUpperCase() == line.text && !line.text.isNumericOnly ) {
           name = line.text;
         }
         for (TextElement element in line.elements) {
@@ -82,6 +82,9 @@ class CccdAuthenticationController extends GetxController {
         }
       }
     }
+
+    print(name);
+    print(numberIdentify);
 
 
     bool check = checkData(inputName, name, inputIdentity, numberIdentify);
@@ -118,7 +121,7 @@ class CccdAuthenticationController extends GetxController {
   }
 
   bool checkData(String inputName, String recogName, String inputCCCD, String recogCCCd){
-    return LongestCommonSubString.getSimilarity(inputName, recogName) > 0.9 && LongestCommonSubString.getSimilarity(inputCCCD, recogCCCd) > 0.9;
+    return LongestCommonSubString.getSimilarity(inputName, recogName) > 0.7 && LongestCommonSubString.getSimilarity(inputCCCD, recogCCCd) > 0.8;
   }
 
   void showMessage(String message){

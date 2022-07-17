@@ -56,6 +56,7 @@ class ConfirmTransactionPage extends GetWidget<ConfirmTransactionController> {
                   PinCodeTextField(
                     appContext: context,
                     length: 6,
+                    obscureText: true,
                     onChanged: (value) {
                       controller.pin.value = value;
                     },

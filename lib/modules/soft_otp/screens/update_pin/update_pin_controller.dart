@@ -27,7 +27,8 @@ class UpdatePinController extends GetxController {
         actions: [
           CupertinoDialogAction(
             onPressed: () {
-              Get.offAllNamed(AppRoutes.softOTP);
+              // Get.offAllNamed(AppRoutes.softOTP);
+              Get.until((route) => Get.currentRoute == AppRoutes.softOTP);
             },
             child: const Text('Đồng ý'),
           )
@@ -42,7 +43,8 @@ class UpdatePinController extends GetxController {
         actions: [
           CupertinoDialogAction(
             onPressed: () {
-              Get.offAllNamed(AppRoutes.softOTP);
+              Get.until((route) => Get.currentRoute == AppRoutes.softOTP);
+              // Get.offAllNamed(AppRoutes.softOTP);
             },
             child: const Text('Đồng ý'),
           )

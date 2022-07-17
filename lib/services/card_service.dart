@@ -39,6 +39,19 @@ class CardService {
 
   }
 
+  Future<CardEntity?> changePin({required String id,required String oldPass,required String newPass}) async {
+    _repo.url = APIConstants.baseURL + APIConstants.updateCard;
+    _repo.keyData = 'data';
+    var data = {
+      'id': id,
+      'pin_old': oldPass,
+      'pin_new': newPass,
+    };
+
+    return await _repo.queryByPath((e) => CardEntity.fromJson(e), data: data);
+
+  }
+
 
 
 }

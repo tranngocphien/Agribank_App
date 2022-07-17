@@ -119,7 +119,7 @@ class AccountSaving extends BaseEntity{
     startDate: json["start_date"] == null ? null : DateTime.parse(json["start_date"]),
     endDate: json["end_date"] == null ? null : DateTime.parse(json["end_date"]),
     cycleId: json["cycle_id"] ?? '',
-    cycleInterestRate: json["cycle_interest_rate"] ?? 0,
+    cycleInterestRate: double.parse(json["cycle_interest_rate"].toString()),
     cycleMonth: json["cycle_month"] ?? 0,
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
@@ -171,7 +171,7 @@ class MoneySaving extends BaseEntity {
 
   factory MoneySaving.fromJson(Map<String, dynamic> json) => MoneySaving(
     money: json["money"] ?? 0,
-    cycleInterestRate: json["cycle_interest_rate"] ?? 0,
+    cycleInterestRate: double.parse(json["cycle_interest_rate"].toString()),
     cycleMonth: json["cycle_month"] ?? 0,
   );
 

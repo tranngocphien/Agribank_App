@@ -104,7 +104,11 @@ class OpenSavingAccountDetailPage
                     height: height48,
                     child: ButtonPrimaryText(
                       onTab: () {
-                        Get.toNamed(AppRoutes.confirmTransaction, arguments: TransactionType.openSavingAccount);
+                        StoreGlobal.soft.value
+                            ? Get.toNamed(AppRoutes.confirmTransaction,
+                                arguments: TransactionType.openSavingAccount)
+                            : Get.toNamed(AppRoutes.confirmTransactionPassword,
+                                arguments: TransactionType.openSavingAccount);
                       },
                       margin: EdgeInsets.zero,
                       padding: EdgeInsets.all(width8),

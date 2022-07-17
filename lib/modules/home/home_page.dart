@@ -456,7 +456,22 @@ class HomePage extends GetWidget<HomeController> {
                             },
                           ),
                           BottomNavigationItem(
-                            icon: const Icon(Icons.notifications_none_outlined),
+                            icon: Stack(
+                              children: [
+                                const Icon(Icons.notifications_none_outlined),
+                                Positioned(
+                                  right: 0,
+                                  child: Container(
+                                    height: height8,
+                                    width: width8,
+                                    decoration: const BoxDecoration(
+                                      color: Colors.red,
+                                      shape: BoxShape.circle
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                             text: const Text('Thông báo',
                                 style: TextStyle(fontSize: 12)),
                             onClick: () {
@@ -613,12 +628,72 @@ class HomePage extends GetWidget<HomeController> {
                     topRight: Radius.circular(width16),
                     topLeft: Radius.circular(width16))),
             child: Column(
-              children: const [
-                Icon(
+              children:  [
+                const Icon(
                   Icons.account_circle,
                   color: white,
                   size: 80,
-                )
+                ),
+                SizedBox(height: height16,),
+                StoreGlobal.isLogin.value
+                    ? Column(
+                      children: [
+                        Text(
+                  StoreGlobal.user.value!.name.toUpperCase(),
+                  style: Styles.baseNotoSansTS.copyWith(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: white
+                  ),
+                ),
+                        SizedBox(height: height8,),
+                        GestureDetector(
+                          onTap: () {
+                            StoreGlobal.deleteData();
+                            Get.offAndToNamed(AppRoutes.home);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: width24,
+                                vertical: height8),
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                BorderRadius.circular(width16),
+                              border: Border.all(color: white)
+                            ),
+                            child: const Text(
+                              'Đăng xuất',
+                              style: TextStyle(
+                                  color: white, fontSize: 16),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                    : GestureDetector(
+                  onTap: () {
+                    Get.toNamed(AppRoutes.login);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: width24,
+                        vertical: height8),
+                    decoration: BoxDecoration(
+                        color: const Color(0xFFff7700),
+                        gradient:
+                        const LinearGradient(colors: [
+                          Color(0xFFd47c24),
+                          Color(0xFFc96a0a),
+                        ]),
+                        borderRadius:
+                        BorderRadius.circular(width16)),
+                    child: const Text(
+                      'Đăng nhập',
+                      style: TextStyle(
+                          color: white, fontSize: 16),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -759,7 +834,25 @@ class HomePage extends GetWidget<HomeController> {
                   }
                   // Get.toNamed(AppRoutes.questionAnswer);
                 },
+              ),
+              DrawerNavigationItem(
+                icons: const Icon(
+                  Icons.question_mark_sharp,
+                  color: Colors.deepOrangeAccent,
+                ),
+                title: 'Xác thực',
+                onClick: () {
+                  if(StoreGlobal.isLogin.value){
+                    Get.toNamed(AppRoutes.updateInformation, arguments: [
+                      StoreGlobal.user.value!.name.toUpperCase()
+                    ]);                  }
+                  else {
+                    Get.toNamed(AppRoutes.login);
+                  }
+                  // Get.toNamed(AppRoutes.questionAnswer);
+                },
               )
+
             ],
           ))
         ],

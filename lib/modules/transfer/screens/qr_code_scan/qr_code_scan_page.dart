@@ -1,5 +1,4 @@
 import 'package:agribank_banking/modules/transfer/screens/qr_code_scan/qr_code_scan_controller.dart';
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';

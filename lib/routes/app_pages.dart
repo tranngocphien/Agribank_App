@@ -11,8 +11,12 @@ import 'package:agribank_banking/modules/card_service/screens/card_info/card_inf
 import 'package:agribank_banking/modules/card_service/screens/card_info/card_info_page.dart';
 import 'package:agribank_banking/modules/card_service/screens/detail_card_info/detail_card_info_binding.dart';
 import 'package:agribank_banking/modules/card_service/screens/detail_card_info/detail_card_info_page.dart';
+import 'package:agribank_banking/modules/card_service/screens/list_card/list_card_binding.dart';
+import 'package:agribank_banking/modules/card_service/screens/list_card/list_card_page.dart';
 import 'package:agribank_banking/modules/card_service/screens/lock_card/lock_card_binding.dart';
 import 'package:agribank_banking/modules/card_service/screens/lock_card/lock_card_page.dart';
+import 'package:agribank_banking/modules/card_service/screens/update_pin_code/update_pin_code_binding.dart';
+import 'package:agribank_banking/modules/card_service/screens/update_pin_code/update_pin_code_page.dart';
 import 'package:agribank_banking/modules/history_transaction/screens/detail_history_transaction/detail_history_transaction_binding.dart';
 import 'package:agribank_banking/modules/history_transaction/screens/detail_history_transaction/detail_history_transaction_page.dart';
 import 'package:agribank_banking/modules/info_app/info_app_binding.dart';
@@ -400,6 +404,16 @@ class AppPages {
       name: AppRoutes.scanQrCode,
       page: () => const QrCodeScanPage(),
       binding: QrCodeScanBindings()
+    ),
+    GetPage(
+      name: AppRoutes.listCard,
+      page: () => const ListCardPage(),
+      binding: ListCardBinding()
+    ),
+    GetPage(
+      name: AppRoutes.updatePinCard,
+      page: () => const UpdatePinCardPage(),
+      binding: UpdatePinCodeBinding()
     )
 
 

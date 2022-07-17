@@ -69,25 +69,27 @@ class CardServicePage extends GetWidget<CardServiceController> {
                   //     // Get.toNamed(AppRoutes.transferExCardNumber);
                   //   },
                   // ),
-                  FunctionServiceItem(
-                    icon: Image.asset('assets/icons/ic_credit_card.png'),
-                    text: 'Phát hành thẻ phi vật lý',
-                    onPress: (){},
-                  ),
-                  FunctionServiceItem(
-                    icon: Image.asset('assets/icons/ic_credit_card.png'),
-                    text: 'Thanh toán thẻ tín dụng',
-                    onPress: (){},
-                  ),
-                  FunctionServiceItem(
-                    icon: Image.asset('assets/icons/ic_credit_card.png'),
-                    text: 'Kích hoạt thẻ',
-                    onPress: (){},
-                  ),
+                  // FunctionServiceItem(
+                  //   icon: Image.asset('assets/icons/ic_credit_card.png'),
+                  //   text: 'Phát hành thẻ phi vật lý',
+                  //   onPress: (){},
+                  // ),
+                  // FunctionServiceItem(
+                  //   icon: Image.asset('assets/icons/ic_credit_card.png'),
+                  //   text: 'Thanh toán thẻ tín dụng',
+                  //   onPress: (){},
+                  // ),
+                  // FunctionServiceItem(
+                  //   icon: Image.asset('assets/icons/ic_credit_card.png'),
+                  //   text: 'Kích hoạt thẻ',
+                  //   onPress: (){},
+                  // ),
                   FunctionServiceItem(
                     icon: Image.asset('assets/icons/ic_credit_card.png'),
                     text: 'Cấp/Đổi mã PIN',
-                    onPress: (){},
+                    onPress: (){
+                      Get.toNamed(AppRoutes.listCard);
+                    },
                   ),
                   FunctionServiceItem(
                     icon: Image.asset('assets/icons/ic_credit_card.png'),

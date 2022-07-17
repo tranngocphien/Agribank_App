@@ -20,6 +20,8 @@ class AppRoutes {
   static const cardInfo = '/cardInfo';
   static const cardInfoDetail = '/cardInfoDetail';
   static const lockCard = '/lockCard';
+  static const listCard = '/listCard';
+  static const updatePinCard = '/updatePinCard';
 
   /// transfer money
   static const transfer = '/transfer';
