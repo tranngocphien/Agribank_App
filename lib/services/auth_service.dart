@@ -3,7 +3,16 @@ import 'package:agribank_banking/models/base_entity.dart';
 import 'package:agribank_banking/models/response_login_entity.dart';
 import 'package:agribank_banking/models/response_message.dart';
 import 'package:agribank_banking/repositories/base_repository.dart';
+import 'package:agribank_banking/services/card_service.dart';
+import 'package:agribank_banking/services/contact_service.dart';
+import 'package:agribank_banking/services/cycle_service.dart';
 import 'package:agribank_banking/services/dio_service.dart';
+import 'package:agribank_banking/services/faq_service.dart';
+import 'package:agribank_banking/services/info_app_service.dart';
+import 'package:agribank_banking/services/notification_service.dart';
+import 'package:agribank_banking/services/soft_otp_service.dart';
+import 'package:agribank_banking/services/transaction_service.dart';
+import 'package:agribank_banking/services/user_service.dart';
 import 'package:agribank_banking/utils/enums.dart';
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
@@ -24,6 +33,7 @@ class AuthService {
     final data = {"phone": username, "password": password};
     final _authResponse = await _repo.queryByPath((e) => LoginResponse.fromJson(e), data: data);
     DioService.instance.updateDioWithToken(_authResponse!.data.token);
+    updateDioService();
     return _authResponse;
   }
 
@@ -56,6 +66,18 @@ class AuthService {
       "person_image": await MultipartFile.fromFile(faceImage.path)
     });
     return await _repo.queryByPath((e) => ResponseMessage.fromJson(e), data: formData);
+  }
+
+  void updateDioService() {
+    _repo.dio = DioService.instance.get();
+    CardService.instance.updateDioService();
+    ContactService.instance.updateDioService();
+    CycleService.instance.updateDioService();
+    NotificationService.instance.updateDioService();
+    SoftOtpService.instance.updateDioService();
+    TransactionService.instance.updateDioService();
+    UserService.instance.updateDioService();
+    FAQService.instance.updateDioService();
   }
 }
 

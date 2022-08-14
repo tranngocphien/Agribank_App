@@ -72,4 +72,8 @@ class ContactService {
     }
 
   }
+
+  void updateDioService() {
+    _repo.dio = DioService.instance.get();
+  }
 }

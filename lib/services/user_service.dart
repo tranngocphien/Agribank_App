@@ -39,4 +39,8 @@ class UserService {
     return limit;
   }
 
+  void updateDioService() {
+    _repo.dio = DioService.instance.get();
+  }
+
 }

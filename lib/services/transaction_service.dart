@@ -167,4 +167,8 @@ class TransactionService {
       'destination': destination
     });
   }
+
+  void updateDioService() {
+    _repo.dio = DioService.instance.get();
+  }
 }

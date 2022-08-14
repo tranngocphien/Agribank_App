@@ -31,6 +31,10 @@ class InfoAppService {
 
   }
 
+  void updateDioService() {
+    _repo.dio = DioService.instance.get();
+  }
+
 
 
 }

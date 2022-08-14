@@ -68,5 +68,9 @@ class SoftOtpService {
 
   }
 
+  void updateDioService() {
+    _repo.dio = DioService.instance.get();
+  }
+
 
 }

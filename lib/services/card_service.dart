@@ -52,6 +52,10 @@ class CardService {
 
   }
 
+  void updateDioService() {
+    _repo.dio = DioService.instance.get();
+  }
+
 
 
 }

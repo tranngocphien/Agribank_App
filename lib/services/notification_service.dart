@@ -21,4 +21,8 @@ class NotificationService {
       'index': index ?? 0
     });
   }
+
+  void updateDioService() {
+    _repo.dio = DioService.instance.get();
+  }
 }

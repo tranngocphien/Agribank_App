@@ -25,6 +25,10 @@ class FAQService {
     });
   }
 
+  void updateDioService() {
+    _repo.dio = DioService.instance.get();
+  }
+
 
   
 }

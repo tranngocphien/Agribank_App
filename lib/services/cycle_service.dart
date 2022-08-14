@@ -29,4 +29,8 @@ class CycleService {
     return await _repo.queryByPath((e) => CurrencyEntity.fromJson(e));
   }
 
+  void updateDioService() {
+    _repo.dio = DioService.instance.get();
+  }
+
 }
